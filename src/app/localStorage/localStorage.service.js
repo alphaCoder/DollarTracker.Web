@@ -1,4 +1,4 @@
-System.register(['./login.service', 'angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,38 +10,34 @@ System.register(['./login.service', 'angular2/core'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var login_service_1, core_1;
-    var UserService;
+    var core_1;
+    var LocalStorageService;
     return {
         setters:[
-            function (login_service_1_1) {
-                login_service_1 = login_service_1_1;
-            },
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            UserService = (function () {
-                function UserService(_loginService) {
-                    this._loginService = _loginService;
-                    this.pin = 1234;
+            LocalStorageService = (function () {
+                function LocalStorageService() {
+                    this.storgage = localStorage;
                 }
-                UserService.prototype.isValidPin = function () {
-                    return (this.pin >= 0 && this.pin < 10000);
+                LocalStorageService.prototype.getItem = function (key) {
+                    return JSON.parse(this.storgage.getItem(key));
                 };
-                UserService.prototype.getGreeting = function () {
-                    return this._loginService.login(this.pin).then(function (success) {
-                        return success ? 'Welcome!' : 'Login failure!';
-                    });
+                LocalStorageService.prototype.setItem = function (key, value) {
+                    if (key && value) {
+                        this.storgage.setItem(key, JSON.stringify(value));
+                    }
                 };
-                UserService = __decorate([
+                LocalStorageService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [login_service_1.LoginService])
-                ], UserService);
-                return UserService;
+                    __metadata('design:paramtypes', [])
+                ], LocalStorageService);
+                return LocalStorageService;
             }());
-            exports_1("UserService", UserService);
+            exports_1("LocalStorageService", LocalStorageService);
         }
     }
 });
-//# sourceMappingURL=user.service.js.map
+//# sourceMappingURL=localStorage.service.js.map

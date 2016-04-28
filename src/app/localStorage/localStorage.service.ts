@@ -20,5 +20,4 @@ export class LocalStorageService implements ILocalStorage {
              this.storgage.setItem(key, JSON.stringify(value));
         }
     }    
-    
  }

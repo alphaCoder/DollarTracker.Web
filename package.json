@@ -8,21 +8,23 @@
     "url": "https://github.com/alphaCoder/DollarTracker.Web.git"
   },
   "scripts": {
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
     "postinstall": "typings install --ambient",
     "clean": "rimraf src/**/*.js src/**/*.js.map",
     "build": "tsc",
+    "lite": "lite-server",
     "watch": "tsc --watch",
     "serve": "http-server -p 9090 -c-1",
     "test": "karma start karma.conf.js"
   },
   "dependencies": {
-    "angular2": "^2.0.0-beta.15",
+    "angular2": "^2.0.0-beta.17",
     "bootstrap": "3.3.6",
     "clang-format": "^1.0.35",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
+    "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.20",
     "zone.js": "^0.6.12"
   },
@@ -37,6 +39,8 @@
     "rimraf": "^2.4.3",
     "systemjs": "^0.19.4",
     "typescript": "1.8.9",
-    "typings": "^0.6.6"
+    "typings": "^0.6.6",
+    "concurrently": "^2.0.0",
+    "lite-server": "^2.1.0"
   }
 }

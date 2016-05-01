@@ -6,6 +6,8 @@ import {RouterOutlet, RouterLink, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConf
 import {LoginComponent} from './login/login.component'
 import {SignupComponent} from './signup/signup.component'
 
+import {ApiUrl} from './shared/apiurl.service'
+import {LoginService} from './login/login.service'
 
 @Component({
   selector: 'dt-app',
@@ -26,7 +28,7 @@ import {SignupComponent} from './signup/signup.component'
      </div>
  `,
  directives:[RouterOutlet, RouterLink, ROUTER_DIRECTIVES],
- providers:[HTTP_PROVIDERS, ROUTER_PROVIDERS]
+ providers:[HTTP_PROVIDERS, ROUTER_PROVIDERS, ApiUrl, LoginService]
 })
 @RouteConfig([
   { path: '/login', name: 'Login', component: LoginComponent, useAsDefault: false },

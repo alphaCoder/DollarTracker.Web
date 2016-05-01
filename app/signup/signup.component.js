@@ -11,43 +11,27 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var LoginComponent;
+    var SignupComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            LoginComponent = (function () {
-                function LoginComponent() {
-                    this.pageTitle = "Login";
+            SignupComponent = (function () {
+                function SignupComponent() {
+                    this.pageTitle = "Sign Up";
                 }
-                LoginComponent.prototype.ngOnInit = function () {
-                    console.log('dskfjlksjd');
-                };
-                LoginComponent.prototype.submit = function () {
-                    console.log("clicked submit");
-                    console.log("username" + this.username);
-                    console.log("password", this.password);
-                };
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', String)
-                ], LoginComponent.prototype, "username", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', String)
-                ], LoginComponent.prototype, "password", void 0);
-                LoginComponent = __decorate([
+                SignupComponent = __decorate([
                     core_1.Component({
-                        templateUrl: 'app/login/login.component.html'
+                        templateUrl: 'app/signup/signup.component.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], LoginComponent);
-                return LoginComponent;
+                ], SignupComponent);
+                return SignupComponent;
             }());
-            exports_1("LoginComponent", LoginComponent);
+            exports_1("SignupComponent", SignupComponent);
         }
     }
 });
-//# sourceMappingURL=login.component.js.map
+//# sourceMappingURL=signup.component.js.map

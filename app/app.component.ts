@@ -1,9 +1,11 @@
 import {Component} from 'angular2/core';
 import 'rxjs/Rx';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
+import {RouterOutlet, RouterLink, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
 
 import {LoginComponent} from './login/login.component'
+import {SignupComponent} from './signup/signup.component'
+
 
 @Component({
   selector: 'dt-app',
@@ -23,11 +25,12 @@ import {LoginComponent} from './login/login.component'
         </div>
      </div>
  `,
- directives:[ROUTER_DIRECTIVES],
+ directives:[RouterOutlet, RouterLink, ROUTER_DIRECTIVES],
  providers:[HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
 @RouteConfig([
   { path: '/login', name: 'Login', component: LoginComponent, useAsDefault: false },
+  { path: '/signup', name: 'SignUp', component: SignupComponent, useAsDefault: false }
 ])
 export class AppComponent {
   pageTitle: string ='Dollar Tracker a Expense Management tool';

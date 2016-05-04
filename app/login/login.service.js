@@ -37,14 +37,10 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../shared
                     var body = JSON.stringify(payload);
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
-                    console.log("inside login service", this._apiUrl.loginUrl);
-                    console.log("payload", JSON.stringify(payload));
-                    this._http.post(this._apiUrl.loginUrl, body, options)
+                    return this._http.post(this._apiUrl.loginUrl, body, options)
                         .map(function (response) { return response.json(); })
                         .do(function (data) { return console.log("Login:", JSON.stringify(data)); })
-                        .subscribe(function (result) {
-                        console.log(JSON.stringify(result));
-                    });
+                        .catch(this.handleError);
                 };
                 LoginService.prototype.handleError = function (error) {
                     console.error(error);

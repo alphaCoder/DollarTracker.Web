@@ -22,9 +22,15 @@
                             <button class="btn btn-default" (click)='submit()'>Login</button>
                             <a class="btn btn-default" href="javascript:void();">Register</a>
                         </div>
+                        <div>
+                            <textarea *ngIf="loginResponse && loginResponse.user">
+                                {{loginResponse.user|json}}
+                            </textarea>    
+                        </div>
                     </form>
                 </div>
             </div>
+            <dt-alert (malert)="dtAlert"></dt-alert>
         </div>
     </section>
 </div>

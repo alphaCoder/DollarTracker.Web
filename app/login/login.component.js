@@ -51,11 +51,11 @@ System.register(['angular2/core', './login.service', '../shared/alert/dtalert.co
                 LoginComponent.prototype.validateEmailAndPassword = function () {
                     var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
                     if (this.email == null || this.email == "" || !EMAIL_REGEXP.test(this.email)) {
-                        this.dtAlert.Failure("Please enter a valid email");
+                        this.dtAlert.failure("Please enter a valid email");
                         return false;
                     }
                     if (this.password == null || this.password == "") {
-                        this.dtAlert.Failure("Please enter a password");
+                        this.dtAlert.failure("Please enter a password");
                         return false;
                     }
                     return true;

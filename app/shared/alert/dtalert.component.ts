@@ -13,20 +13,25 @@ export class DtAlertComponent implements OnInit {
     ngOnInit() { 
     }
 
-    public Create():DtAlertComponent {
-        return this;
-    }
-    public Success(message:string):void{
+    public success(message:string):void{
         var msg = {"key":"success", "text": message}
         this.messages.push(msg);
+        this.scheduleRemoval(msg);
     }
     
-    public Failure(message:string):void{
+    public failure(message:string):void{
         var msg = {"key":"danger", "text": message}
         this.messages.push(msg);
+        this.scheduleRemoval(msg);
     }
     
-    public Remove(idx:any):void{
+    private scheduleRemoval(msg:any){
+        setTimeout(()=>{
+            var idx = this.messages.indexOf(msg);
+            this.messages.splice(idx,1);
+        }, 5000);
+    }
+    public remove(idx:any):void{
           if(idx >= 0){
               this.messages.splice(idx, 1);
           }

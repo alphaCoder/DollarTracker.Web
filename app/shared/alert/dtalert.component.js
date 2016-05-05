@@ -24,18 +24,24 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 }
                 DtAlertComponent.prototype.ngOnInit = function () {
                 };
-                DtAlertComponent.prototype.Create = function () {
-                    return this;
-                };
-                DtAlertComponent.prototype.Success = function (message) {
+                DtAlertComponent.prototype.success = function (message) {
                     var msg = { "key": "success", "text": message };
                     this.messages.push(msg);
+                    this.scheduleRemoval(msg);
                 };
-                DtAlertComponent.prototype.Failure = function (message) {
+                DtAlertComponent.prototype.failure = function (message) {
                     var msg = { "key": "danger", "text": message };
                     this.messages.push(msg);
+                    this.scheduleRemoval(msg);
                 };
-                DtAlertComponent.prototype.Remove = function (idx) {
+                DtAlertComponent.prototype.scheduleRemoval = function (msg) {
+                    var _this = this;
+                    setTimeout(function () {
+                        var idx = _this.messages.indexOf(msg);
+                        _this.messages.splice(idx, 1);
+                    }, 5000);
+                };
+                DtAlertComponent.prototype.remove = function (idx) {
                     if (idx >= 0) {
                         this.messages.splice(idx, 1);
                     }

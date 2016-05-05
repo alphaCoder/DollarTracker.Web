@@ -22,10 +22,15 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
      }
-
     submit():void {
-        this.dtAlert.Success("Testing dtalert");
+        //this.dtAlert.Success("Testing Alert");
+        
+        var isValid = this.validateEmailAndPassword();
+        if(!isValid){
+            return;
+        }
         var payload = {"email": this.email, "password": this.password};
+        
         this._loginService
         .login(payload)
         .subscribe(result =>{
@@ -35,5 +40,18 @@ export class LoginComponent implements OnInit {
             
         },
         error=>this.loginResult = <string>error);
+    }
+    
+    private validateEmailAndPassword(): boolean{
+        var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        if(this.email == null || this.email == "" || !EMAIL_REGEXP.test(this.email)){
+            this.dtAlert.Failure("Please enter a valid email");
+            return false;
+        }
+        if(this.password == null || this.password == ""){
+            this.dtAlert.Failure("Please enter a password");
+            return false;
+        }
+        return true;
     }
 }

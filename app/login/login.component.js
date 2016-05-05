@@ -33,8 +33,12 @@ System.register(['angular2/core', './login.service', '../shared/alert/dtalert.co
                 LoginComponent.prototype.ngOnInit = function () {
                 };
                 LoginComponent.prototype.submit = function () {
+                    //this.dtAlert.Success("Testing Alert");
                     var _this = this;
-                    this.dtAlert.Success("Testing dtalert");
+                    var isValid = this.validateEmailAndPassword();
+                    if (!isValid) {
+                        return;
+                    }
                     var payload = { "email": this.email, "password": this.password };
                     this._loginService
                         .login(payload)
@@ -43,6 +47,18 @@ System.register(['angular2/core', './login.service', '../shared/alert/dtalert.co
                         _this.loginResult = JSON.stringify(result);
                         console.log(JSON.stringify(result));
                     }, function (error) { return _this.loginResult = error; });
+                };
+                LoginComponent.prototype.validateEmailAndPassword = function () {
+                    var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+                    if (this.email == null || this.email == "" || !EMAIL_REGEXP.test(this.email)) {
+                        this.dtAlert.Failure("Please enter a valid email");
+                        return false;
+                    }
+                    if (this.password == null || this.password == "") {
+                        this.dtAlert.Failure("Please enter a password");
+                        return false;
+                    }
+                    return true;
                 };
                 __decorate([
                     core_1.Input(), 

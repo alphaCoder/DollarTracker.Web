@@ -32,8 +32,13 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this.messages.push(msg);
                 };
                 DtAlertComponent.prototype.Failure = function (message) {
-                    var msg = { "key": "error", "text": message };
+                    var msg = { "key": "danger", "text": message };
                     this.messages.push(msg);
+                };
+                DtAlertComponent.prototype.Remove = function (idx) {
+                    if (idx >= 0) {
+                        this.messages.splice(idx, 1);
+                    }
                 };
                 __decorate([
                     core_1.Input(), 

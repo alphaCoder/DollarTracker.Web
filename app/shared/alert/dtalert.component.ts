@@ -22,8 +22,14 @@ export class DtAlertComponent implements OnInit {
     }
     
     public Failure(message:string):void{
-        var msg = {"key":"error", "text": message}
+        var msg = {"key":"danger", "text": message}
         this.messages.push(msg);
+    }
+    
+    public Remove(idx:any):void{
+          if(idx >= 0){
+              this.messages.splice(idx, 1);
+          }
     }
     
     @Input() malert:DtAlertComponent;

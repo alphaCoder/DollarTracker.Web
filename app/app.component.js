@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router', './login/login.component', './signup/signup.component', './shared/apiurl.service', './login/login.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './login/login.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, login_component_1, signup_component_1, apiurl_service_1, login_service_1;
+    var core_1, http_1, router_1, login_component_1, signup_component_1, dashboard_component_1, apiurl_service_1, login_service_1;
     var AppComponent;
     return {
         setters:[
@@ -29,6 +29,9 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
             },
             function (signup_component_1_1) {
                 signup_component_1 = signup_component_1_1;
+            },
+            function (dashboard_component_1_1) {
+                dashboard_component_1 = dashboard_component_1_1;
             },
             function (apiurl_service_1_1) {
                 apiurl_service_1 = apiurl_service_1_1;
@@ -50,7 +53,8 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
                     }),
                     router_1.RouteConfig([
                         { path: '/login', name: 'Login', component: login_component_1.LoginComponent, useAsDefault: false },
-                        { path: '/signup', name: 'SignUp', component: signup_component_1.SignupComponent, useAsDefault: false }
+                        { path: '/signup', name: 'SignUp', component: signup_component_1.SignupComponent, useAsDefault: false },
+                        { path: '/dashboard', name: 'Dashboard', component: dashboard_component_1.DashboardComponent, useAsDefault: false }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

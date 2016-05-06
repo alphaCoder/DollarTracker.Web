@@ -39,7 +39,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     setTimeout(function () {
                         var idx = _this.messages.indexOf(msg);
                         _this.messages.splice(idx, 1);
-                    }, 5000);
+                    }, 3000);
                 };
                 DtAlertComponent.prototype.remove = function (idx) {
                     if (idx >= 0) {

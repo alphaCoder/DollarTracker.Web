@@ -1,4 +1,4 @@
-System.register(['angular2/core', './login.service', '../shared/alert/dtalert.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './login.service', '../shared/alert/dtalert.component', '../shared/spinner/dtspinner.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,30 +10,36 @@ System.register(['angular2/core', './login.service', '../shared/alert/dtalert.co
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, login_service_1, dtalert_component_1;
+    var core_1, router_1, login_service_1, dtalert_component_1, dtspinner_component_1;
     var LoginComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
             function (login_service_1_1) {
                 login_service_1 = login_service_1_1;
             },
             function (dtalert_component_1_1) {
                 dtalert_component_1 = dtalert_component_1_1;
+            },
+            function (dtspinner_component_1_1) {
+                dtspinner_component_1 = dtspinner_component_1_1;
             }],
         execute: function() {
             LoginComponent = (function () {
-                function LoginComponent(_loginService) {
+                function LoginComponent(_loginService, _router) {
                     this._loginService = _loginService;
+                    this._router = _router;
                     this.pageTitle = "Login";
                     this.dtAlert = new dtalert_component_1.DtAlertComponent();
                 }
                 LoginComponent.prototype.ngOnInit = function () {
                 };
                 LoginComponent.prototype.submit = function () {
-                    //this.dtAlert.Success("Testing Alert");
                     var _this = this;
                     var isValid = this.validateEmailAndPassword();
                     if (!isValid) {
@@ -43,9 +49,13 @@ System.register(['angular2/core', './login.service', '../shared/alert/dtalert.co
                     this._loginService
                         .login(payload)
                         .subscribe(function (result) {
+                        if (!result.success) {
+                            _this.dtAlert.failure(result.message);
+                            return;
+                        }
                         _this.loginResponse = result;
                         _this.loginResult = JSON.stringify(result);
-                        console.log(JSON.stringify(result));
+                        _this._router.navigate(['Dashboard']);
                     }, function (error) { return _this.loginResult = error; });
                 };
                 LoginComponent.prototype.validateEmailAndPassword = function () {
@@ -71,9 +81,9 @@ System.register(['angular2/core', './login.service', '../shared/alert/dtalert.co
                 LoginComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/login/login.component.html',
-                        directives: [dtalert_component_1.DtAlertComponent]
+                        directives: [dtalert_component_1.DtAlertComponent, dtspinner_component_1.DtSpinButtonComponent]
                     }), 
-                    __metadata('design:paramtypes', [login_service_1.LoginService])
+                    __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router])
                 ], LoginComponent);
                 return LoginComponent;
             }());

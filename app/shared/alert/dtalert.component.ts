@@ -29,7 +29,7 @@ export class DtAlertComponent implements OnInit {
         setTimeout(()=>{
             var idx = this.messages.indexOf(msg);
             this.messages.splice(idx,1);
-        }, 5000);
+        }, 3000);
     }
     public remove(idx:any):void{
           if(idx >= 0){

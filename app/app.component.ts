@@ -5,6 +5,7 @@ import {RouterOutlet, RouterLink, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConf
 
 import {LoginComponent} from './login/login.component'
 import {SignupComponent} from './signup/signup.component'
+import {DashboardComponent} from './dashboard/dashboard.component'
 
 import {ApiUrl} from './shared/apiurl.service'
 import {LoginService} from './login/login.service'
@@ -32,7 +33,8 @@ import {LoginService} from './login/login.service'
 })
 @RouteConfig([
   { path: '/login', name: 'Login', component: LoginComponent, useAsDefault: false },
-  { path: '/signup', name: 'SignUp', component: SignupComponent, useAsDefault: false }
+  { path: '/signup', name: 'SignUp', component: SignupComponent, useAsDefault: false },
+  { path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: false }
 ])
 export class AppComponent {
   pageTitle: string ='Dollar Tracker a Expense Management tool';

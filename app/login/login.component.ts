@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from 'angular2/core';
-import {RouterOutlet, RouterLink} from 'angular2/router';
+import {Router} from 'angular2/router';
 
 import {LoginService} from './login.service'
 import {ILoginResponse} from './loginResponse'
 import {DtAlertComponent} from '../shared/alert/dtalert.component'
-
+import {DtSpinButtonComponent} from '../shared/spinner/dtspinner.component'
 @Component({
     templateUrl: 'app/login/login.component.html',
-    directives:[DtAlertComponent]
+    directives:[DtAlertComponent,DtSpinButtonComponent]
 })
 export class LoginComponent implements OnInit {
     public pageTitle: string = "Login";
@@ -16,14 +16,13 @@ export class LoginComponent implements OnInit {
     @Input() email:string;
     @Input() password:string;
     public dtAlert:DtAlertComponent;
-    constructor(private _loginService: LoginService) { 
+    constructor(private _loginService: LoginService, private _router:Router) { 
         this.dtAlert = new DtAlertComponent();
     }
 
     ngOnInit() {
-     }
+    }
     submit():void {
-        //this.dtAlert.Success("Testing Alert");
         
         var isValid = this.validateEmailAndPassword();
         if(!isValid){
@@ -33,11 +32,14 @@ export class LoginComponent implements OnInit {
         
         this._loginService
         .login(payload)
-        .subscribe(result =>{
+        .subscribe(result => {
+            if(!result.success){
+                this.dtAlert.failure(result.message);
+                return;   
+            }
             this.loginResponse = result;
             this.loginResult = JSON.stringify(result);
-            console.log(JSON.stringify(result));
-            
+            this._router.navigate(['Dashboard']);
         },
         error=>this.loginResult = <string>error);
     }

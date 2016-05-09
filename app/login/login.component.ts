@@ -5,6 +5,7 @@ import {LoginService} from './login.service'
 import {ILoginResponse} from './loginResponse'
 import {DtAlertComponent} from '../shared/alert/dtalert.component'
 import {DtSpinButtonComponent} from '../shared/spinner/dtspinner.component'
+import {JwtService} from '../jwt/jwt.service'
 @Component({
     templateUrl: 'app/login/login.component.html',
     directives:[DtAlertComponent,DtSpinButtonComponent]
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     @Input() email:string;
     @Input() password:string;
     public dtAlert:DtAlertComponent;
-    constructor(private _loginService: LoginService, private _router:Router) { 
+    constructor(private _loginService: LoginService, private _router:Router, private _jwtService:JwtService) { 
         this.dtAlert = new DtAlertComponent();
     }
 
@@ -38,6 +39,10 @@ export class LoginComponent implements OnInit {
                 return;   
             }
             this.loginResponse = result;
+            
+           this._jwtService.set(result.token);
+           console.log("is valid jwt", this._jwtService.isValid().subscribe(x=>console.log("Valid Jwt subscribe:", x)));
+            
             this.loginResult = JSON.stringify(result);
             this._router.navigate(['Dashboard']);
         },

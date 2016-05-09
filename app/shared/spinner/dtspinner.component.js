@@ -22,10 +22,18 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function DtSpinButtonComponent() {
                 }
                 DtSpinButtonComponent.prototype.ngOnInit = function () { };
+                DtSpinButtonComponent.prototype.onClick = function () {
+                    console.log('I am on click in dt spinner');
+                    this.method().subscribe(function (x) { return console.log('done'); });
+                };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], DtSpinButtonComponent.prototype, "method", void 0);
                 DtSpinButtonComponent = __decorate([
                     core_1.Component({
                         selector: 'dt-spin-button',
-                        template: "\n    <button><i class='fa fa-gear fa-spin' style=\"color: #5CB85C;\"></i> Test</button>\n    "
+                        template: "\n    <button><i class='fa fa-gear fa-spin' (click)='onClick()'></i> Test</button>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], DtSpinButtonComponent);

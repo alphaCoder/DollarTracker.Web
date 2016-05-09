@@ -1,5 +1,6 @@
 import { Injectable } from 'angular2/core';
 import {LocalStorageService} from '../localStorage/localStorage.service'
+import {Observable} from 'rxjs/Observable'
 
 @Injectable()
 export class JwtService {
@@ -15,12 +16,16 @@ export class JwtService {
         this._localStorage.setItem(this._jwtKey, token);
     }
     
-    public isValid():boolean {
+    public isValid():Observable<boolean> {
+        return Observable.create(observer=>{
         var jwt = this.get();
         if(jwt){
             let payloadStr = jwt.split(".")[1];
-            var payload = window.atob(payload);
+          //  var payload = window.atob(payload);
+            observer.next(true);
         }
-        return false;
-    }
+        
+        return false; 
+    });
+}
 }

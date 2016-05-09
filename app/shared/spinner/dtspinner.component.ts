@@ -1,9 +1,9 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit, Input } from 'angular2/core';
 
 @Component({
     selector: 'dt-spin-button',
     template: `
-    <button><i class='fa fa-gear fa-spin' style="color: #5CB85C;"></i> Test</button>
+    <button><i class='fa fa-gear fa-spin' (click)='onClick()'></i> Test</button>
     `
 })
 export class DtSpinButtonComponent implements OnInit {
@@ -11,4 +11,10 @@ export class DtSpinButtonComponent implements OnInit {
 
     ngOnInit() { }
 
+    @Input() method;
+    
+    onClick():any{
+        console.log('I am on click in dt spinner');
+        this.method().subscribe(x=>console.log('done'));
+    }
 }

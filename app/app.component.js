@@ -1,4 +1,5 @@
-System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './login/login.service'], function(exports_1, context_1) {
+/// <reference path="../node_modules/ng2-nvd3/build/lib/ng2-nvd3.d.ts" />
+System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router', 'ng2-nvd3/lib/ng2-nvd3', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './localStorage/localStorage.service', './jwt/jwt.service', './login/login.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +11,7 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, login_component_1, signup_component_1, dashboard_component_1, apiurl_service_1, login_service_1;
+    var core_1, http_1, router_1, ng2_nvd3_1, login_component_1, signup_component_1, dashboard_component_1, apiurl_service_1, localStorage_service_1, jwt_service_1, login_service_1;
     var AppComponent;
     return {
         setters:[
@@ -24,6 +25,9 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (ng2_nvd3_1_1) {
+                ng2_nvd3_1 = ng2_nvd3_1_1;
+            },
             function (login_component_1_1) {
                 login_component_1 = login_component_1_1;
             },
@@ -36,6 +40,12 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
             function (apiurl_service_1_1) {
                 apiurl_service_1 = apiurl_service_1_1;
             },
+            function (localStorage_service_1_1) {
+                localStorage_service_1 = localStorage_service_1_1;
+            },
+            function (jwt_service_1_1) {
+                jwt_service_1 = jwt_service_1_1;
+            },
             function (login_service_1_1) {
                 login_service_1 = login_service_1_1;
             }],
@@ -47,9 +57,9 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'dt-app',
-                        template: "\n <div>\n        <nav class='navbar navbar-default'>\n            <div class='container-fluid'>\n                <a class='navbar-brand'>{{pageTitle}}</a>\n                <ul class='nav navbar-nav navbar-right'>\n                    <li><a [routerLink]=\"['Login']\">Login</a></li>\n                    <li><a [routerLink]=\"['SignUp']\">Sign Up</a></li>\n                </ul>\n            </div>\n        </nav>\n        <div class='container'>\n            <router-outlet></router-outlet>\n        </div>\n     </div>\n ",
-                        directives: [router_1.RouterOutlet, router_1.RouterLink, router_1.ROUTER_DIRECTIVES],
-                        providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, apiurl_service_1.ApiUrl, login_service_1.LoginService]
+                        template: "\n <div>\n        <nav class='navbar navbar-default'>\n            <div class='container-fluid'>\n                <a class='navbar-brand'>{{pageTitle}}</a>\n                <ul class='nav navbar-nav navbar-right'>\n                    <li><a [routerLink]=\"['Login']\">Login</a></li>\n                    <li><a [routerLink]=\"['SignUp']\">Sign Up</a></li>\n                </ul>\n            </div>\n        </nav>\n        <div class='container'>\n            <router-outlet></router-outlet>\n        </div>\n   </div>\n ",
+                        directives: [router_1.RouterOutlet, router_1.RouterLink, router_1.ROUTER_DIRECTIVES, ng2_nvd3_1.nvD3],
+                        providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, apiurl_service_1.ApiUrl, login_service_1.LoginService, jwt_service_1.JwtService, localStorage_service_1.LocalStorageService]
                     }),
                     router_1.RouteConfig([
                         { path: '/login', name: 'Login', component: login_component_1.LoginComponent, useAsDefault: false },

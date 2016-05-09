@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './login.service', '../shared/alert/dtalert.component', '../shared/spinner/dtspinner.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './login.service', '../shared/alert/dtalert.component', '../shared/spinner/dtspinner.component', '../jwt/jwt.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './login.service', '../shar
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, login_service_1, dtalert_component_1, dtspinner_component_1;
+    var core_1, router_1, login_service_1, dtalert_component_1, dtspinner_component_1, jwt_service_1;
     var LoginComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'angular2/router', './login.service', '../shar
             },
             function (dtspinner_component_1_1) {
                 dtspinner_component_1 = dtspinner_component_1_1;
+            },
+            function (jwt_service_1_1) {
+                jwt_service_1 = jwt_service_1_1;
             }],
         execute: function() {
             LoginComponent = (function () {
-                function LoginComponent(_loginService, _router) {
+                function LoginComponent(_loginService, _router, _jwtService) {
                     this._loginService = _loginService;
                     this._router = _router;
+                    this._jwtService = _jwtService;
                     this.pageTitle = "Login";
                     this.dtAlert = new dtalert_component_1.DtAlertComponent();
                 }
@@ -54,6 +58,8 @@ System.register(['angular2/core', 'angular2/router', './login.service', '../shar
                             return;
                         }
                         _this.loginResponse = result;
+                        _this._jwtService.set(result.token);
+                        console.log("is valid jwt", _this._jwtService.isValid().subscribe(function (x) { return console.log("Valid Jwt subscribe:", x); }));
                         _this.loginResult = JSON.stringify(result);
                         _this._router.navigate(['Dashboard']);
                     }, function (error) { return _this.loginResult = error; });
@@ -83,7 +89,7 @@ System.register(['angular2/core', 'angular2/router', './login.service', '../shar
                         templateUrl: 'app/login/login.component.html',
                         directives: [dtalert_component_1.DtAlertComponent, dtspinner_component_1.DtSpinButtonComponent]
                     }), 
-                    __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router])
+                    __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router, jwt_service_1.JwtService])
                 ], LoginComponent);
                 return LoginComponent;
             }());

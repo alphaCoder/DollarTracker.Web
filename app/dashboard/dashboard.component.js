@@ -1,4 +1,4 @@
-System.register(['angular2/core', './charts/chartdemo'], function(exports_1, context_1) {
+System.register(['angular2/core', './charts/chartdemo', './charts/barchartdemo'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './charts/chartdemo'], function(exports_1, con
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, chartdemo_1;
+    var core_1, chartdemo_1, barchartdemo_1;
     var DashboardComponent;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', './charts/chartdemo'], function(exports_1, con
             },
             function (chartdemo_1_1) {
                 chartdemo_1 = chartdemo_1_1;
+            },
+            function (barchartdemo_1_1) {
+                barchartdemo_1 = barchartdemo_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
@@ -28,7 +31,7 @@ System.register(['angular2/core', './charts/chartdemo'], function(exports_1, con
                 DashboardComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/dashboard/dashboard.component.html',
-                        directives: [chartdemo_1.ChartDemo]
+                        directives: [chartdemo_1.ChartDemo, barchartdemo_1.BarChartDemo]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], DashboardComponent);

@@ -1,14 +1,14 @@
 import {bootstrap}  from 'angular2/platform/browser';
 import {Component} from 'angular2/core';
 
-import {nvD3} from 'ng2-nvd3/lib/ng2-nvD3';
+import {nvD3} from 'ng2-nvD3';
 declare let d3: any;
 
 @Component({
   selector: 'chart-demo',
   directives: [nvD3],
   template: `
-    <div>
+    <div style="background-color: #FFF;">
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
   `

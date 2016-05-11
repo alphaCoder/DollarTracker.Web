@@ -11,7 +11,7 @@ System.register(['angular2/core', 'ng2-nvD3'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, ng2_nvD3_1;
-    var ChartDemo;
+    var BarChartDemo;
     return {
         setters:[
             function (core_1_1) {
@@ -21,38 +21,77 @@ System.register(['angular2/core', 'ng2-nvD3'], function(exports_1, context_1) {
                 ng2_nvD3_1 = ng2_nvD3_1_1;
             }],
         execute: function() {
-            ChartDemo = (function () {
-                function ChartDemo() {
+            BarChartDemo = (function () {
+                function BarChartDemo() {
                 }
-                ChartDemo.prototype.ngOnInit = function () {
+                BarChartDemo.prototype.ngOnInit = function () {
                     this.options = {
                         chart: {
-                            type: 'lineChart',
+                            type: 'discreteBarChart',
                             height: 450,
                             margin: {
                                 top: 20,
                                 right: 20,
-                                bottom: 40,
+                                bottom: 50,
                                 left: 55
                             },
-                            x: function (d) { return d.x; },
-                            y: function (d) { return d.y; },
-                            useInteractiveGuideline: true,
+                            x: function (d) { return d.label; },
+                            y: function (d) { return d.value; },
+                            showValues: true,
+                            valueFormat: function (d) {
+                                return d3.format(',.4f')(d);
+                            },
+                            duration: 500,
                             xAxis: {
-                                axisLabel: 'Time (ms)'
+                                axisLabel: 'X Axis'
                             },
                             yAxis: {
-                                axisLabel: 'Voltage (v)',
-                                tickFormat: function (d) {
-                                    return d3.format('.02f')(d);
-                                },
+                                axisLabel: 'Y Axis',
                                 axisLabelDistance: -10
                             }
                         }
                     };
-                    this.data = this.sinAndCos();
+                    this.data = [
+                        {
+                            key: "Cumulative Return",
+                            values: [
+                                {
+                                    "label": "A",
+                                    "value": -29.765957771107
+                                },
+                                {
+                                    "label": "B",
+                                    "value": 0
+                                },
+                                {
+                                    "label": "C",
+                                    "value": 32.807804682612
+                                },
+                                {
+                                    "label": "D",
+                                    "value": 196.45946739256
+                                },
+                                {
+                                    "label": "E",
+                                    "value": 0.19434030906893
+                                },
+                                {
+                                    "label": "F",
+                                    "value": -98.079782601442
+                                },
+                                {
+                                    "label": "G",
+                                    "value": -13.925743130903
+                                },
+                                {
+                                    "label": "H",
+                                    "value": -5.1387322875705
+                                }
+                            ]
+                        }
+                    ];
                 };
-                ChartDemo.prototype.sinAndCos = function () {
+                BarChartDemo.prototype.sinAndCos = function () {
                     var sin = [], sin2 = [], cos = [];
                     //Data is represented as an array of {x,y} pairs.
                     for (var i = 0; i < 100; i++) {
@@ -80,18 +119,18 @@ System.register(['angular2/core', 'ng2-nvD3'], function(exports_1, context_1) {
                         }
                     ];
                 };
-                ChartDemo = __decorate([
+                BarChartDemo = __decorate([
                     core_1.Component({
-                        selector: 'chart-demo',
+                        selector: 'bar-chart',
                         directives: [ng2_nvD3_1.nvD3],
                         template: "\n    <div style=\"background-color: #FFF;\">\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
                     }), 
                     __metadata('design:paramtypes', [])
-                ], ChartDemo);
-                return ChartDemo;
+                ], BarChartDemo);
+                return BarChartDemo;
             }());
-            exports_1("ChartDemo", ChartDemo);
+            exports_1("BarChartDemo", BarChartDemo);
         }
     }
 });
-//# sourceMappingURL=chartdemo.js.map
+//# sourceMappingURL=barchartdemo.js.map

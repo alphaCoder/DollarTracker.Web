@@ -1,4 +1,4 @@
-System.register(['angular2/testing', './localStorage.service'], function(exports_1, context_1) {
+System.register(['@angular/core/testing', './localStorage.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var testing_1, localStorage_service_1;

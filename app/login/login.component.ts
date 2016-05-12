@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from 'angular2/core';
-import {Router} from 'angular2/router';
+import { Component, Input, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 import {LoginService} from './login.service'
 import {ILoginResponse} from './loginResponse'
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
            console.log("is valid jwt", this._jwtService.isValid().subscribe(x=>console.log("Valid Jwt subscribe:", x)));
             
             this.loginResult = JSON.stringify(result);
-            this._router.navigate(['Dashboard']);
+            this._router.navigate(['dashboard']);
         },
         error=>this.loginResult = <string>error);
     }

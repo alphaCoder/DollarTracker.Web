@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './localStorage/localStorage.service', './jwt/jwt.service', './login/login.service'], function(exports_1, context_1) {
+System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './localStorage/localStorage.service', './jwt/jwt.service', './login/login.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -53,14 +53,15 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', 'angular2/router',
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'dt-app',
-                        template: "\n <div>\n        <nav class='navbar navbar-default'>\n            <div class='container-fluid'>\n                <a class='navbar-brand'>{{pageTitle}}</a>\n                <ul class='nav navbar-nav navbar-right'>\n                    <li><a [routerLink]=\"['Login']\">Login</a></li>\n                    <li><a [routerLink]=\"['SignUp']\">Sign Up</a></li>\n                </ul>\n            </div>\n        </nav>\n        <div class='container'>\n            <router-outlet></router-outlet>\n        </div>\n   </div>\n ",
-                        directives: [router_1.RouterOutlet, router_1.RouterLink, router_1.ROUTER_DIRECTIVES],
+                        template: "\n <div>\n        <nav class='navbar navbar-default'>\n            <div class='container-fluid'>\n                <a class='navbar-brand'>{{pageTitle}}</a>\n                <ul class='nav navbar-nav navbar-right'>\n                    <li><a [routerLink]=\"['/login']\">Login</a></li>\n                    <li><a [routerLink]=\"['/signup']\">Sign Up</a></li>\n                </ul>\n            </div>\n        </nav>\n        <div class='container'>\n            <router-outlet></router-outlet>\n        </div>\n   </div>\n ",
+                        directives: [router_1.ROUTER_DIRECTIVES],
                         providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, apiurl_service_1.ApiUrl, login_service_1.LoginService, jwt_service_1.JwtService, localStorage_service_1.LocalStorageService]
                     }),
-                    router_1.RouteConfig([
-                        { path: '/login', name: 'Login', component: login_component_1.LoginComponent, useAsDefault: false },
-                        { path: '/signup', name: 'SignUp', component: signup_component_1.SignupComponent, useAsDefault: false },
-                        { path: '/dashboard', name: 'Dashboard', component: dashboard_component_1.DashboardComponent, useAsDefault: false }
+                    router_1.Routes([
+                        { path: '/', component: login_component_1.LoginComponent },
+                        { path: '/login', component: login_component_1.LoginComponent },
+                        { path: '/signup', component: signup_component_1.SignupComponent },
+                        { path: '/dashboard', component: dashboard_component_1.DashboardComponent }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

@@ -1,8 +1,8 @@
-import { Injectable } from 'angular2/core';
-import {Http, Response} from 'angular2/http';
+import { Injectable } from '@angular/core';
+import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable'
 import {ApiUrl} from '../shared/apiurl.service'
-import {Headers, RequestOptions} from 'angular2/http';
+import {Headers, RequestOptions} from '@angular/http';
 import {ILoginResponse} from './loginResponse'
 
 @Injectable()

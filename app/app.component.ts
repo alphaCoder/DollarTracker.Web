@@ -1,7 +1,7 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import 'rxjs/Rx';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {RouterOutlet, RouterLink, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
+import {HTTP_PROVIDERS} from '@angular/http';
+import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Routes} from '@angular/router';
 
 import {LoginComponent} from './login/login.component'
 import {SignupComponent} from './signup/signup.component'
@@ -20,8 +20,8 @@ import {LoginService} from './login/login.service'
             <div class='container-fluid'>
                 <a class='navbar-brand'>{{pageTitle}}</a>
                 <ul class='nav navbar-nav navbar-right'>
-                    <li><a [routerLink]="['Login']">Login</a></li>
-                    <li><a [routerLink]="['SignUp']">Sign Up</a></li>
+                    <li><a [routerLink]="['/login']">Login</a></li>
+                    <li><a [routerLink]="['/signup']">Sign Up</a></li>
                 </ul>
             </div>
         </nav>
@@ -30,13 +30,14 @@ import {LoginService} from './login/login.service'
         </div>
    </div>
  `,
- directives:[RouterOutlet, RouterLink, ROUTER_DIRECTIVES],
+ directives:[ROUTER_DIRECTIVES],
  providers:[HTTP_PROVIDERS, ROUTER_PROVIDERS, ApiUrl, LoginService,JwtService, LocalStorageService]
 })
-@RouteConfig([
-  { path: '/login', name: 'Login', component: LoginComponent, useAsDefault: false },
-  { path: '/signup', name: 'SignUp', component: SignupComponent, useAsDefault: false },
-  { path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: false }
+@Routes([
+   { path: '/', component: LoginComponent },  
+  { path: '/login', component: LoginComponent },
+  { path: '/signup',  component: SignupComponent },
+  { path: '/dashboard', component: DashboardComponent }
 ])
 export class AppComponent {
   pageTitle: string ='Dollar Tracker a Expense Management tool';

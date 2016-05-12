@@ -15,31 +15,61 @@
   <script src="node_modules/systemjs/dist/system.src.js"></script>
 
   <script src="node_modules/rxjs/bundles/Rx.js"></script>
-  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  
   <!--<link href="node_modules/font-awesome/css/font-awesome.css" />-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
-    <!-- Required for http -->
-    <script src="node_modules/angular2/bundles/http.dev.js"></script>
-
-    <!-- Required for routing -->
-    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+  
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
     
     <!--ng2-charts -->
     <script src="node_modules/d3/d3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.min.js"></script>
   <script>
-    System.config({
-      packages: {
-        'app': {
-            format: 'register',
-            defaultExtension: 'js'
-        }
-      },
-      map: {
-        'ng2-nvD3':'node_modules/ng2-nvd3/build/lib/ng2-nvd3.js'
-      }
-    });
+    (function(global) {
+
+  // map tells the System loader where to look for things
+  var map = {
+    'app':                        'app',
+    'rxjs':                       'node_modules/rxjs',
+    '@angular':                   'node_modules/@angular',
+    'ng2-nvD3':                   'node_modules/ng2-nvd3/build/lib/ng2-nvd3.js'
+  };
+
+  // packages tells the System loader how to load when no filename and/or no extension
+  var packages = {
+    'app':    { main: 'main.js',  defaultExtension: 'js' },
+    'rxjs':   { defaultExtension: 'js' }
+  };
+
+  var packageNames = [
+    '@angular/common',
+    '@angular/compiler',
+    '@angular/core',
+    '@angular/http',
+    '@angular/platform-browser',
+    '@angular/platform-browser-dynamic',
+    '@angular/router'
+  ];
+
+  // add package entries for angular packages in the form 
+  // '@angular/common': { main: 'index.js', defaultExtension: 'js' }
+  packageNames.forEach(function(pkgName) {
+    packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
+  });
+
+  var config = {
+    map: map,
+    packages: packages
+  }
+
+  System.config(config);
+
+})(this);
     System.import('app/boot').catch(function(err) {
       console.log('error while importing:');
       console.log(err);

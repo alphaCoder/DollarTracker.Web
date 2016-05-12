@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 import {ChartDemo} from './charts/chartdemo'
 import {BarChartDemo} from './charts/barchartdemo'
 

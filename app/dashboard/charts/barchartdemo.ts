@@ -1,5 +1,4 @@
-import {bootstrap}  from 'angular2/platform/browser';
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 import {nvD3} from 'ng2-nvD3';
 declare let d3: any;

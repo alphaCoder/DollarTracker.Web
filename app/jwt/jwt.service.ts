@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 import {LocalStorageService} from '../localStorage/localStorage.service'
 import {Observable} from 'rxjs/Observable'
 

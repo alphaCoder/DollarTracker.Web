@@ -41,9 +41,6 @@ export class LoginComponent implements OnInit {
             this.loginResponse = result;
             
            this._jwtService.set(result.token);
-           console.log("is valid jwt", this._jwtService.isValid().subscribe(x=>console.log("Valid Jwt subscribe:", x)));
-            
-            this.loginResult = JSON.stringify(result);
             this._router.navigate(['dashboard']);
         },
         error=>this.loginResult = <string>error);

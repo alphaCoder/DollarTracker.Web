@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './localStorage/localStorage.service', './jwt/jwt.service', './login/login.service'], function(exports_1, context_1) {
+System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './localStorage/localStorage.service', './jwt/jwt.service', './login/login.service', 'angular2-jwt'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, login_component_1, signup_component_1, dashboard_component_1, apiurl_service_1, localStorage_service_1, jwt_service_1, login_service_1;
+    var core_1, http_1, router_1, login_component_1, signup_component_1, dashboard_component_1, apiurl_service_1, localStorage_service_1, jwt_service_1, login_service_1, angular2_jwt_1;
     var AppComponent;
     return {
         setters:[
@@ -44,6 +44,9 @@ System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router',
             },
             function (login_service_1_1) {
                 login_service_1 = login_service_1_1;
+            },
+            function (angular2_jwt_1_1) {
+                angular2_jwt_1 = angular2_jwt_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -55,7 +58,22 @@ System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router',
                         selector: 'dt-app',
                         template: "\n <div>\n        <nav class='navbar navbar-default'>\n            <div class='container-fluid'>\n                <a class='navbar-brand'>{{pageTitle}}</a>\n                <ul class='nav navbar-nav navbar-right'>\n                    <li><a [routerLink]=\"['/login']\">Login</a></li>\n                    <li><a [routerLink]=\"['/signup']\">Sign Up</a></li>\n                </ul>\n            </div>\n        </nav>\n        <div class='container'>\n            <router-outlet></router-outlet>\n        </div>\n   </div>\n ",
                         directives: [router_1.ROUTER_DIRECTIVES],
-                        providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, apiurl_service_1.ApiUrl, login_service_1.LoginService, jwt_service_1.JwtService, localStorage_service_1.LocalStorageService]
+                        providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, apiurl_service_1.ApiUrl, login_service_1.LoginService, jwt_service_1.JwtService, localStorage_service_1.LocalStorageService, angular2_jwt_1.AUTH_PROVIDERS,
+                            core_1.provide(angular2_jwt_1.AuthHttp, {
+                                useFactory: function (http) {
+                                    return new angular2_jwt_1.AuthHttp(new angular2_jwt_1.AuthConfig({
+                                        headerName: 'Authorization',
+                                        headerPrefix: 'Bearer',
+                                        tokenName: 'dollarTrackerJwtToken',
+                                        tokenGetter: function () { return localStorage.getItem('dollarTrackerJwtToken'); },
+                                        globalHeaders: [{ 'Content-Type': 'application/json' }],
+                                        noJwtError: true,
+                                        noTokenScheme: true
+                                    }), http);
+                                },
+                                deps: [http_1.Http]
+                            })
+                        ]
                     }),
                     router_1.Routes([
                         { path: '/', component: login_component_1.LoginComponent },

@@ -1,4 +1,4 @@
-System.register(['@angular/core', '../localStorage/localStorage.service', 'rxjs/Observable'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,46 +10,68 @@ System.register(['@angular/core', '../localStorage/localStorage.service', 'rxjs/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, localStorage_service_1, Observable_1;
+    var core_1;
     var JwtService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (localStorage_service_1_1) {
-                localStorage_service_1 = localStorage_service_1_1;
-            },
-            function (Observable_1_1) {
-                Observable_1 = Observable_1_1;
             }],
         execute: function() {
             JwtService = (function () {
-                function JwtService(_localStorage) {
-                    this._localStorage = _localStorage;
+                function JwtService() {
                     this._jwtKey = "dollarTrackerJwtToken";
                 }
                 JwtService.prototype.get = function () {
-                    return this._localStorage.getItem(this._jwtKey);
+                    return localStorage.getItem(this._jwtKey);
                 };
                 JwtService.prototype.set = function (token) {
-                    this._localStorage.setItem(this._jwtKey, token);
+                    localStorage.setItem(this._jwtKey, token);
                 };
-                JwtService.prototype.isValid = function () {
-                    var _this = this;
-                    return Observable_1.Observable.create(function (observer) {
-                        var jwt = _this.get();
-                        if (jwt) {
-                            var payloadStr = jwt.split(".")[1];
-                            //  var payload = window.atob(payload);
-                            observer.next(true);
-                        }
+                JwtService.prototype.isAuthenticated = function () {
+                    var token = this.get();
+                    if (!token)
                         return false;
-                    });
+                    var decoded = this.decodeToken(token);
+                    if (typeof decoded == "undefined" || decoded == null || typeof decoded.exp === "undefined") {
+                        return false;
+                    }
+                    return Math.round(new Date().getTime() / 1000) >= decoded.exp;
+                };
+                JwtService.prototype.urlBase64Decode = function (str) {
+                    var output = str.replace(/-/g, '+').replace(/_/g, '/');
+                    switch (output.length % 4) {
+                        case 0: {
+                            break;
+                        }
+                        case 2: {
+                            output += '==';
+                            break;
+                        }
+                        case 3: {
+                            output += '=';
+                            break;
+                        }
+                        default: {
+                            throw 'Illegal base64url string!';
+                        }
+                    }
+                    return decodeURIComponent(escape(window.atob(output))); //polifyll https://github.com/davidchambers/Base64.js
+                };
+                JwtService.prototype.decodeToken = function (token) {
+                    var parts = token.split('.');
+                    if (parts.length !== 3) {
+                        throw new Error('JWT must have 3 parts');
+                    }
+                    var decoded = this.urlBase64Decode(parts[1]);
+                    if (!decoded) {
+                        throw new Error('Cannot decode the token');
+                    }
+                    return JSON.parse(decoded);
                 };
                 JwtService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [localStorage_service_1.LocalStorageService])
+                    __metadata('design:paramtypes', [])
                 ], JwtService);
                 return JwtService;
             }());

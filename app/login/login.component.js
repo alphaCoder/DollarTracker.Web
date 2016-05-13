@@ -59,8 +59,6 @@ System.register(['@angular/core', '@angular/router', './login.service', '../shar
                         }
                         _this.loginResponse = result;
                         _this._jwtService.set(result.token);
-                        console.log("is valid jwt", _this._jwtService.isValid().subscribe(function (x) { return console.log("Valid Jwt subscribe:", x); }));
-                        _this.loginResult = JSON.stringify(result);
                         _this._router.navigate(['dashboard']);
                     }, function (error) { return _this.loginResult = error; });
                 };

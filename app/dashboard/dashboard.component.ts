@@ -7,10 +7,8 @@ import {JwtService} from '../jwt/jwt.service'
 import {DtBaseComponent} from '../shared/dtbase.component'
 @Component({
     templateUrl: 'app/dashboard/dashboard.component.html',
-    directives:[ChartDemo,BarChartDemo],
+    directives:[ChartDemo,BarChartDemo]
 })
-export class DashboardComponent extends DtBaseComponent {
-    constructor(_router:Router,  _jwtService:JwtService) {
-        super(_router, _jwtService);
-     }
+export class DashboardComponent {
+    
 }

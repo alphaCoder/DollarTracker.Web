@@ -38,6 +38,9 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                     }
                     return Math.round(new Date().getTime() / 1000) >= decoded.exp;
                 };
+                JwtService.prototype.clear = function () {
+                    localStorage.removeItem(this._jwtKey);
+                };
                 JwtService.prototype.urlBase64Decode = function (str) {
                     var output = str.replace(/-/g, '+').replace(/_/g, '/');
                     switch (output.length % 4) {

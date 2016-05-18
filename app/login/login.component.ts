@@ -1,29 +1,29 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
+import {UserService} from '../user/user.service'
 import {LoginService} from './login.service'
 import {ILoginResponse} from './loginResponse'
 import {DtAlertComponent} from '../shared/alert/dtalert.component'
 import {DtSpinButtonComponent} from '../shared/spinner/dtspinner.component'
-import {JwtService} from '../jwt/jwt.service'
+
 @Component({
     templateUrl: 'app/login/login.component.html',
     directives:[DtAlertComponent,DtSpinButtonComponent]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     public pageTitle: string = "Login";
     public loginResult:string;
-    public loginResponse: ILoginResponse;
+  
     @Input() email:string;
     @Input() password:string;
     public dtAlert:DtAlertComponent;
-    constructor(private _loginService: LoginService, private _router:Router, private _jwtService:JwtService) { 
+    private EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+    constructor(private _loginService: LoginService, private _router:Router, private _userService:UserService) { 
         this.dtAlert = new DtAlertComponent();
     }
 
-    ngOnInit() {
-    }
-    submit():void {
+    public submit():void {
         
         var isValid = this.validateEmailAndPassword();
         if(!isValid){
@@ -38,17 +38,15 @@ export class LoginComponent implements OnInit {
                 this.dtAlert.failure(result.message);
                 return;   
             }
-            this.loginResponse = result;
-            
-           this._jwtService.set(result.token);
-            this._router.navigate(['dashboard']);
+           this._userService.add(result);
+           this._router.navigate(['dashboard']);
         },
-        error=>this.loginResult = <string>error);
+        error=>this.dtAlert.failure(error));
     }
     
     private validateEmailAndPassword(): boolean{
-        var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-        if(this.email == null || this.email == "" || !EMAIL_REGEXP.test(this.email)){
+       
+        if(this.email == null || this.email == "" || !this.EMAIL_REGEXP.test(this.email)){
             this.dtAlert.failure("Please enter a valid email");
             return false;
         }

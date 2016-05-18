@@ -26,6 +26,10 @@ public isAuthenticated(){
     return Math.round(new Date().getTime() / 1000) >= decoded.exp;
 }
 
+public clear(){
+    localStorage.removeItem(this._jwtKey);
+}
+
 private urlBase64Decode(str:string) {
     var output = str.replace(/-/g, '+').replace(/_/g, '/');
     switch (output.length % 4) {

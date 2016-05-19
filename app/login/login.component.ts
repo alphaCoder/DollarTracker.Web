@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Rx';
 
 import {UserService} from '../user/user.service'
 import {LoginService} from './login.service'
@@ -23,7 +24,7 @@ export class LoginComponent {
         this.dtAlert = new DtAlertComponent();
     }
 
-    public submit():void {
+    public submit():Observable<any> {
         
         var isValid = this.validateEmailAndPassword();
         if(!isValid){

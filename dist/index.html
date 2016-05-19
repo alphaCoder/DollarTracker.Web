@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  <!--<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />-->
+  <link href="css/bootstrapbootswatch.css" rel="stylesheet" />
+  <link href="css/main.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+  
+  <script src="lib/es6-shim/es6-shim.min.js"></script>
+  <script src="lib/zone.js/dist/zone.js"></script>
+  <script src="lib/reflect-metadata/Reflect.js"></script>
+  <script src="lib/systemjs/dist/system.src.js"></script>  
+    
+    <!--ng2-charts -->
+  <script src="lib/d3/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.min.js"></script>
+
+  <script>
+    (function(global) {
+
+  // map tells the System loader where to look for things
+  var map = {
+    'app':                        'app',
+    'rxjs':                       'lib/rxjs',
+    '@angular':                   'lib/@angular',
+    'ng2-nvD3':                   'lib/ng2-nvd3/build/lib/ng2-nvd3.js',
+    'angular2-jwt':               'lib/angular2-jwt/angular2-jwt.js'
+  };
+
+  // packages tells the System loader how to load when no filename and/or no extension
+  var packages = {
+    'app':    { main: 'main.js',  defaultExtension: 'js' },
+    'rxjs':   { defaultExtension: 'js' }
+  };
+
+  var packageNames = [
+    '@angular/common',
+    '@angular/compiler',
+    '@angular/core',
+    '@angular/http',
+    '@angular/platform-browser',
+    '@angular/platform-browser-dynamic',
+    '@angular/router'
+  ];
+
+  // add package entries for angular packages in the form 
+  // '@angular/common': { main: 'index.js', defaultExtension: 'js' }
+  packageNames.forEach(function(pkgName) {
+    packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
+  });
+
+  var config = {
+    map: map,
+    packages: packages
+  }
+
+  System.config(config);
+
+})(this);
+    System.import('app/boot').catch(function(err) {
+      console.log('error while importing:');
+      console.log(err);
+      console.log(err.stack);
+    });
+  </script>
+</head>
+
+<body>
+  <dt-app>Loading...</dt-app>
+</body>
+
+</html>

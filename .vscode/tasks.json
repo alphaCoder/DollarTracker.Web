@@ -1,0 +1,21 @@
+{
+    "version": "0.1.0",
+    "command": "gulp",
+    "isShellCommand": true,
+    "tasks": [
+        {
+            "taskName": "rebuild",
+            "isBuildCommand": true,
+            "isTestCommand": false,
+            "showOutput": "always",
+            "isWatching": false
+        },
+        {
+            "taskName": "watchAll",
+            "isBuildCommand": false,
+            "isTestCommand": true,
+            "showOutput": "always",
+            "isWatching": false
+        }
+    ]
+}

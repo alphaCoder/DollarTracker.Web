@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ROUTER_DIRECTIVES,Router} from '@angular/router';
 import{NgClass} from '@angular/common'
 import {UserService} from '../../user/user.service'
+import {IUser} from '../../login/loginresponse'
 @Component({
     selector: 'post-login-nav',
     templateUrl: 'app/layout/postlogin/postlogin.nav.component.html',
@@ -9,7 +10,13 @@ import {UserService} from '../../user/user.service'
 })
 export class PostLoginNavComponent implements OnInit {
     public showDropdown:boolean = false;
-    constructor(private _router:Router, private _userService:UserService) { }
+    user:IUser;
+    constructor(private _router:Router, private _userService:UserService) {
+        this._userService.currentUser.subscribe(user => {
+            console.log('user',user);
+            this.user = user
+        });
+     }
 
     ngOnInit() { }
 

@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/router', './signup.service', '../shared/alert/dtalert.component', '../shared/spinner/dtspinner.component'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/router', './signup.service', '../shared/alert/dtalert.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/router', './signup.service', '../sha
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, signup_service_1, dtalert_component_1, dtspinner_component_1;
+    var core_1, router_1, signup_service_1, dtalert_component_1;
     var SignupComponent;
     return {
         setters:[
@@ -25,9 +25,6 @@ System.register(['@angular/core', '@angular/router', './signup.service', '../sha
             },
             function (dtalert_component_1_1) {
                 dtalert_component_1 = dtalert_component_1_1;
-            },
-            function (dtspinner_component_1_1) {
-                dtspinner_component_1 = dtspinner_component_1_1;
             }],
         execute: function() {
             SignupComponent = (function () {
@@ -54,8 +51,8 @@ System.register(['@angular/core', '@angular/router', './signup.service', '../sha
                         }
                         else {
                             _this.dtAlert.success("Successfully created account! Please Login");
-                            _this.email = "";
-                            _this.password = "";
+                            _this.email = null;
+                            _this.password = null;
                         }
                     }, function (error) { return _this.dtAlert.failure(error); });
                 };
@@ -82,7 +79,7 @@ System.register(['@angular/core', '@angular/router', './signup.service', '../sha
                     core_1.Component({
                         templateUrl: 'app/signup/signup.component.html',
                         providers: [signup_service_1.SignupService],
-                        directives: [dtalert_component_1.DtAlertComponent, dtspinner_component_1.DtSpinButtonComponent]
+                        directives: [dtalert_component_1.DtAlertComponent]
                     }), 
                     __metadata('design:paramtypes', [signup_service_1.SignupService, router_1.Router])
                 ], SignupComponent);

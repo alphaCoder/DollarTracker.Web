@@ -1,0 +1,8 @@
+ <div *ngFor="let m of malert.messages; let i=index">
+    <div class="alert alert-{{m.key}} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true" (click)="malert.remove(i)">&times;</span>
+            </button>
+            {{m.text}}
+    </div>
+ </div>

@@ -1,39 +1,47 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {JwtService} from '../jwt/jwt.service'
 import {IUser, ILoginResponse} from '../login/loginResponse'
+import {Subject, BehaviorSubject} from 'rxjs/Rx';
 
 @Injectable()
-export class UserService {
+export class UserService{
 
-    public userId:string = null;
-	public userName:string = null;
-	public email:string = null;
-	public displayName:string = null;
-    public memberSince:Date = null;
-    public isAuthenticated:boolean = false;
-    constructor(private _jwtService:JwtService) {}
+    private userKey:string = "dollarTrackerUser"
+    isAuthenticated:Subject<boolean> = new BehaviorSubject<boolean>(false);
+    currentUser: Subject<IUser> = new BehaviorSubject<IUser>(null);
+
+    constructor(private _jwtService:JwtService) {
+    }
+    public init(){
+        console.log("userservice 1");
+       let usr = localStorage.getItem(this.userKey);
+       console.log('user',usr);
+       if(usr){
+           let user:IUser = JSON.parse(usr);
+           console.log('parsed user', user);
+           this.currentUser =new BehaviorSubject<IUser>(user);
+           //this.currentUser.next(user);
+       }
+       else{
+           this.currentUser = new BehaviorSubject<IUser>(null);
+       }
+       this.isAuthenticated.next(this._jwtService.isAuthenticated())
+    }
 
     public add(loginResponse:ILoginResponse){
        this._jwtService.set(loginResponse.token);
-       this.mapUser(loginResponse.user);
-       this.isAuthenticated = true;
-    }
-
-    private mapUser(user:IUser){
-        this.userId = user.userId,
-        this.userName = user.userName,
-        this.displayName = user.displayName,
-        this.email = user.email,
-        this.memberSince = user.memberSince;
+       this.isAuthenticated.next(true);
+       this.setCurrent(loginResponse.user);
+       localStorage.setItem(this.userKey, JSON.stringify(loginResponse.user));
     }
     
+    public setCurrent(newUser: IUser):void {
+        this.currentUser.next(newUser);
+    }
+
     public clear() {
-        this.userId = null;
-        this.userName = null;
-        this.displayName = null;
-        this.email = null;
-        this.memberSince = null;
-        this.isAuthenticated = false;
+        this.currentUser.next(null);
         this._jwtService.clear();
+        this.isAuthenticated.next(false);
     }
 }

@@ -51,13 +51,19 @@ System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router',
         execute: function() {
             AppComponent = (function () {
                 function AppComponent(_userService) {
+                    var _this = this;
                     this._userService = _userService;
                     this.pageTitle = 'Dollar Tracker';
+                    this.isAuthenticated = false;
+                    _userService.isAuthenticated.subscribe(function (isAuthenticated) {
+                        console.log('is authenticated', isAuthenticated);
+                        _this.isAuthenticated = isAuthenticated;
+                    });
                 }
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'dt-app',
-                        template: "\n <div>\n        <nav class='navbar navbar-default'>\n            <div class='container-fluid'>\n               <a class='navbar-brand'>{{pageTitle}}</a>\n               <ul class='nav navbar-nav navbar-right'*ngIf=\"!_userService.isAuthenticated\">\n                    <li><a [routerLink]=\"['/login']\">Login</a></li>\n                    <li><a [routerLink]=\"['/signup']\">Sign Up</a></li>\n                </ul>\n                <post-login-nav *ngIf=\"_userService.isAuthenticated\"></post-login-nav>\n            </div>\n        </nav>\n        <div class='container'>\n            <router-outlet></router-outlet>\n        </div>\n   </div>\n ",
+                        template: "\n <div>\n        <nav class='navbar navbar-default'>\n            <div class='container-fluid'>\n               <a class='navbar-brand'>{{pageTitle}}</a>\n               <ul class='nav navbar-nav navbar-right'*ngIf=\"!isAuthenticated\">\n                    <li><a [routerLink]=\"['/login']\">Login</a></li>\n                    <li><a [routerLink]=\"['/signup']\">Sign Up</a></li>\n                </ul>\n                <post-login-nav *ngIf=\"isAuthenticated\"></post-login-nav>\n            </div>\n        </nav>\n        <div class='container'>\n            <router-outlet></router-outlet>\n        </div>\n   </div>\n ",
                         directives: [router_1.ROUTER_DIRECTIVES, postlogin_nav_component_1.PostLoginNavComponent],
                         providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, apiurl_service_1.ApiUrl, login_service_1.LoginService, jwt_service_1.JwtService, user_service_1.UserService]
                     }),

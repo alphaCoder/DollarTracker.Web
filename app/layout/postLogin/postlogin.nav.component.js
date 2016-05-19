@@ -29,9 +29,14 @@ System.register(['@angular/core', '@angular/router', '@angular/common', '../../u
         execute: function() {
             PostLoginNavComponent = (function () {
                 function PostLoginNavComponent(_router, _userService) {
+                    var _this = this;
                     this._router = _router;
                     this._userService = _userService;
                     this.showDropdown = false;
+                    this._userService.currentUser.subscribe(function (user) {
+                        console.log('user', user);
+                        _this.user = user;
+                    });
                 }
                 PostLoginNavComponent.prototype.ngOnInit = function () { };
                 PostLoginNavComponent.prototype.toggleDropDown = function () {

@@ -1,0 +1,44 @@
+System.register(['@angular/core', './charts/chartdemo', './charts/barchartdemo'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var core_1, chartdemo_1, barchartdemo_1;
+    var DashboardComponent;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (chartdemo_1_1) {
+                chartdemo_1 = chartdemo_1_1;
+            },
+            function (barchartdemo_1_1) {
+                barchartdemo_1 = barchartdemo_1_1;
+            }],
+        execute: function() {
+            DashboardComponent = (function () {
+                function DashboardComponent() {
+                }
+                DashboardComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/dashboard/dashboard.component.html',
+                        directives: [chartdemo_1.ChartDemo, barchartdemo_1.BarChartDemo]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], DashboardComponent);
+                return DashboardComponent;
+            }());
+            exports_1("DashboardComponent", DashboardComponent);
+        }
+    }
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9kYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztZQVdBO2dCQUFBO2dCQUVBLENBQUM7Z0JBTkQ7b0JBQUMsZ0JBQVMsQ0FBQzt3QkFDUCxXQUFXLEVBQUUsd0NBQXdDO3dCQUNyRCxVQUFVLEVBQUMsQ0FBQyxxQkFBUyxFQUFDLDJCQUFZLENBQUM7cUJBQ3RDLENBQUM7O3NDQUFBO2dCQUdGLHlCQUFDO1lBQUQsQ0FGQSxBQUVDLElBQUE7WUFGRCxtREFFQyxDQUFBIiwiZmlsZSI6ImFwcC9kYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XHJcbmltcG9ydCB7Q2hhcnREZW1vfSBmcm9tICcuL2NoYXJ0cy9jaGFydGRlbW8nXHJcbmltcG9ydCB7QmFyQ2hhcnREZW1vfSBmcm9tICcuL2NoYXJ0cy9iYXJjaGFydGRlbW8nXHJcbmltcG9ydCB7Snd0SGVscGVyfSBmcm9tICdhbmd1bGFyMi1qd3QnXHJcbmltcG9ydCB7Um91dGVyfSBmcm9tICdAYW5ndWxhci9yb3V0ZXInXHJcbmltcG9ydCB7Snd0U2VydmljZX0gZnJvbSAnLi4vand0L2p3dC5zZXJ2aWNlJ1xyXG5pbXBvcnQge0R0QmFzZUNvbXBvbmVudH0gZnJvbSAnLi4vc2hhcmVkL2R0YmFzZS5jb21wb25lbnQnXHJcbkBDb21wb25lbnQoe1xyXG4gICAgdGVtcGxhdGVVcmw6ICdhcHAvZGFzaGJvYXJkL2Rhc2hib2FyZC5jb21wb25lbnQuaHRtbCcsXHJcbiAgICBkaXJlY3RpdmVzOltDaGFydERlbW8sQmFyQ2hhcnREZW1vXVxyXG59KVxyXG5leHBvcnQgY2xhc3MgRGFzaGJvYXJkQ29tcG9uZW50IHtcclxuICAgIFxyXG59Il0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9

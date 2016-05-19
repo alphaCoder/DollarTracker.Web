@@ -13,7 +13,7 @@ import {ApiUrl} from './shared/apiurl.service'
 import {JwtService} from './jwt/jwt.service'
 import {LoginService} from './login/login.service'
 import {PostLoginNavComponent} from './layout/postLogin/postlogin.nav.component'
-
+import {Subject, BehaviorSubject} from 'rxjs';
 @Component({
   selector: 'dt-app',
   template: `
@@ -21,11 +21,11 @@ import {PostLoginNavComponent} from './layout/postLogin/postlogin.nav.component'
         <nav class='navbar navbar-default'>
             <div class='container-fluid'>
                <a class='navbar-brand'>{{pageTitle}}</a>
-               <ul class='nav navbar-nav navbar-right'*ngIf="!_userService.isAuthenticated">
+               <ul class='nav navbar-nav navbar-right'*ngIf="!isAuthenticated">
                     <li><a [routerLink]="['/login']">Login</a></li>
                     <li><a [routerLink]="['/signup']">Sign Up</a></li>
                 </ul>
-                <post-login-nav *ngIf="_userService.isAuthenticated"></post-login-nav>
+                <post-login-nav *ngIf="isAuthenticated"></post-login-nav>
             </div>
         </nav>
         <div class='container'>
@@ -44,6 +44,11 @@ import {PostLoginNavComponent} from './layout/postLogin/postlogin.nav.component'
 ])
 export class AppComponent {
   pageTitle: string ='Dollar Tracker';
+  isAuthenticated:boolean = false;
   constructor(public _userService:UserService){
+    _userService.isAuthenticated.subscribe(isAuthenticated=>{
+      console.log('is authenticated', isAuthenticated);
+      this.isAuthenticated = isAuthenticated;
+    })
   }
 }

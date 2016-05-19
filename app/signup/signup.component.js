@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/router', '../user/user.service', './signup.service', '../shared/alert/dtalert.component'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/router', './signup.service', '../shared/alert/dtalert.component', '../shared/spinner/dtspinner.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/router', '../user/user.service', './
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, user_service_1, signup_service_1, dtalert_component_1;
+    var core_1, router_1, signup_service_1, dtalert_component_1, dtspinner_component_1;
     var SignupComponent;
     return {
         setters:[
@@ -20,28 +20,26 @@ System.register(['@angular/core', '@angular/router', '../user/user.service', './
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (user_service_1_1) {
-                user_service_1 = user_service_1_1;
-            },
             function (signup_service_1_1) {
                 signup_service_1 = signup_service_1_1;
             },
             function (dtalert_component_1_1) {
                 dtalert_component_1 = dtalert_component_1_1;
+            },
+            function (dtspinner_component_1_1) {
+                dtspinner_component_1 = dtspinner_component_1_1;
             }],
         execute: function() {
             SignupComponent = (function () {
-                function SignupComponent(_signupService, _router, _userService) {
+                function SignupComponent(_signupService, _router) {
                     this._signupService = _signupService;
                     this._router = _router;
-                    this._userService = _userService;
                     this.pageTitle = "Sign Up";
                     this.EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
                     this.dtAlert = new dtalert_component_1.DtAlertComponent();
                 }
                 SignupComponent.prototype.submit = function () {
                     var _this = this;
-                    console.log("Clicked Sign up button");
                     var isValid = this.validateEmailAndPassword();
                     if (!isValid) {
                         return;
@@ -54,9 +52,11 @@ System.register(['@angular/core', '@angular/router', '../user/user.service', './
                             _this.dtAlert.failure(result.message);
                             return;
                         }
-                        _this._userService.add(result);
-                        _this._router.navigate(['login']);
-                        console.log("Entered service in sign up page");
+                        else {
+                            _this.dtAlert.success("Successfully created account! Please Login");
+                            _this.email = "";
+                            _this.password = "";
+                        }
                     }, function (error) { return _this.dtAlert.failure(error); });
                 };
                 SignupComponent.prototype.validateEmailAndPassword = function () {
@@ -81,9 +81,10 @@ System.register(['@angular/core', '@angular/router', '../user/user.service', './
                 SignupComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/signup/signup.component.html',
-                        providers: [signup_service_1.SignupService]
+                        providers: [signup_service_1.SignupService],
+                        directives: [dtalert_component_1.DtAlertComponent, dtspinner_component_1.DtSpinButtonComponent]
                     }), 
-                    __metadata('design:paramtypes', [signup_service_1.SignupService, router_1.Router, user_service_1.UserService])
+                    __metadata('design:paramtypes', [signup_service_1.SignupService, router_1.Router])
                 ], SignupComponent);
                 return SignupComponent;
             }());

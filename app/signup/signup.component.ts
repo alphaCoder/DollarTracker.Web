@@ -3,30 +3,29 @@ import {Router} from '@angular/router';
 
 import {UserService} from '../user/user.service'
 import {SignupService} from './signup.service'
-import {ISignupResponse} from './signupResponse'
+import {ILoginResponse} from '../login/loginResponse'
 import {DtAlertComponent} from '../shared/alert/dtalert.component'
 import {DtSpinButtonComponent} from '../shared/spinner/dtspinner.component'
 
 @Component({
     templateUrl: 'app/signup/signup.component.html',
-    providers: [SignupService]
+    providers: [SignupService],
+    directives:[DtAlertComponent]
 })
 export class SignupComponent {
     public pageTitle:string = "Sign Up";
-    public signupResult:string;
-  
+    
     @Input() email:string;
     @Input() password:string;
     public dtAlert:DtAlertComponent;
     private EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     
-    constructor(private _signupService: SignupService, private _router:Router, private _userService:UserService) { 
+    constructor(private _signupService: SignupService, private _router:Router) { 
         this.dtAlert = new DtAlertComponent();
     }
 
     public submit():void {
         
-        console.log("Clicked Sign up button");
         var isValid = this.validateEmailAndPassword();
         if(!isValid){
             return;
@@ -40,9 +39,11 @@ export class SignupComponent {
                 this.dtAlert.failure(result.message);
                 return;   
             }
-           this._userService.add(result);
-           this._router.navigate(['login']);
-           console.log("Entered service in sign up page");
+            else{
+                this.dtAlert.success("Successfully created account! Please Login");
+                this.email = null;
+                this.password = null;
+            }
         },
         error=>this.dtAlert.failure(error));
     }

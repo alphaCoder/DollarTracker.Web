@@ -22,6 +22,7 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 function ApiUrl() {
                     this.baseUrl = "http://dev-dollartracker.azurewebsites.net";
                     this.loginUrl = this.baseUrl + "/api/login";
+                    this.signupUrl = this.baseUrl + "/api/register";
                 }
                 ApiUrl = __decorate([
                     core_1.Injectable(), 

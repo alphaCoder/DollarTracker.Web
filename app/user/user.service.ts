@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {JwtService} from '../jwt/jwt.service'
 import {IUser, ILoginResponse} from '../login/loginResponse'
 import {Subject, BehaviorSubject} from 'rxjs/Rx';
+import {Router} from '@angular/router'
 
 @Injectable()
 export class UserService{
@@ -10,22 +11,26 @@ export class UserService{
     isAuthenticated:Subject<boolean> = new BehaviorSubject<boolean>(false);
     currentUser: Subject<IUser> = new BehaviorSubject<IUser>(null);
 
-    constructor(private _jwtService:JwtService) {
+    constructor(private _jwtService:JwtService, private _router:Router) {
     }
     public init(){
-        console.log("userservice 1");
+        
        let usr = localStorage.getItem(this.userKey);
-       console.log('user',usr);
-       if(usr){
+       let isAuthenticated = this._jwtService.isAuthenticated();
+
+       if(usr) {
            let user:IUser = JSON.parse(usr);
-           console.log('parsed user', user);
-           this.currentUser =new BehaviorSubject<IUser>(user);
-           //this.currentUser.next(user);
+           this.currentUser.next(user);
        }
-       else{
-           this.currentUser = new BehaviorSubject<IUser>(null);
+       this.isAuthenticated.next(isAuthenticated);
+       if(!isAuthenticated) {
+           this.clear();
+             this._router.navigateByUrl('/login');
        }
-       this.isAuthenticated.next(this._jwtService.isAuthenticated())
+       else {
+           console.log('navigate to dashboard');
+           this._router.navigate(['dashboard']);
+       }
     }
 
     public add(loginResponse:ILoginResponse){

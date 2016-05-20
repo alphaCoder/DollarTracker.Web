@@ -30,13 +30,17 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 };
                 JwtService.prototype.isAuthenticated = function () {
                     var token = this.get();
+                    console.log('token in isAuthenticated', token);
                     if (!token)
                         return false;
                     var decoded = this.decodeToken(token);
                     if (typeof decoded == "undefined" || decoded == null || typeof decoded.exp === "undefined") {
+                        console.log('decoded is undefined', decoded);
                         return false;
                     }
-                    return Math.round(new Date().getTime() / 1000) >= decoded.exp;
+                    console.log('exp', decoded.exp);
+                    console.log('Math.round(new Date().getTime() / 1000)', Math.round(new Date().getTime() / 1000));
+                    return decoded.exp >= Math.round(new Date().getTime() / 1000);
                 };
                 JwtService.prototype.clear = function () {
                     localStorage.removeItem(this._jwtKey);

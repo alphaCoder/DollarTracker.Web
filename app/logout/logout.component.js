@@ -31,7 +31,7 @@ System.register(['@angular/core', '@angular/Router', '../user/user.service'], fu
                 }
                 LogoutComponent.prototype.signout = function () {
                     this._userService.clear();
-                    this._router.navigate(['/']);
+                    this._router.navigateByUrl('/login');
                 };
                 LogoutComponent = __decorate([
                     core_1.Component({

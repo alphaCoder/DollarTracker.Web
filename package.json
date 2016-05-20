@@ -8,7 +8,7 @@
     "url": "https://github.com/alphaCoder/DollarTracker.Web.git"
   },
   "scripts": {
-    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "start": "concurrent \"npm run lite\" ",
     "postinstall": "typings install --ambient",
     "clean": "rimraf src/**/*.js src/**/*.js.map",
     "build": "tsc",

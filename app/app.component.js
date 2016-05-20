@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router', './user/user.service', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './jwt/jwt.service', './login/login.service', './layout/postLogin/postlogin.nav.component'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', '@angular/router', './user/user.service', './login/login.component', './signup/signup.component', './dashboard/dashboard.component', './shared/apiurl.service', './jwt/jwt.service', './login/login.service', './layout/postLogin/postlogin.nav.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -17,7 +17,6 @@ System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router',
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (_1) {},
             function (http_1_1) {
                 http_1 = http_1_1;
             },
@@ -50,15 +49,19 @@ System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router',
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_userService) {
+                function AppComponent(_userService, _router) {
                     var _this = this;
                     this._userService = _userService;
+                    this._router = _router;
                     this.pageTitle = 'Dollar Tracker';
-                    this.isAuthenticated = false;
                     _userService.isAuthenticated.subscribe(function (isAuthenticated) {
                         console.log('is authenticated', isAuthenticated);
                         _this.isAuthenticated = isAuthenticated;
+                        if (!isAuthenticated) {
+                            _this._router.navigateByUrl('/login');
+                        }
                     });
+                    this._userService.init();
                 }
                 AppComponent = __decorate([
                     core_1.Component({
@@ -68,12 +71,12 @@ System.register(['@angular/core', 'rxjs/Rx', '@angular/http', '@angular/router',
                         providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, apiurl_service_1.ApiUrl, login_service_1.LoginService, jwt_service_1.JwtService, user_service_1.UserService]
                     }),
                     router_1.Routes([
-                        { path: '/', component: login_component_1.LoginComponent },
+                        { path: '/', component: dashboard_component_1.DashboardComponent },
                         { path: '/login', component: login_component_1.LoginComponent },
                         { path: '/signup', component: signup_component_1.SignupComponent },
                         { path: '/dashboard', component: dashboard_component_1.DashboardComponent }
                     ]), 
-                    __metadata('design:paramtypes', [user_service_1.UserService])
+                    __metadata('design:paramtypes', [user_service_1.UserService, router_1.Router])
                 ], AppComponent);
                 return AppComponent;
             }());

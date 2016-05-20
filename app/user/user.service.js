@@ -1,4 +1,4 @@
-System.register(['@angular/core', '../jwt/jwt.service', 'rxjs/Rx'], function(exports_1, context_1) {
+System.register(['@angular/core', '../jwt/jwt.service', 'rxjs/Rx', '@angular/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '../jwt/jwt.service', 'rxjs/Rx'], function(exp
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, jwt_service_1, Rx_1;
+    var core_1, jwt_service_1, Rx_1, router_1;
     var UserService;
     return {
         setters:[
@@ -22,28 +22,35 @@ System.register(['@angular/core', '../jwt/jwt.service', 'rxjs/Rx'], function(exp
             },
             function (Rx_1_1) {
                 Rx_1 = Rx_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             UserService = (function () {
-                function UserService(_jwtService) {
+                function UserService(_jwtService, _router) {
                     this._jwtService = _jwtService;
+                    this._router = _router;
                     this.userKey = "dollarTrackerUser";
                     this.isAuthenticated = new Rx_1.BehaviorSubject(false);
                     this.currentUser = new Rx_1.BehaviorSubject(null);
                 }
                 UserService.prototype.init = function () {
-                    console.log("userservice 1");
                     var usr = localStorage.getItem(this.userKey);
-                    console.log('user', usr);
+                    var isAuthenticated = this._jwtService.isAuthenticated();
                     if (usr) {
                         var user = JSON.parse(usr);
-                        console.log('parsed user', user);
-                        this.currentUser = new Rx_1.BehaviorSubject(user);
+                        this.currentUser.next(user);
+                    }
+                    this.isAuthenticated.next(isAuthenticated);
+                    if (!isAuthenticated) {
+                        this.clear();
+                        this._router.navigateByUrl('/login');
                     }
                     else {
-                        this.currentUser = new Rx_1.BehaviorSubject(null);
+                        console.log('navigate to dashboard');
+                        this._router.navigate(['dashboard']);
                     }
-                    this.isAuthenticated.next(this._jwtService.isAuthenticated());
                 };
                 UserService.prototype.add = function (loginResponse) {
                     this._jwtService.set(loginResponse.token);
@@ -61,7 +68,7 @@ System.register(['@angular/core', '../jwt/jwt.service', 'rxjs/Rx'], function(exp
                 };
                 UserService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [jwt_service_1.JwtService])
+                    __metadata('design:paramtypes', [jwt_service_1.JwtService, router_1.Router])
                 ], UserService);
                 return UserService;
             }());

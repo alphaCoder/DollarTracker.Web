@@ -10,6 +10,6 @@ export class LogoutComponent {
 
     signout(){
         this._userService.clear();
-        this._router.navigate(['/']);
+        this._router.navigateByUrl('/login');
     }
 }

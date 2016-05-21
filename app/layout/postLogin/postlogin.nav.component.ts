@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ROUTER_DIRECTIVES,Router} from '@angular/router';
+import {Router} from '@angular/router';
 import{NgClass} from '@angular/common'
 import {UserService} from '../../user/user.service'
 import {IUser} from '../../login/loginresponse'
 @Component({
     selector: 'post-login-nav',
     templateUrl: 'app/layout/postlogin/postlogin.nav.component.html',
-    directives:[ROUTER_DIRECTIVES, NgClass]
+    directives:[NgClass]
 })
 export class PostLoginNavComponent implements OnInit {
     public showDropdown:boolean = false;

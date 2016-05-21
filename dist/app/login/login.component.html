@@ -1,0 +1,35 @@
+<div class="col-sm-6 col-sm-offset-4">
+    <section class="content">
+        <div class="container-center animated slideInDown">
+            <div class="view-header">
+                <div class="header-title">
+                    <h3>{{pageTitle}}</h3>
+                </div>
+            </div>
+
+            <div class="panel panel-info col-sm-10">
+                <div class="panel-body">
+                    <form class="form form-vertical">
+                        <div class="form-group">
+                            <label class="control-label" for="email">Email</label>
+                            <input type="text" [(ngModel)] = "email"  placeholder="example@example.com" value="" name="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password">Password</label>
+                            <input type="password" [(ngModel)] = "password" placeholder="******" value="" name="password" class="form-control">
+                        </div>
+                        <div>
+                            <button class="btn btn-default" (click)='submit()'>Login</button>
+                            <!--<dt-button [method]='submit() | async'></dt-button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-sm-4 col-sm-offset-4">
+     <div class="content">
+       <dt-alert [malert]="dtAlert"></dt-alert>
+    </div> 
+</div>    

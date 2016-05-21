@@ -1,0 +1,10 @@
+ <nav class='navbar navbar-default'>
+    <div class='container-fluid'>
+        <a class='navbar-brand'>{{pageTitle}}</a>
+        <ul class='nav navbar-nav navbar-right'*ngIf="!isAuthenticated">
+            <li><a [routerLink]="['/login']">Login</a></li>
+            <li><a [routerLink]="['/signup']">Sign Up</a></li>
+        </ul>
+        <post-login-nav *ngIf="isAuthenticated"></post-login-nav>
+    </div>
+</nav>

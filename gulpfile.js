@@ -24,7 +24,7 @@ var libFiles = [
         "node_modules/es6-shim/es6-shim.min.js",
         "node_modules/zone.js/dist/zone.js",
         "node_modules/reflect-metadata/Reflect.js",
-        "node_modules/d3/d3.js",
+        "node_modules/d3/d3.min.js",
         "node_modules/ng2-nvd3/build/lib/ng2-nvd3.js",
         "node_modules/angular2-jwt/angular2-jwt.js"
     ];

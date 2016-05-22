@@ -10,7 +10,8 @@ import {DtSpinButtonComponent} from '../shared/spinner/dtspinner.component'
 
 @Component({
     templateUrl: 'app/login/login.component.html',
-    directives:[DtAlertComponent,DtSpinButtonComponent]
+    directives:[DtAlertComponent,DtSpinButtonComponent],
+    selector:'login'
 })
 export class LoginComponent {
     public pageTitle: string = "Login";
@@ -40,7 +41,7 @@ export class LoginComponent {
                 return;   
             }
            this._userService.add(result);
-           this._router.navigate(['dashboard']);
+           this._router.navigateByUrl('/dashboard');
         },
         error=>this.dtAlert.failure(error));
     }

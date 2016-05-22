@@ -1,0 +1,12 @@
+<div>
+   <div *ngIf="!isAuthenticated">
+      <login></login>
+    </div>    
+     
+    <div *ngIf="!isAuthenticated"> 
+       <top-nav></top-nav>
+        <div class='container'>
+            <router-outlet></router-outlet>
+        </div>
+   </div>
+  </div>

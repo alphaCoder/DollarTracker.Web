@@ -1,34 +1,42 @@
 import {Component,provide} from '@angular/core';
 import {HTTP_PROVIDERS,Http} from '@angular/http';
-import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Routes, Router} from '@angular/router';
+import {ROUTER_DIRECTIVES, Routes, Router} from '@angular/router';
 import {Subject, BehaviorSubject,Observable} from 'rxjs/Rx';
 
-import {UserService} from './user/user.service'
+import {AppBodyComponent} from './layout/appbody/appbody.component'
 import {LoginComponent} from './login/login.component'
-import {SignupComponent} from './signup/signup.component'
 import {DashboardComponent} from './dashboard/dashboard.component'
 import {TopNavComponent} from './layout/topnav/topnav.component'
+import {UserService} from './user/user.service';
 
 @Component({
   selector: 'dt-app',
-  template: `
- <div>
+  template: `<div>
+   <div *ngIf="!isAuthenticated">
+      <login></login>
+    </div>    
+     
+    <div *ngIf="isAuthenticated"> 
        <top-nav></top-nav>
-        <div class='container'>
-            <router-outlet></router-outlet>
-        </div>
    </div>
- `,
- directives:[ROUTER_DIRECTIVES,TopNavComponent]
+    <div class='container'>
+       <router-outlet></router-outlet>
+    </div>
+  </div>`,
+ directives:[ROUTER_DIRECTIVES,AppBodyComponent, LoginComponent,TopNavComponent]
 })
 @Routes([
-  { path: '/', component: DashboardComponent },  
-  { path: '/login', component: LoginComponent },
-  { path: '/signup',  component: SignupComponent },
-  { path: '/dashboard', component: DashboardComponent }
+  { path: '/dashboard', component: DashboardComponent }  
 ])
 export class AppComponent {
   pageTitle: string ='Dollar Tracker';
   isAuthenticated:boolean;
-  constructor(){}
+    constructor(public _userService:UserService) {
+   
+    _userService.isAuthenticated.subscribe(isAuthenticated=>{
+      console.log('is authenticated', isAuthenticated);
+      this.isAuthenticated = isAuthenticated;
+    });
+     this._userService.init();
+  }
 }

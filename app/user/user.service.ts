@@ -25,11 +25,11 @@ export class UserService{
        this.isAuthenticated.next(isAuthenticated);
        if(!isAuthenticated) {
            this.clear();
-             this._router.navigateByUrl('/login');
+             this._router.navigateByUrl('/');
        }
        else {
            console.log('navigate to dashboard');
-           this._router.navigate(['dashboard']);
+           this._router.navigateByUrl('/dashboard');
        }
     }
 

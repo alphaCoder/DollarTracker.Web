@@ -9,5 +9,6 @@ import {PostLoginNavComponent} from '../postlogin/postlogin.nav.component';
     directives: [ROUTER_DIRECTIVES,PostLoginNavComponent]
 })
 export class TopNavComponent {
+   pageTitle: string ='Dollar Tracker';
    constructor(){}
  }

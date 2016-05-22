@@ -1,36 +1,17 @@
+<div *ngIf="dashboardStats">
 <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div>25</div>
-                                    <div>New Expenses</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-success">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
+                                    <i class="fa fa-files-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div>1</div>
-                                    <div>Active Expense Reports</div>
+                                    <h1>{{dashboardStats.totalActiveReports}}</h1>
+                                </div>
+                                <div class="col-xs-12">
+                                    <h4>Active Expense Reports</h4>
                                 </div>
                             </div>
                         </div>
@@ -48,12 +29,14 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-files-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div>124</div>
-                                    <div>Total Expense Reports</div>
+                                    <h1>{{dashboardStats.totalExpenseReports}}</h1>
                                 </div>
+                                <div class="col-xs-12">
+                                      <h4>Total Expense Reports</h4>
+                                </div>    
                             </div>
                         </div>
                         <a href="#">
@@ -70,12 +53,12 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
+                                    <i class="fa fa-money fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div>$1000</div>
-                                    <div> October Expenditure</div>
+                                    <h1>${{dashboardStats.totalExpenditureForCurrentMonth}}</h1>
                                 </div>
+                                <div class="col-xs-12"><h4> October Expenditure</h4></div>
                             </div>
                         </div>
                         <a href="#">
@@ -89,36 +72,31 @@
                 </div>
     </div> <!--end div row -->
     <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="{background:red}">
-                   <h1><strong>Oct Spending</strong></h1>
-                    <div class="row">
-                    <div class="col-xs-6">
-                        <chart-demo></chart-demo>
-                    </div>
-                      <div class="col-xs-6">
-                            <bar-chart></bar-chart>
-                        </div>
-                    </div>
+        <div class="col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Recently Added Expenses</h3>
                 </div>
+                <div class="panel-body" style="padding:0">
+                    <table class="table table-condensed table-hover" style="margin-bottom:0">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Added By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ra of dashboardStats.recentlyAdded">
+                                <td>{{ra.expenseCategoryId}}</td>
+                                <td>{{ra.amount}}</td>
+                                <td>{{ra.addedByName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
-    </div> <!-- end div row -->    
- <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="{background:red}">
-                   <h1><strong>Oct Spending</strong></h1>
-                    <div class="row">
-                    <div class="col-xs-6">
-                        <chart-demo></chart-demo>
-                    </div>
-                      <div class="col-xs-6">
-                            <bar-chart></bar-chart>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- end div row -->    
+    </div>
+ </div> 

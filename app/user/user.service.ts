@@ -22,12 +22,11 @@ export class UserService{
            let user:IUser = JSON.parse(usr);
            this.currentUser.next(user);
        }
-       this.isAuthenticated.next(isAuthenticated);
        if(!isAuthenticated) {
            this.clear();
-             this._router.navigateByUrl('/');
        }
        else {
+          this.isAuthenticated.next(isAuthenticated);
            console.log('navigate to dashboard');
            this._router.navigateByUrl('/dashboard');
        }
@@ -48,5 +47,6 @@ export class UserService{
         this.currentUser.next(null);
         this._jwtService.clear();
         this.isAuthenticated.next(false);
+        this._router.navigateByUrl('/');
     }
 }

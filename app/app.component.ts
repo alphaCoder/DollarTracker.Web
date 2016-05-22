@@ -3,7 +3,6 @@ import {HTTP_PROVIDERS,Http} from '@angular/http';
 import {ROUTER_DIRECTIVES, Routes, Router} from '@angular/router';
 import {Subject, BehaviorSubject,Observable} from 'rxjs/Rx';
 
-import {AppBodyComponent} from './layout/appbody/appbody.component'
 import {LoginComponent} from './login/login.component'
 import {DashboardComponent} from './dashboard/dashboard.component'
 import {TopNavComponent} from './layout/topnav/topnav.component'
@@ -23,7 +22,7 @@ import {UserService} from './user/user.service';
        <router-outlet></router-outlet>
     </div>
   </div>`,
- directives:[ROUTER_DIRECTIVES,AppBodyComponent, LoginComponent,TopNavComponent]
+ directives:[ROUTER_DIRECTIVES, LoginComponent,TopNavComponent]
 })
 @Routes([
   { path: '/dashboard', component: DashboardComponent }  

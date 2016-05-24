@@ -26,3 +26,15 @@
         -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
       }
 }
+.progress.sm
+{
+  height: 10px;
+  border-radius: 1px;
+}
+
+.progress-group .progress-text {
+  font-weight: 300;
+}
+.progress-group .progress-number {
+  float: right;
+}

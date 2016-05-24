@@ -40,7 +40,7 @@ export class BarChartDemo {
                 },
                 yAxis: {
                     axisLabel: 'Y Axis',
-                    axisLabelDistance: -10
+                    axisLabelDistance: 10
                 }
             }
     };
@@ -51,7 +51,7 @@ export class BarChartDemo {
                 values: [
                     {
                         "label" : "A" ,
-                        "value" : -29.765957771107
+                        "value" : 29.765957771107
                     } ,
                     {
                         "label" : "B" ,
@@ -71,16 +71,8 @@ export class BarChartDemo {
                     } ,
                     {
                         "label" : "F" ,
-                        "value" : -98.079782601442
-                    } ,
-                    {
-                        "label" : "G" ,
-                        "value" : -13.925743130903
-                    } ,
-                    {
-                        "label" : "H" ,
-                        "value" : -5.1387322875705
-                    }
+                        "value" : 98.079782601442
+                    } 
                 ]
             }
         ];

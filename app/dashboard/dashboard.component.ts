@@ -7,9 +7,10 @@ import {DtBaseComponent} from '../shared/dtbase.component';
 import {UserService} from '../user/user.service';
 import {DashboardService} from './dashboard.service';
 import {Observable} from 'rxJs/Rx';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 @Component({
     templateUrl: 'app/dashboard/dashboard.component.html',
-    directives:[ChartDemo,BarChartDemo]
+    directives:[ChartDemo,BarChartDemo,ROUTER_DIRECTIVES]
 })
 export class DashboardComponent {
     public dashboardStats:any;

@@ -7,7 +7,7 @@ import {LoginComponent} from './login/login.component'
 import {DashboardComponent} from './dashboard/dashboard.component'
 import {TopNavComponent} from './layout/topnav/topnav.component'
 import {UserService} from './user/user.service';
-
+import {ReportComponent} from './report/report.component';
 @Component({
   selector: 'dt-app',
   template: `<div>
@@ -25,7 +25,8 @@ import {UserService} from './user/user.service';
  directives:[ROUTER_DIRECTIVES, LoginComponent,TopNavComponent]
 })
 @Routes([
-  { path: '/dashboard', component: DashboardComponent }  
+  { path: '/dashboard', component: DashboardComponent },
+  {path: '/report', component: ReportComponent}
 ])
 export class AppComponent {
   pageTitle: string ='Dollar Tracker';

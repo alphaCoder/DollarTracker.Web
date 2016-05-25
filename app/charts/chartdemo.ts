@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 import {nvD3} from 'ng2-nvD3';
 declare let d3: any;
@@ -9,22 +9,22 @@ declare let d3: any;
   template: `
     <div >
       <nvd3 [options]="options" [data]="data"></nvd3>
-    </div>
+     </div>
   `
 })
 export class ChartDemo {
   options;
-  data;
+  @Input() data = [];
   chartType;
-
+  
   ngOnInit(){
     
     this.options = {
      chart: {
       type: 'pieChart',
       height: 500,
-      x: function(d){return d.key;},
-      y: function(d){return d.y;},
+      x: function(d){return d.label;},
+      y: function(d){return d.value;},
       showLabels: false,
       duration: 500,
       labelThreshold: 0.01,
@@ -40,36 +40,36 @@ export class ChartDemo {
     }
     };
   
-    this.data =   [
-    {
-      key: "One",
-      y: 5
-    },
-    {
-      key: "Two",
-      y: 2
-    },
-    {
-      key: "Three",
-      y: 9
-    },
-    {
-      key: "Four",
-      y: 7
-    },
-    {
-      key: "Five",
-      y: 4
-    },
-    {
-      key: "Six",
-      y: 3
-    },
-    {
-      key: "Seven",
-      y: .5
-    }
-  ];
+  //   this.data =   [
+  //   {
+  //     key: "One",
+  //     y: 5
+  //   },
+  //   {
+  //     key: "Two",
+  //     y: 2
+  //   },
+  //   {
+  //     key: "Three",
+  //     y: 9
+  //   },
+  //   {
+  //     key: "Four",
+  //     y: 7
+  //   },
+  //   {
+  //     key: "Five",
+  //     y: 4
+  //   },
+  //   {
+  //     key: "Six",
+  //     y: 3
+  //   },
+  //   {
+  //     key: "Seven",
+  //     y: .5
+  //   }
+  // ];
   }
   
   

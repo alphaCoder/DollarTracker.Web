@@ -8,5 +8,6 @@ export class ApiUrl {
     private baseUrl:string = "http://dev-dollartracker.azurewebsites.net";
     public loginUrl:string = this.baseUrl + "/api/login";
     public signupUrl:string = this.baseUrl + "/api/register";
-    public dashboardStatsUrl:string = this.baseUrl + "/api/dashboardStats"
+    public dashboardStatsUrl:string = this.baseUrl + "/api/dashboardStats";
+    public report:string = this.baseUrl + "/api/dashboard";
 }

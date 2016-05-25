@@ -20,32 +20,56 @@ export class ChartDemo {
   ngOnInit(){
     
     this.options = {
-      chart: {
-        type: 'lineChart',
-        height: 450,
-        margin : {
-          top: 20,
-          right: 20,
-          bottom: 40,
-          left: 55
-        },
-        x: function(d){ return d.x; },
-        y: function(d){ return d.y; },
-        useInteractiveGuideline: true,
-        xAxis: {
-          axisLabel: 'Time (ms)'
-        },
-        yAxis: {
-          axisLabel: 'Voltage (v)',
-          tickFormat: function(d){
-            return d3.format('.02f')(d);
-          },
-          axisLabelDistance: -10
+     chart: {
+      type: 'pieChart',
+      height: 500,
+      x: function(d){return d.key;},
+      y: function(d){return d.y;},
+      showLabels: false,
+      duration: 500,
+      labelThreshold: 0.01,
+      labelSunbeamLayout: false,
+      legend: {
+        margin: {
+          top: 5,
+          right: 35,
+          bottom: 5,
+          left: 0
         }
       }
+    }
     };
   
-    this.data = this.sinAndCos();
+    this.data =   [
+    {
+      key: "One",
+      y: 5
+    },
+    {
+      key: "Two",
+      y: 2
+    },
+    {
+      key: "Three",
+      y: 9
+    },
+    {
+      key: "Four",
+      y: 7
+    },
+    {
+      key: "Five",
+      y: 4
+    },
+    {
+      key: "Six",
+      y: 3
+    },
+    {
+      key: "Seven",
+      y: .5
+    }
+  ];
   }
   
   

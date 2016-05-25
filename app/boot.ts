@@ -11,6 +11,7 @@ import {JwtService} from './jwt/jwt.service'
 import {LoginService} from './login/login.service'
 import {DashboardService} from './dashboard/dashboard.service'
 import {ApiService} from './shared/api/api.service'
+import {ReportService} from './report/report.service'
 
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
@@ -21,5 +22,6 @@ bootstrap(AppComponent, [
     JwtService,
     UserService,
     DashboardService,
-    ApiService
+    ApiService,
+    ReportService
 ]);

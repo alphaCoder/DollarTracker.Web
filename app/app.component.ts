@@ -8,6 +8,7 @@ import {DashboardComponent} from './dashboard/dashboard.component'
 import {TopNavComponent} from './layout/topnav/topnav.component'
 import {UserService} from './user/user.service';
 import {ReportComponent} from './report/report.component';
+
 @Component({
   selector: 'dt-app',
   template: `<div>

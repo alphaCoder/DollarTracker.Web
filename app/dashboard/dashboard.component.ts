@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ChartDemo} from '../charts/chartdemo';
 import {BarChartDemo} from '../charts/barchartdemo';
 import {Router} from '@angular/router';
-import {JwtService} from '../jwt/jwt.service';
 import {DtBaseComponent} from '../shared/dtbase.component';
-import {UserService} from '../user/user.service';
 import {DashboardService} from './dashboard.service';
 import {Observable} from 'rxJs/Rx';
 import {ROUTER_DIRECTIVES} from '@angular/router';
@@ -14,7 +12,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 })
 export class DashboardComponent {
     public dashboardStats:any;
-    constructor(private _userService:UserService, private _dashboardService:DashboardService){
+    constructor(private _dashboardService:DashboardService){
     
         this._dashboardService.getDashboardStats()
         .subscribe(ds=>{

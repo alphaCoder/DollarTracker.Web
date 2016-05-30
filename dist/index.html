@@ -4,8 +4,9 @@
 <head>
  
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-  <!--<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link href="css/bootstrapbootswatch.css" rel="stylesheet" />
   <link href="css/main.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
@@ -18,7 +19,7 @@
     <!--ng2-charts -->
   <script src="lib/d3/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.min.js"></script>
-
+  
   <script>
     (function(global) {
 
@@ -28,13 +29,15 @@
     'rxjs':                       'lib/rxjs',
     '@angular':                   'lib/@angular',
     'ng2-nvD3':                   'lib/ng2-nvd3/build/lib/ng2-nvd3.js',
-    'angular2-jwt':               'lib/angular2-jwt/angular2-jwt.js'
+    'angular2-jwt':               'lib/angular2-jwt/angular2-jwt.js',
+    'ng2-bs3-modal':              'lib/ng2-bs3-modal'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':    { main: 'main.js',  defaultExtension: 'js' },
-    'rxjs':   { defaultExtension: 'js' }
+    'rxjs':   { defaultExtension: 'js' },
+    'ng2-bs3-modal':   { defaultExtension: 'js' }
   };
 
   var packageNames = [

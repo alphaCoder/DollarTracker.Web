@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/http@2.0.0-rc.1",
-      "f:\\repo\\DollarTracker.Web"
+      "F:\\repo\\DollarTracker.Web"
     ]
   ],
   "_from": "@angular/http@2.0.0-rc.1",
@@ -36,7 +36,7 @@
   "_shasum": "9be6485e74f4edbcdc856f04235d9b467fc6cdeb",
   "_shrinkwrap": null,
   "_spec": "@angular/http@2.0.0-rc.1",
-  "_where": "f:\\repo\\DollarTracker.Web",
+  "_where": "F:\\repo\\DollarTracker.Web",
   "author": {
     "name": "angular"
   },

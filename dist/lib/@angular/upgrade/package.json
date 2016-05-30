@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/upgrade@2.0.0-rc.1",
-      "f:\\repo\\DollarTracker.Web"
+      "F:\\repo\\DollarTracker.Web"
     ]
   ],
   "_from": "@angular/upgrade@2.0.0-rc.1",
@@ -36,7 +36,7 @@
   "_shasum": "50278e5e605b9629e6130db523005951695149ee",
   "_shrinkwrap": null,
   "_spec": "@angular/upgrade@2.0.0-rc.1",
-  "_where": "f:\\repo\\DollarTracker.Web",
+  "_where": "F:\\repo\\DollarTracker.Web",
   "author": {
     "name": "angular"
   },

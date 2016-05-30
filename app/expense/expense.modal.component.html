@@ -1,0 +1,15 @@
+ <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+        (onOpen)="opened()" #modal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">I'm a modal!</h4>
+        </modal-header>
+        <modal-body>
+            <ul>
+                <li *ngFor="let item of items">
+                    <a href="#" (click)="$event.preventDefault(); selected = item">{{ item }}</a>
+                </li>
+            </ul>
+            <p *ngIf="selected">Selected: <b>{{ selected }}</b></p>
+        </modal-body>
+        <modal-footer [show-default-buttons]="true"></modal-footer>
+    </modal>

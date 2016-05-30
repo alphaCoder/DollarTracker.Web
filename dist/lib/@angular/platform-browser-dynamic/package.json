@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/platform-browser-dynamic@2.0.0-rc.1",
-      "f:\\repo\\DollarTracker.Web"
+      "F:\\repo\\DollarTracker.Web"
     ]
   ],
   "_from": "@angular/platform-browser-dynamic@2.0.0-rc.1",
@@ -30,13 +30,14 @@
     "type": "version"
   },
   "_requiredBy": [
-    "/"
+    "/",
+    "/ng2-nvd3"
   ],
   "_resolved": "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.0.0-rc.1.tgz",
   "_shasum": "0edb02929dbe479afdfeba6a1a3b67985a8f66ff",
   "_shrinkwrap": null,
   "_spec": "@angular/platform-browser-dynamic@2.0.0-rc.1",
-  "_where": "f:\\repo\\DollarTracker.Web",
+  "_where": "F:\\repo\\DollarTracker.Web",
   "author": {
     "name": "angular"
   },

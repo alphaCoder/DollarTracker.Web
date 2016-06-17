@@ -1,15 +1,56 @@
- <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
         (onOpen)="opened()" #modal>
         <modal-header [show-close]="true">
-            <h4 class="modal-title">I'm a modal!</h4>
+            <h4 class="modal-title">New Expense
+             
+             </h4>   
         </modal-header>
         <modal-body>
-            <ul>
-                <li *ngFor="let item of items">
-                    <a href="#" (click)="$event.preventDefault(); selected = item">{{ item }}</a>
-                </li>
-            </ul>
-            <p *ngIf="selected">Selected: <b>{{ selected }}</b></p>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i ></i></span>
+                DROPDOWN HERE
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-dollar"> &nbsp;</i></span>
+                <input type="text" class="form-control" placeholder="Amount" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-shopping-bag"></i></span>
+                <input type="text" class="form-control" placeholder="Store Name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <span>
+               <date-picker #datepicker [(ngModel)] = "test"></date-picker>
+            </span>
+            
+            <div style="padding-top: 10px">
+                <div class="thumbnail" *ngIf="file">
+                    <img  class="thumb"> <span ng-show="file"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="btn btn-default btn-file btn-sm" name="file" 
+                  xngf-resize="{width: 100, height: 100}">
+                  Add Receipt - {{test}}
+                  <br />
+                  {{someValue|json}}
+            </span>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="2" placeholder="additional comments"> </textarea>
+        </div>
         </modal-body>
-        <modal-footer [show-default-buttons]="true"></modal-footer>
+        <modal-footer [show-default-buttons]="false">
+            <span class="pull-right">
+                <button class="btn btn-warning">Cancel</button>
+                <button class="btn btn-primary" (click)="submit()">Add</button>
+            </span>   
+        </modal-footer>
     </modal>

@@ -1,20 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import {DatePickerComponent} from '../shared/datepicker/datepicker.component';
 
 @Component({
     selector: 'expense',
     templateUrl: 'app/expense/expense.modal.component.html',
-    directives:[MODAL_DIRECTIVES]
+    directives:[MODAL_DIRECTIVES,DatePickerComponent]
 })
 export class ExpenseModalComponent{
     constructor() { }
- @ViewChild('modal')
+    public test:string ='';
+    @ViewChild('modal')
     modal: ModalComponent;
+    @ViewChild('datepicker')
+    datepicker:DatePickerComponent;
     items: string[] = ['item1', 'item2', 'item3'];
     selected: string;
     output: string;
-    model: Person = new Person();
-
     index: number = 0;
     backdropOptions = [true, false, 'static'];
 
@@ -40,10 +42,10 @@ export class ExpenseModalComponent{
     }
 
     open() {
-        this.modal.open();
+        this.modal.open('sm');
     }
-}
-export class Person {
-    firstName: string;
-    lastName: string;
+    submit(){
+        console.log("selected dt"+ this.test);
+        console.log("DatePicker data:"+this.datepicker.value);
+    }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {DatePickerComponent} from '../shared/datepicker/datepicker.component';
-
+import {Expense} from './expense'
 @Component({
     selector: 'expense',
     templateUrl: 'app/expense/expense.modal.component.html',
@@ -14,7 +14,6 @@ export class ExpenseModalComponent{
     modal: ModalComponent;
     @ViewChild('datepicker')
     datepicker:DatePickerComponent;
-    items: string[] = ['item1', 'item2', 'item3'];
     selected: string;
     output: string;
     index: number = 0;
@@ -24,13 +23,21 @@ export class ExpenseModalComponent{
     keyboard: boolean = true;
     backdrop: string | boolean = true;
 
-
+    expense : Expense = new Expense();
     closed() {
         this.output = '(closed) ' + this.selected;
     }
 
     dismissed() {
         this.output = '(dismissed)';
+        console.log("I am in dismissed expense");
+        this.expense.expenseUtcDt = this.datepicker.value;
+        if(this.expense) {
+            console.log("Expense::");
+            console.log(JSON.stringify(this.expense));
+        }
+        this.expense = new Expense();
+        this.modal.dismiss();
     }
 
     opened() {

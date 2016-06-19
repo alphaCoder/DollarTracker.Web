@@ -31,4 +31,8 @@ export class ReportComponent {
         console.log("you clicked open");
         this.expense.open();
     } 
+    dismissed() {
+        console.log("I am in dismissed");
+        this.expense.dismissed();
+    }
 }

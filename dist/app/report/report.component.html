@@ -63,7 +63,7 @@
 
                   <div class="progress-group" *ngFor="let st of es.expensesStats; let i=index" >
                     <span class="progress-text">{{st.label}}</span>
-                    <span class="progress-number"><b>{{st.value}}</b>/{{es.totalExpenses}}</span>
+                    <span class="progress-number"><b>{{st.value | number}}</b>/{{es.totalExpenses | number}}</span>
 
                     <div class="progress sm">
                       <div class="progress-bar progress-bar-{{colors[i%colors.length]}}" [style.width]="(st.value/es.totalExpenses)*100 + '%'"></div>

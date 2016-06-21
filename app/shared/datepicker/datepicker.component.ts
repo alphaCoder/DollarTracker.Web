@@ -7,7 +7,7 @@ const noop = () => {};
 
 const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = new Provider(
   NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => DatePickerComponent),
+    useExisting: forwardRef(() => DatePicker),
     multi: true
   });
 
@@ -17,53 +17,67 @@ declare var moment;
 @Component({
     selector: 'date-picker',
     template: `
-    <div class="input-group date"> 
+    <div #datepickerInput class="input-group date"> 
          <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-         <input #datepickerInput type="text" value={{_value}} class="form-control">
+         <input type="text" [(ngModel)]="value" class="form-control">
     </div>
     `,
     providers:[CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR,FORM_PROVIDERS],
     directives:[CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
-export class DatePickerComponent implements ControlValueAccessor {
+export class DatePicker implements ControlValueAccessor {
 	//The internal data model
-    private _value: string = '';
+    private _value: string = "";
+    private displayDate:string ="";
     @ViewChild('datepickerInput') datepickerInput;
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
     
  
 	ngAfterViewInit() {
-      	$(this.datepickerInput.nativeElement).datepicker({
+      	var self = this;
+        $(this.datepickerInput.nativeElement).datepicker({
            autoclose: true,
            todayBtn: 'linked',
            defaultViewDate: 'today'
+           
+        }).on('changeDate', function (dt) {
+          console.log(dt.date.toISOString());
+          console.log(dt.format(0,"mm/dd/yyyy"))
+          console.log("I am truly in change date method:");
+          self.writeValue(dt.format(0,"mm/dd/yyyy"));
         });
      }
-//Placeholders for the callbacks...overwritten upon registering
-    private _onTouchedCallback: (_:any) => void = noop;
-    private _onChangeCallback: (_:any) => void = noop;
-
-    //Set touched on blur
-    onTouched(){
-		this._onTouchedCallback(null);
-    }
   
-  //get accessor
+    //Placeholders for the callbacks
+    private _onTouchedCallback: () => void = noop;
+   
+    private _onChangeCallback: (_:any) => void = noop;
+  
+    //get accessor
     get value(): any { return this._value; };
   
     //set accessor including call the onchange callback
     set value(v: any) {
-      console.log('DATE PICKER SET'+v);
+      console.log("I am in set");
       if (v !== this._value) {
         this._value = v;
         this._onChangeCallback(v);
       }
     }
     
+    //Set touched on blur
+    onTouched(ev){
+      console.log("touched", ev.target.value);
+    this.writeValue(ev.target.value);
+      this._onTouchedCallback();
+    }
+  
     //From ControlValueAccessor interface
     writeValue(value: any) {
+      console.log("I am in writeValue:"+value)
       this._value = value;
     }
   

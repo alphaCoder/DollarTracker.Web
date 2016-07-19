@@ -1,11 +1,18 @@
 {
   "_args": [
     [
-      "ng2-bs3-modal",
+      {
+        "name": "ng2-bs3-modal",
+        "raw": "ng2-bs3-modal@^0.6.1",
+        "rawSpec": "^0.6.1",
+        "scope": null,
+        "spec": ">=0.6.1 <0.7.0",
+        "type": "range"
+      },
       "f:\\repo\\DollarTracker.Web"
     ]
   ],
-  "_from": "ng2-bs3-modal@latest",
+  "_from": "ng2-bs3-modal@>=0.6.1 <0.7.0",
   "_id": "ng2-bs3-modal@0.6.1",
   "_inCache": true,
   "_installable": true,
@@ -23,11 +30,11 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "ng2-bs3-modal",
-    "raw": "ng2-bs3-modal",
-    "rawSpec": "",
+    "raw": "ng2-bs3-modal@^0.6.1",
+    "rawSpec": "^0.6.1",
     "scope": null,
-    "spec": "latest",
-    "type": "tag"
+    "spec": ">=0.6.1 <0.7.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
@@ -35,7 +42,7 @@
   "_resolved": "https://registry.npmjs.org/ng2-bs3-modal/-/ng2-bs3-modal-0.6.1.tgz",
   "_shasum": "2c105f6769ba5f7d0c4acea6cf74fe7a03ba54b6",
   "_shrinkwrap": null,
-  "_spec": "ng2-bs3-modal",
+  "_spec": "ng2-bs3-modal@^0.6.1",
   "_where": "f:\\repo\\DollarTracker.Web",
   "author": {
     "email": "doug.ludlow@gmail.com",

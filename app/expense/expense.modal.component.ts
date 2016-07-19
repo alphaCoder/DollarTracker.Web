@@ -33,7 +33,7 @@ export class ExpenseModalComponent{
         this.output = '(dismissed)';
         console.log("I am in dismissed expense");
         
-        this.expense.expenseUtcDt = this.datepicker.value;
+      //  this.expense.expenseUtcDt = this.datepicker.value;
         console.log("date selected is: "+ this.expense.expenseUtcDt);
         if(this.expense) {
             console.log("Expense::");
@@ -58,4 +58,9 @@ export class ExpenseModalComponent{
         console.log("selected dt"+ this.test);
         console.log("DatePicker data:"+this.datepicker.value);
     }
+    cancel() {
+        this.modal.dismiss();
+    }
+
+
 }

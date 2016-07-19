@@ -27,7 +27,7 @@ export class ChartDemo {
       y: function(d){return d.value;},
       showLabels: false,
       duration: 500,
-      labelThreshold: 0.01,
+      labelThreshold: 0.02,
       labelSunbeamLayout: false,
       legend: {
         margin: {

@@ -1,17 +1,20 @@
 <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
         (onOpen)="opened()" #modal>
         <modal-header [show-close]="true">
-            <h4 class="modal-title">New Expense
-             
+            <h4 class="modal-title">
+                New Expense
              </h4>   
         </modal-header>
         <modal-body>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i ></i></span>
-                DROPDOWN HERE
+                <span class="input-group-addon">
+                    <i class="fa fa-list"></i>
+                </span>
+                <input type="text" class="form-control">
             </div>
         </div>
+           
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-dollar"> &nbsp;</i></span>
@@ -27,7 +30,7 @@
         <div class="form-group">
            
             <span>
-               <date-picker #datepicker></date-picker>
+               <date-picker #datepicker [(ngModel)]="expense.expenseUtcDt"></date-picker>
             </span>
             
             <div style="padding-top: 10px">
@@ -39,7 +42,7 @@
         <div class="form-group">
             <span class="btn btn-default btn-file btn-sm" name="file" 
                   xngf-resize="{width: 100, height: 100}">
-                  Add Receipt - {{test}}
+                  Add Receipt
             </span>
         </div>
         <div class="form-group">
@@ -48,7 +51,7 @@
         </modal-body>
         <modal-footer [show-default-buttons]="false">
             <span class="pull-right">
-                <button class="btn btn-warning">Cancel</button>
+                <button class="btn btn-warning" (click)="cancel()">Cancel</button>
                 <button class="btn btn-primary" (click)="submit()">Add</button>
             </span>   
         </modal-footer>

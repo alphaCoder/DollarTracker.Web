@@ -38,3 +38,10 @@
 .progress-group .progress-number {
   float: right;
 }
+.chartD  {
+    text-decoration-style: white !important;
+}
+
+.ng2-nvD3 text {
+    fill: white !important;
+}

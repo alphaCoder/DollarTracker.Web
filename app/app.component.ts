@@ -1,6 +1,6 @@
-import {Component,provide} from '@angular/core';
-import {HTTP_PROVIDERS,Http} from '@angular/http';
-import {ROUTER_DIRECTIVES, Routes, Router} from '@angular/router';
+import {Component} from '@angular/core';
+import {HTTP_PROVIDERS} from '@angular/http';
+import {ROUTER_DIRECTIVES,  Router} from '@angular/router';
 import {Subject, BehaviorSubject,Observable} from 'rxjs/Rx';
 
 import {LoginComponent} from './login/login.component'
@@ -23,12 +23,10 @@ import {ReportComponent} from './report/report.component';
        <router-outlet></router-outlet>
     </div>
   </div>`,
- directives:[ROUTER_DIRECTIVES, LoginComponent,TopNavComponent]
+ directives:[ROUTER_DIRECTIVES, LoginComponent,TopNavComponent],
+ providers:[HTTP_PROVIDERS]
 })
-@Routes([
-  { path: '/dashboard', component: DashboardComponent },
-  {path: '/report', component: ReportComponent}
-])
+
 export class AppComponent {
   pageTitle: string ='Dollar Tracker';
   isAuthenticated:boolean;

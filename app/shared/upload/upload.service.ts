@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Rx'
+import {JwtService} from '../../jwt/jwt.service'
 //http://stackoverflow.com/questions/35985347/how-to-upload-file-in-angular2
 @Injectable()
 export class UploadService {
     public progress;
     public progressObserver;
-    constructor() { 
+    constructor(private _jwtService:JwtService) { 
         this.progress = Observable.create( observer => {
             this.progressObserver = observer;
         }).share();
@@ -34,13 +35,13 @@ public makeFileRequest (url: string, params: string[], files: File[]): Observabl
         };
 
         xhr.upload.onprogress = (event) => {
-            this.progress = Math.round(event.loaded / event.total * 100);
-
-            this.progressObserver.next(this.progress);
+           
         };
-
+        
         xhr.open('POST', url, true);
+        xhr.setRequestHeader("Authorization", "Bearer "+this._jwtService.get())
         xhr.send(formData);
+        return xhr.response;
     });
   }
 }

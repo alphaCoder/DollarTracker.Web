@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input, Provider, forwardRef } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, CORE_DIRECTIVES,FORM_PROVIDERS, FORM_DIRECTIVES} from "@angular/common";
-
+import {ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR, CORE_DIRECTIVES,FORM_PROVIDERS, FORM_DIRECTIVES} from "@angular/common";
+import {Output, EventEmitter} from '@angular/core';
 // To understand how ngModel works here, read: http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
 
 const noop = () => {};
@@ -17,9 +17,9 @@ declare var moment;
 @Component({
     selector: 'date-picker',
     template: `
-    <div #datepickerInput class="input-group date"> 
+    <div class="input-group date"> 
          <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-         <input type="text" [(ngModel)]="value" class="form-control">
+         <input #datepickerInput type="text" class="form-control" readonly>
     </div>
     `,
     providers:[CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR,FORM_PROVIDERS],
@@ -28,25 +28,27 @@ declare var moment;
 export class DatePicker implements ControlValueAccessor {
 	//The internal data model
     private _value: string = "";
-    private displayDate:string ="";
+    public viewValue:string = "";
+    @Output() notify: EventEmitter<string> = new EventEmitter<string>();
     @ViewChild('datepickerInput') datepickerInput;
-    constructor() { }
+    constructor() { 
+    }
 
     ngOnInit() {
       this.value = '';
+      this.viewValue = '';
     }
     
  
 	ngAfterViewInit() {
+
       	var self = this;
         $(this.datepickerInput.nativeElement).datepicker({
            autoclose: true,
            todayBtn: 'linked',
-           defaultViewDate: 'today'
-           
+           defaultViewDate: 'today',
+           forceParse: 0
         }).on('changeDate', function (dt) {
-          console.log(dt.date.toISOString());
-          console.log(dt.format(0,"mm/dd/yyyy"))
           console.log("I am truly in change date method:");
           self.writeValue(dt.format(0,"mm/dd/yyyy"));
         });
@@ -58,37 +60,43 @@ export class DatePicker implements ControlValueAccessor {
     private _onChangeCallback: (_:any) => void = noop;
   
     //get accessor
-    get value(): any { return this._value; };
+    get value(): any {
+       return this.viewValue; 
+      };
   
     //set accessor including call the onchange callback
     set value(v: any) {
-      console.log("I am in set");
-      if (v !== this._value) {
-        this._value = v;
-        this._onChangeCallback(v);
-      }
+      
     }
     
     //Set touched on blur
     onTouched(ev){
-      console.log("touched", ev.target.value);
-    this.writeValue(ev.target.value);
+      this.writeValue(ev.target.value);
       this._onTouchedCallback();
     }
   
     //From ControlValueAccessor interface
     writeValue(value: any) {
       console.log("I am in writeValue:"+value)
-      this._value = value;
+      this.notify.emit(value);
     }
   
     //From ControlValueAccessor interface
     registerOnChange(fn: any) {
+      console.log("register on change");
+      console.log(fn);
+      
       this._onChangeCallback = fn;
     }
   
     //From ControlValueAccessor interface
     registerOnTouched(fn: any) {
+      console.log("register on touched");
+      console.log(fn);
+      
       this._onTouchedCallback = fn;
+    }
+    reset(){
+        $(this.datepickerInput.nativeElement).datepicker('update', '');
     }
 }

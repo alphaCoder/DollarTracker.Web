@@ -1,5 +1,5 @@
-<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
-        (onOpen)="opened()" #modal>
+<modal [animation]="true" [keyboard]="true" [backdrop]="true" (onClose)="closed()" (onDismiss)="dismissed()"
+         #modal>
         <modal-header [show-close]="true">
             <h4 class="modal-title">
                 New Expense
@@ -9,9 +9,13 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon">
-                    <i class="fa fa-list"></i>
+                    <i [ngClass]="categoryIcon"></i>
                 </span>
-                <input type="text" class="form-control">
+                <ng-select [allowClear]="true"
+                [items]="items"
+                (selected)="selected($event)"
+                placeholder="Please select a category">
+                </ng-select>
             </div>
         </div>
            
@@ -24,25 +28,20 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-shopping-bag"></i></span>
-                <input type="text" class="form-control" placeholder="Store Name" />
+                <input type="text" class="form-control" [(ngModel)] = "expense.storeName" placeholder="Store Name" />
             </div>
         </div>
         <div class="form-group">
            
             <span>
-               <date-picker #datepicker [(ngModel)]="expense.expenseUtcDt"></date-picker>
+               <date-picker #datepickerInput (notify)='onNotify($event)'></date-picker>
             </span>
-            
-            <div style="padding-top: 10px">
-                <div class="thumbnail" *ngIf="file">
-                    <img  class="thumb"> <span ng-show="file"></span>
-                </div>
-            </div>
         </div>
         <div class="form-group">
-            <span class="btn btn-default btn-file btn-sm" name="file" 
+            <span class="btn btn-success btn-file btn-sm" name="file" 
                   xngf-resize="{width: 100, height: 100}">
-                  Add Receipt
+                    <input type="file" (change)="onChange($event)" value="Add Receipt"/>
+                  
             </span>
         </div>
         <div class="form-group">

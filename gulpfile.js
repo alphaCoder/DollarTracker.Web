@@ -27,7 +27,8 @@ var libFiles = [
         "node_modules/d3/d3.min.js",
         "node_modules/ng2-nvd3/build/lib/ng2-nvd3.js",
         "node_modules/angular2-jwt/angular2-jwt.js",
-        "node_modules/ng2-bs3-modal/**/*"
+        "node_modules/ng2-bs3-modal/**/*",
+        "node_modules/ng2-select/**/*"
     ];
     
     gulp.task('copyLibs', function () {

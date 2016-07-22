@@ -39,3 +39,8 @@
 .progress-group .progress-number {
   float: right;
 }
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}

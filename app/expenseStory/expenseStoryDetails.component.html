@@ -1,0 +1,69 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title">
+            Expense Story Details
+        </h1>    
+    </div>
+    <div class="panel-body">
+        <table class="table table-condensed table-striped" *ngFor="let ck of categoryKeys" >
+            <caption class="text-muted text-spacing">{{ck|uppercase}}</caption>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Store</th>
+                    <th>Amount</th>
+                    <th>Comments</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let es of expensesByCategory[ck]">
+                    <td>
+                     <div class="col-sm-1 date">{{es.expenseUtcDt|date:"MMM"}} 
+                         <div class="number">{{es.expenseUtcDt|date:"dd"}}</div>
+                     </div>
+                    </td>
+                    <td>
+                        <i class="dashboard-item" [ngClass]=" _iconMapper.mapper[es.expenseSubCategoryId]?_iconMapper.mapper[es.expenseSubCategoryId] :'fa fa-list'"></i>
+                        <span class="dashboard-item">
+                            <small class="text-bold text-muted">
+                                {{_expenseStoryService.expenseCategoryById[es.expenseSubCategoryId].description}}
+                            </small>
+                        </span>
+                    </td>
+                    <td>
+                        <small class="text-bold text-muted">{{es.storeName}}</small>
+                    </td>
+                    <td>
+                        <div>
+                            <span class="dashboard-item">
+                                <small class="text-bold text-muted">YOU PAID</small><br/> 
+                                <span class="text-green text-bold">${{es.amount}}</span>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                         <div>
+                             <span class="dashboard-item">
+                                <small class="text-bold text-muted">{{es.comments}}</small>
+                             </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="es.receiptThumbnail">
+                            <span class="dashboard-item">
+                                <a href="api/downloadReceipt/{{es.expenseStoryId}}/{{es.receiptId}}" download="receipt.jpg">
+                                    <img src="data:image/png;base64,{{es.receiptThumbnail}}" height="60" width="60" alt="User Image" />
+                                </a>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+    
+    </div>    
+</div>

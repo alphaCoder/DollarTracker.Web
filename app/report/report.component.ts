@@ -9,7 +9,7 @@ import {Expense} from '../expense/expense';
 import {ExpenseStorySummary, ExpenseStory, ExpensesStat} from '../expenseStory/expenseStory.model'
 @Component({
     templateUrl: 'app/report/report.component.html',
-    directives:[BarChartDemo, ChartDemo, ExpenseModalComponent]
+    directives:[BarChartDemo, ChartDemo, ExpenseModalComponent, ROUTER_DIRECTIVES]
 })
 export class ReportComponent {
     public expenseStories:Observable<Array<ExpenseStorySummary>>;

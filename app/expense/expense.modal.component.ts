@@ -43,13 +43,65 @@ export class ExpenseModalComponent{
     public categoryIcon:string ='fa fa-list';
   
     public files:Array<any>;
-
+    previewImageUrl:string='';
     onChange(event) {
         console.log('onChange');
+        
         this.files = event.srcElement.files;
         console.log(this.files);
+        this.readThumbnail(event);
     }
+    //src: http://raydaq.com/example-preview-and-auto-resize-images-for-uploading-angular2-typescript/
+    private readThumbnail(event) {
+         var img = document.createElement("img");
+            img.src = window.URL.createObjectURL(event.srcElement.files[0]);
+          var reader: any, target: EventTarget;
+             reader = new FileReader();
 
+            // Add an event listener to deal with the file when the reader is complete
+            reader.addEventListener("load", (event1) => {
+                // Get the event.target.result from the reader (base64 of the image)
+                img.src = event1.target.result;
+
+                // Resize the image
+                var resized_img = this.resize(img,500,200);
+
+                // Push the img src (base64 string) into our array that we display in our html template
+               this.previewImageUrl = resized_img
+            }, false);
+
+            reader.readAsDataURL(event.srcElement.files[0]);    
+    }
+    private resize (img, MAX_WIDTH:number = 900, MAX_HEIGHT:number = 900){
+        var canvas = document.createElement("canvas");
+
+        console.log("Size Before: " + img.src.length + " bytes");
+
+        var width = img.width;
+        var height = img.height;
+
+        if (width > height) {
+            if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+            }
+        } else {
+            if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+            }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        var ctx = canvas.getContext("2d");
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        var dataUrl = canvas.toDataURL('image/jpeg');  
+        // IMPORTANT: 'jpeg' NOT 'jpg'
+        console.log("Size After:  " + dataUrl.length  + " bytes");
+        return dataUrl
+    }
     closed() {
         this.modal.close();
     }

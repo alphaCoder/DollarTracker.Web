@@ -44,3 +44,44 @@
     position: relative;
     overflow: hidden;
 }
+
+.date
+{
+    float: left;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #999;
+    font-weight: normal;
+}
+
+ .date .number 
+  {
+      margin-top: -3px;
+      font-size: 20px;
+  }
+  .text-spacing
+  {
+    font-family: sans-serif; 
+    letter-spacing: 4px;
+    font-weight: 900;
+  }
+   .dashboard-item
+  {
+    height: 35px;
+    width: 35px;
+    font-size: 16px;
+  }
+.text-green 
+ {
+    color: green !important;
+ }
+ .text-yellow
+ {
+   color: yellow !important;
+ }
+.text-bold {
+    font-weight: 700;
+}

@@ -43,7 +43,11 @@
                     <input type="file" (change)="onChange($event)" value="Add Receipt"/>
                   
             </span>
+            <div class="thumbnail" *ngIf="previewImageUrl">
+                <img [src] ='previewImageUrl' alt="" />
+            </div>
         </div>
+        
         <div class="form-group">
             <textarea class="form-control" rows="2" [(ngModel)]="expense.comments" placeholder="additional comments"> </textarea>
         </div>

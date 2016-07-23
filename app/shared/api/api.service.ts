@@ -21,7 +21,7 @@ post(url:string, payload:any) {
        {headers: headers}).map(x=>x.json());
  } 
 
-   get(url: string) : Observable<Response> {
+   get(url: string) : Observable<any> {
      if(!this._jwtService.isAuthenticated()) {
         this._user.clear();
       }

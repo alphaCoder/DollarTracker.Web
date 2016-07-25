@@ -17,6 +17,8 @@ import {APP_ROUTER_PROVIDERS} from './app.routes';
 import {IconMapperService} from './shared/iconmapper/iconmapper.service' 
 import {ExpenseCategoriesService} from './expense/expenseCategories.service'
 import {ExpenseService} from './expense/expense.service'
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+
 bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
@@ -33,5 +35,6 @@ bootstrap(AppComponent, [
     UploadService,
     IconMapperService,
     ExpenseCategoriesService,
-    ExpenseService
+    ExpenseService,
+    SlimLoadingBarService
 ]);

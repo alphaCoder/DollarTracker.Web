@@ -1,20 +1,76 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h1 class="panel-title">
-            Expense Story Details
-        </h1>    
-    </div>
+        <h3 class="panel-title">Expense Story Details</h3>
+    </div>    
     <div class="panel-body">
-        <table class="table table-condensed table-striped" *ngFor="let ck of categoryKeys" >
+        <div style="margin-top:10px" *ngIf="expenseStorySummary">
+        <div class="col-sm-2">
+          <div class="panel panel-success" >
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <i class="fa fa-money fa-5x"></i>
+                        </div>
+                        <div class="col-xs-10 text-left">
+                            <h3>${{expenseStorySummary.totalExpenses}}</h3>
+                        </div>
+                        <div class="col-xs-12">
+                                <h5>Total Expenditure</h5>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>   
+         <div class="col-sm-2">
+            <div class="panel panel-danger" >
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa-files-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-10 text-left">
+                                <h3>{{expenseStorySummary.totalExpenseCount}}</h3>
+                            </div>
+                            <div class="col-xs-12">
+                                <h5>Expenses #</h5>
+                            </div>    
+                        </div>
+                    </div>
+              </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="panel panel-warning" >
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-12 text-left">
+                                <h4>
+                                    Start Date <br /> {{expenseStorySummary.expenseStory.startDt |date:"mediumDate"}}
+                                </h4>
+                            </div>
+                             <div class="col-xs-12 text-left">
+                                <h4>
+                                    End Date <br /> {{expenseStorySummary.expenseStory.endDt |date:"mediumDate"}} 
+                                </h4>
+                            </div>
+                            <div class="col-xs-12">
+                                <h4>&nbsp;</h4>
+                            </div> 
+                        </div>
+                    </div>
+              </div>
+        </div>          
+    </div>
+        <table class="table table-condensed table-striped col-sm-12" *ngFor="let ck of categoryKeys" >
             <caption class="text-muted text-spacing">{{ck|uppercase}}</caption>
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Store</th>
-                    <th>Amount</th>
-                    <th>Comments</th>
-                    <th></th>
+                    <th class="col-sm-1">Date</th>
+                    <th class="col-sm-3">Category</th>
+                    <th class="col-sm-2">Store</th>
+                    <th class="col-sm-1">Amount</th>
+                    <th class="col-sm-3">Comments</th>
+                    <th class="col-sm-1"></th>
+                    <th class="col-sm-1"></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +89,9 @@
                         </span>
                     </td>
                     <td>
-                        <small class="text-bold text-muted">{{es.storeName}}</small>
+                        <span class="dashboard-item">
+                            <small class="text-bold text-muted">{{es.storeName}}</small>
+                        </span>
                     </td>
                     <td>
                         <div>
@@ -59,6 +117,15 @@
                             </span>
                         </div>
                     </td>
+                    <td>
+                         <div style="padding-top: 6px;cursor:pointer">
+                            <span>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-edit" style="cursor: pointer" ></i>
+                                <i class="fa fa-trash-o text-red" style="cursor:pointer"></i>
+                            </span>
+                         </div>
+                    </td>    
                 </tr>
             </tbody>
         </table>

@@ -17,19 +17,25 @@ export class ExpenseStoryDetailsComponent implements OnInit {
 
     private sub: any;
     private expensesByCategory;
+    private expenseStorySummary;
     private categoryKeys =[];
     public ngOnInit() {
         this.sub = this._route.params.subscribe(params => {
             let id = params['id']; // (+) converts string 'id' to a number
-            console.log("id:", id);
             this._expenseStoryService
             .getAllExpensesByCategory(id)
             .subscribe(es=>{
                 this.expensesByCategory = es.data;
                 this.categoryKeys = Object.keys(es.data);
-                console.log("GOT ALL Expenses");
-                console.log(JSON.stringify(this.expensesByCategory));
-            })
+            });
+
+            //get expenseStorySummary TODO: need to optimize this call
+            this._expenseStoryService
+            .getExpenseStorySummary(id)
+            .subscribe(es =>{
+                this.expenseStorySummary = es.data;
+            });
+
   	    });
     }
 

@@ -24,6 +24,12 @@ export class ExpenseStoryService {
         return this._apiService.get(url);
     }
 
+    public getExpenseStorySummary(storyId) : Observable<any>
+    {
+        var url = this._apiUrl.expenseStorySummary + '/' + storyId;
+        return this._apiService.get(url);
+    }
+
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

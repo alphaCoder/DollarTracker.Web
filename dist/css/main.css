@@ -85,3 +85,6 @@
 .text-bold {
     font-weight: 700;
 }
+svg text {
+    fill: ghostwhite;
+}

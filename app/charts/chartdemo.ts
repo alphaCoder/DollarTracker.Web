@@ -29,14 +29,7 @@ export class ChartDemo {
       duration: 500,
       labelThreshold: 0.02,
       labelSunbeamLayout: false,
-      legend: {
-        margin: {
-          top: 5,
-          right: 35,
-          bottom: 5,
-          left: 0
-        }
-      }
+      legend: "right"
     }
     };
   

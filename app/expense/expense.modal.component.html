@@ -6,51 +6,49 @@
              </h4>   
         </modal-header>
         <modal-body>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <i [ngClass]="categoryIcon"></i>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i [ngClass]="categoryIcon"></i>
+                    </span>
+                    <ng-select [allowClear]="true"
+                    [items]="items"
+                    (selected)="selected($event)"
+                    placeholder="Please select a category">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-dollar"> &nbsp;</i></span>
+                    <input type="text" class="form-control" [(ngModel)] ="expense.amount" placeholder="Amount" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-shopping-bag"></i></span>
+                    <input type="text" class="form-control" [(ngModel)] = "expense.storeName" placeholder="Store Name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <span>
+                    <date-picker #datepickerInput (notify)='onNotify($event)'></date-picker>
                 </span>
-                <ng-select [allowClear]="true"
-                [items]="items"
-                (selected)="selected($event)"
-                placeholder="Please select a category">
-                </ng-select>
             </div>
-        </div>
-           
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-dollar"> &nbsp;</i></span>
-                <input type="text" class="form-control" [(ngModel)] ="expense.amount" placeholder="Amount" />
+            <div class="form-group">
+                <span class="btn btn-success btn-file btn-sm" name="file" 
+                    xngf-resize="{width: 100, height: 100}">
+                        <input type="file" (change)="onChange($event)" value="Add Receipt"/>
+                    
+                </span>
+                <div class="thumbnail" *ngIf="previewImageUrl">
+                    <img [src] ='previewImageUrl' alt="" />
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-shopping-bag"></i></span>
-                <input type="text" class="form-control" [(ngModel)] = "expense.storeName" placeholder="Store Name" />
+            
+            <div class="form-group">
+                <textarea class="form-control" rows="2" [(ngModel)]="expense.comments" placeholder="additional comments"> </textarea>
             </div>
-        </div>
-        <div class="form-group">
-           
-            <span>
-               <date-picker #datepickerInput (notify)='onNotify($event)'></date-picker>
-            </span>
-        </div>
-        <div class="form-group">
-            <span class="btn btn-success btn-file btn-sm" name="file" 
-                  xngf-resize="{width: 100, height: 100}">
-                    <input type="file" (change)="onChange($event)" value="Add Receipt"/>
-                  
-            </span>
-            <div class="thumbnail" *ngIf="previewImageUrl">
-                <img [src] ='previewImageUrl' alt="" />
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <textarea class="form-control" rows="2" [(ngModel)]="expense.comments" placeholder="additional comments"> </textarea>
-        </div>
         </modal-body>
         <modal-footer [show-default-buttons]="false">
             <span class="pull-right">

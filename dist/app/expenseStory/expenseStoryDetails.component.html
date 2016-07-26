@@ -68,7 +68,7 @@
         </div>          
     </div>
         <table class="table table-condensed table-striped col-sm-12" *ngFor="let ck of categoryKeys" >
-            <caption class="text-muted text-spacing">{{ck|uppercase}}</caption>
+            <caption class="text-muted text-spacing">{{ck|uppercase}} ({{expensesByCategory[ck].length}})</caption>
             <thead>
                 <tr>
                     <th class="col-sm-1">Date</th>
@@ -134,10 +134,10 @@
                          </div>
                     </td>    
                 </tr>
+                <tr>
+                    <td colspan="7" style="text-align:right" > <span class="dashboard-item">Total: $100</span></td>
+                </tr>    
             </tbody>
         </table>
     </div>
-    <div class="panel-footer">
-    
-    </div>    
 </div>

@@ -1,0 +1,34 @@
+<modal [animation]="true" [keyboard]="true" [backdrop]="true" (onClose)="closed()" 
+    (onDismiss)="dismissed()" #esmodal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">
+                New Expense Report
+             </h4>   
+        </modal-header>
+        <modal-body>
+        
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Name</span>
+                    <input type="text" class="form-control" [(ngModel)]="expenseStory.title" placeholder="Expense Story Title" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span>
+                   <date-picker addontext="Start Dt" #datepickerInput3 (notify)='onNotify($event)'></date-picker>
+                </span>
+            </div>
+            <div class="form-group">
+                <span>
+                   <date-picker addontext="End Dt" #datepickerInput4 (notify)='onNotify1($event)'></date-picker>
+                </span>
+            </div>
+        </modal-body>
+        <modal-footer [show-default-buttons]="false">
+            <span class="pull-right">
+                <button class="btn btn-warning" (click)="cancel()">Cancel</button>
+                <button class="btn btn-primary" (click)="submit()">Add</button>
+            </span>   
+        </modal-footer>
+    </modal>

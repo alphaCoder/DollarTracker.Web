@@ -19,4 +19,5 @@ export class ApiUrl {
     public getAllExpensesByCategory = this.baseUrl +"/api/getAllExpensesByCategory";
     public expenseCategory = this.baseUrl + "/api/expenseCategory";
     public expenseStorySummary = this.baseUrl + "/api/expenseStorySummary";
+    public addExpenseStory = this.baseUrl + "/api/addExpenseStory";
 }

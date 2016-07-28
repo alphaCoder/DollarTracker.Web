@@ -107,22 +107,12 @@ export class ExpenseModalComponent{
     }
 
     dismissed() {
-        console.log("I am in dismissed expense");
-        
-      //  this.expense.expenseUtcDt = this.datepicker.value;
-        console.log("date selected is: "+ this.expense.expenseUtcDt);
-        if(this.expense) {
-            console.log("Expense::");
-            console.log(JSON.stringify(this.expense));
-        }
         this.expense = new Expense();
         this.datepickerInput.reset(); //TODO: replace this temporary solution
         this.modal.dismiss();
     }
 
     open(storyId) {
-        console.log("YOU CLICKED OPEN::"+storyId);
-        
         this.expense.expenseStoryId = storyId;
         this.modal.open('sm');
     }

@@ -16,12 +16,12 @@
 
             <div class="form-group">
                 <span>
-                   <date-picker addontext="Start Dt" #datepickerInput3 (notify)='onNotify($event)'></date-picker>
+                   <date-picker addontext="Start Dt" #datepickerStartDtInput (notify)='onNotifyStartDt($event)'></date-picker>
                 </span>
             </div>
             <div class="form-group">
                 <span>
-                   <date-picker addontext="End Dt" #datepickerInput4 (notify)='onNotify1($event)'></date-picker>
+                   <date-picker addontext="End Dt" #datepickerEndDtInput (notify)='onNotifyEndDt($event)'></date-picker>
                 </span>
             </div>
         </modal-body>

@@ -4,11 +4,8 @@
         <li>Report</li>
     </ol>
 </div>
-<div>
-    <button class="btn btn-default pull-right" (click)="addExpenseReport()">Add Expense Report</button>
-    <expense-story-modal #expensestorymodal></expense-story-modal>
-</div>
-<div class="col-md-12" *ngFor="let es of expenseStories">
+<expense-story></expense-story>
+<div class="col-md-12" *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">{{es.expenseStory.title}}</h3>

@@ -10,7 +10,6 @@ import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
     selector: 'selector',
     templateUrl: 'app/expenseStory/expenseStoryDetails.component.html',
     directives: [ROUTER_DIRECTIVES],
-    providers:[ExpenseStoryService]
 })
 export class ExpenseStoryDetailsComponent implements OnInit {
     constructor( private _route: ActivatedRoute,

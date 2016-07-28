@@ -11,14 +11,13 @@ import {JwtService} from './jwt/jwt.service'
 import {LoginService} from './login/login.service'
 import {DashboardService} from './dashboard/dashboard.service'
 import {ApiService} from './shared/api/api.service'
-import {ReportService} from './report/report.service'
 import {UploadService} from './shared/upload/upload.service'
 import {APP_ROUTER_PROVIDERS} from './app.routes';
 import {IconMapperService} from './shared/iconmapper/iconmapper.service' 
 import {ExpenseCategoriesService} from './expense/expenseCategories.service'
 import {ExpenseService} from './expense/expense.service'
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
-
+import {ExpenseStoryService} from './expenseStory/expenseStory.service';
 bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
@@ -31,10 +30,10 @@ bootstrap(AppComponent, [
     UserService,
     DashboardService,
     ApiService,
-    ReportService,
     UploadService,
     IconMapperService,
     ExpenseCategoriesService,
     ExpenseService,
-    SlimLoadingBarService
+    SlimLoadingBarService,
+    ExpenseStoryService
 ]);

@@ -20,19 +20,12 @@ export class DashboardComponent {
         this._dashboardService.getDashboardStats()
         .subscribe(ds=>{
             this._slimLoader.start();   
-            console.log('dashboard results');
-            console.log(JSON.stringify(ds));
             this.dashboardStats = ds.data;
-            console.log('dashboardstats', this.dashboardStats);
             this._slimLoader.complete();
         }, 
         e => {
-            console.log("error occured");
-            console.log(e);
             this._slimLoader.complete();
         });
         this._slimLoader.complete();
     }
-   
-    
 }

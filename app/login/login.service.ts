@@ -16,7 +16,6 @@ export class LoginService {
         
      return this._http.post(this._apiUrl.loginUrl,body, options)
         .map((response: Response) => <ILoginResponse>response.json())
-        .do(data=>console.log("Login:", JSON.stringify(data)))
         .catch(this.handleError)
     }
      private handleError(error: Response) {

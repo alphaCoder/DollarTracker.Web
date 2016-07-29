@@ -28,8 +28,17 @@ export class UserService{
        else {
           this.isAuthenticated.next(isAuthenticated);
            console.log('navigate to dashboard');
-           this._router.navigateByUrl('/dashboard');
+           this._router.navigate(['dashboard']);
        }
+    }
+
+    public isUserAuthenticated():boolean
+    {
+        let isAuthenticated = this._jwtService.isAuthenticated();
+        if(!isAuthenticated){
+            this.clear();
+        }
+        return isAuthenticated;
     }
 
     public add(loginResponse:ILoginResponse){
@@ -47,6 +56,11 @@ export class UserService{
         this.currentUser.next(null);
         this._jwtService.clear();
         this.isAuthenticated.next(false);
-        this._router.navigateByUrl('/');
+        //this._router.navigateByUrl('/');
+    }
+
+    public logout(){
+        this.clear();
+        this._router.navigate(['login']);
     }
 }

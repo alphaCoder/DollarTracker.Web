@@ -10,8 +10,7 @@ import {DtSpinButtonComponent} from '../shared/spinner/dtspinner.component'
 
 @Component({
     templateUrl: 'app/login/login.component.html',
-    directives:[DtAlertComponent,DtSpinButtonComponent],
-    selector:'login'
+    directives:[DtAlertComponent,DtSpinButtonComponent]
 })
 export class LoginComponent {
     public pageTitle: string = "Login";
@@ -25,16 +24,17 @@ export class LoginComponent {
         this.dtAlert = new DtAlertComponent();
     }
 
-    public submit():Observable<any> {
+    public submit() {
         
-        var isValid = this.validateEmailAndPassword();
-        if(!isValid){
-            return;
-        }
+        // var isValid = this.validateEmailAndPassword();
+        // if(!isValid){
+        //     return;
+        // }
         var payload = {"email": this.email, "password": this.password};
         
-        this._loginService
+       this._loginService
         .login(payload)
+        .filter(x=> this.validateEmailAndPassword())
         .subscribe(result => {
             if(!result.success){
                 this.dtAlert.failure(result.message);

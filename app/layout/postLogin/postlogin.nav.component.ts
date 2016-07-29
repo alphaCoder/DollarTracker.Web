@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import{NgClass} from '@angular/common'
 import {UserService} from '../../user/user.service'
 import {IUser} from '../../login/loginresponse'
+
 @Component({
     selector: 'post-login-nav',
     templateUrl: 'app/layout/postlogin/postlogin.nav.component.html',
@@ -23,9 +24,7 @@ export class PostLoginNavComponent implements OnInit {
     public toggleDropDown(){
         this.showDropdown = !this.showDropdown;
     }
-    
     signout(){
-        this._userService.clear();
-        this._router.navigate(['/']);
+        this._userService.logout();
     }
 }

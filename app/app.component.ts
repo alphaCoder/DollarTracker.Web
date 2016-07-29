@@ -13,10 +13,6 @@ import {SlimLoadingBarService, SlimLoadingBar} from 'ng2-slim-loading-bar/ng2-sl
 @Component({
   selector: 'dt-app',
   template: `<div>
-   <div *ngIf="!isAuthenticated">
-      <login></login>
-    </div>    
-     
     <div *ngIf="isAuthenticated"> 
        <top-nav></top-nav>
     </div>

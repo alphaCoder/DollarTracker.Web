@@ -6,11 +6,11 @@ import {ExpenseModalComponent} from '../expense/expense.modal.component';
 import {Expense} from '../expense/expense';
 import {ExpenseStorySummary, ExpenseStory, ExpensesStat} from '../expenseStory/expenseStory.model'
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
-import {ExpenseStoryComponent} from '../expenseStory/expenseStory.component';
+import {DeleteExpenseStoryComponent} from '../deleteExpenseStory/deleteExpenseStory.component'
 import {ExpenseStoryService} from '../expenseStory/expenseStory.service';
 @Component({
     templateUrl: 'app/report/report.component.html',
-    directives:[ChartDemo, ExpenseModalComponent, ExpenseStoryComponent, ROUTER_DIRECTIVES]
+    directives:[ChartDemo, ExpenseModalComponent, ROUTER_DIRECTIVES, DeleteExpenseStoryComponent]
 })
 export class ReportComponent {
     public expenseStorySummaries:Array<ExpenseStorySummary>;
@@ -19,9 +19,7 @@ export class ReportComponent {
     constructor(
     private _slimLoader:SlimLoadingBarService, 
     private _expenseStoryService:ExpenseStoryService
-    ) {
-        console.log('LOADING REPORT');
-     }
+    ) {}
    
 
     @ViewChild('expense')

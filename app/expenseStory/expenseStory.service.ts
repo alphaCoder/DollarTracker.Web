@@ -14,11 +14,6 @@ export class ExpenseStoryService {
     constructor(private _apiUrl:ApiUrl, private _apiService:ApiService) {
         this.loadExpenseCategories();
         this.loadExpenseStorySummaries();
-        this.expenseStorySummaries
-        .subscribe(values=>{
-            console.log("got expense story summaries");
-            console.log(JSON.stringify(values));
-        })
     }
     public addExpenseStory(expenseStory:ExpenseStory): Observable<any>
     {
@@ -50,6 +45,15 @@ export class ExpenseStoryService {
     {
         var url = this._apiUrl.expenseStorySummary + '/' + storyId;
         return this._apiService.get(url);
+    }
+
+    public deleteExpenseStory(storyId) {
+        var url = this._apiUrl.deleteExpenseStory + '/' + storyId;
+        this._apiService
+        .delete(url)
+        .subscribe(x=>{
+            this.loadExpenseStorySummaries()
+        });
     }
 
     public loadExpenseStorySummaries() {

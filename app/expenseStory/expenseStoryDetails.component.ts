@@ -6,10 +6,11 @@ import {Observable} from 'rxjs/Rx';
 import {Expense} from '../expense/expense';
 import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+
 @Component({
     selector: 'selector',
     templateUrl: 'app/expenseStory/expenseStoryDetails.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES]
 })
 export class ExpenseStoryDetailsComponent implements OnInit {
     constructor( private _route: ActivatedRoute,

@@ -4,11 +4,11 @@
         <li>Report</li>
     </ol>
 </div>
-<expense-story></expense-story>
 <div class="col-md-12" *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{es.expenseStory.title}}</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <b class="panel-title">{{es.expenseStory.title}}</b>
+              <delete-expense-story [storyId]="es.expenseStory.expenseStoryId"></delete-expense-story>
         </div>
         <div class="panel-body">
             <div class="col-lg-3 col-md-6">

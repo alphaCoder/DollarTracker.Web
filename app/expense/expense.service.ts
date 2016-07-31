@@ -15,4 +15,8 @@ export class ExpenseService {
         return this._uploadService
             .makeFileRequest(this._apiurl.addExpense, [JSON.stringify(payload)], files);
     }
+    deleteExpense(expenseId){
+        var url = this._apiurl.deleteExpense + "/" + expenseId;
+        return this._apiService.delete(url);
+    }
 }

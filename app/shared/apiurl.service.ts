@@ -14,6 +14,7 @@ export class ApiUrl {
     public addExpense = this.baseUrl + "/api/addExpense";
     public updateOnlyExpense = this.baseUrl + "/api/updateOnlyExpense";
     public updateExpense = this.baseUrl + "/api/updateExpense";
+    public deleteExpense = this.baseUrl + "/api/Expense";
 
     public getAllExpenses = this.baseUrl + "/api/expense";
     public getAllExpensesByCategory = this.baseUrl +"/api/getAllExpensesByCategory";
@@ -21,4 +22,5 @@ export class ApiUrl {
     public expenseStorySummary = this.baseUrl + "/api/expenseStorySummary";
     public addExpenseStory = this.baseUrl + "/api/addExpenseStory";
     public deleteExpenseStory = this.baseUrl + "/api/deleteExpenseStory";
+
 }

@@ -6,11 +6,11 @@ import {Observable} from 'rxjs/Rx';
 import {Expense} from '../expense/expense';
 import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
-
+import {DeleteExpenseDirective} from '../expense/deleteExpense.directive';
 @Component({
     selector: 'selector',
     templateUrl: 'app/expenseStory/expenseStoryDetails.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, DeleteExpenseDirective]
 })
 export class ExpenseStoryDetailsComponent implements OnInit {
     constructor( private _route: ActivatedRoute,
@@ -48,4 +48,11 @@ export class ExpenseStoryDetailsComponent implements OnInit {
         this.sub.unsubscribe();
     }
 
+    onNotify(expense:Expense):void {
+        let exl = this.expensesByCategory[expense.expenseCategoryId.toLowerCase()];
+        if(exl){
+            var idx = exl.indexOf(expense);
+            this.expensesByCategory[expense.expenseCategoryId.toLowerCase()].splice(idx,1);
+        }
+    }
 }

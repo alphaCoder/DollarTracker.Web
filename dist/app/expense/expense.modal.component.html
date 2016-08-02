@@ -11,7 +11,8 @@
                     <span class="input-group-addon">
                         <i [ngClass]="categoryIcon"></i>
                     </span>
-                    <ng-select [allowClear]="true"
+                    <ng-select [allowClear]="true" #categorySelect *ngIf="selectedCategory"
+                    [initData] = "[selectedCategory]"
                     [items]="items"
                     (selected)="selected($event)"
                     placeholder="Please select a category">

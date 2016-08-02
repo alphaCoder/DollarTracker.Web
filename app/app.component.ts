@@ -21,7 +21,9 @@ import {SlimLoadingBarService, SlimLoadingBar} from 'ng2-slim-loading-bar/ng2-sl
        <router-outlet></router-outlet>
     </div>
     
-  </div>`,
+  </div>
+  
+  `,
  directives:[ROUTER_DIRECTIVES, LoginComponent,TopNavComponent, SlimLoadingBar],
  providers:[HTTP_PROVIDERS]
 })

@@ -81,7 +81,9 @@ export class DatePicker implements ControlValueAccessor {
       console.log("I am in writeValue:"+value)
       this.notify.emit(value);
     }
-  
+    updateDate(value:string) {
+      $(this.datepickerInput.nativeElement).datepicker('update', new Date(value));
+    }
     //From ControlValueAccessor interface
     registerOnChange(fn: any) {
       console.log("register on change");

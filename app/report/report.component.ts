@@ -21,7 +21,6 @@ export class ReportComponent {
     private _expenseStoryService:ExpenseStoryService
     ) {}
    
-
     @ViewChild('expense')
     expenseModal:ExpenseModalComponent;
 

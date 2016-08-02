@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/cor
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {DatePicker} from '../shared/datepicker/datepicker.component';
 import {Expense} from './expense'
-import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+import {SelectComponent, SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import {ExpenseCategoriesService} from './expenseCategories.service';
 import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {Observable} from 'rxjs/Rx';
@@ -21,15 +21,17 @@ export class ExpenseModalComponent{
     @ViewChild('modal')
     modal: ModalComponent;
     
-    @ViewChild('datepickerInput') datepickerInput;
+    @ViewChild('datepickerInput') datepickerInput:DatePicker;
     expense : Expense;
+    @ViewChild(SelectComponent) categorySelect:SelectComponent;
 
+    private selectedItem;
     constructor(private _expenseCategoriesService:ExpenseCategoriesService, private _iconMapper:IconMapperService,
     private _expenseService:ExpenseService)
      {
          this.expense = new Expense();
      }
-   
+    private selectedCategory = null;
     public ngOnInit():any {
         this._expenseCategoriesService.categories.forEach(
             (category) =>{
@@ -108,14 +110,29 @@ export class ExpenseModalComponent{
 
     dismissed() {
         this.expense = new Expense();
+        console.log("IN DISMISS");
+        console.log(this.categorySelect.data);
+        console.log("INIT DATA", this.categorySelect.initData);
+        
+        this.categorySelect.remove(this.selectedItem);
+        this.categoryIcon = 'fa fa-list';
+        this.selectedCategory = null;
         this.datepickerInput.reset(); //TODO: replace this temporary solution
         this.modal.dismiss();
     }
 
     open(storyId) {
+        this.selectedCategory = {};
         this.expense.expenseStoryId = storyId;
         this.modal.open('sm');
     }
+    edit(expense){
+        this.expense = expense;
+        this.selectedCategory = this.items.find(x=>x.id == this.expense.expenseSubCategoryId);
+        this.datepickerInput.updateDate (this.expense.expenseUtcDt);
+        this.modal.open('sm')
+    }
+
     submit() {
         var fn;   
         if(this.files && this.files.length > 0) {
@@ -143,6 +160,7 @@ export class ExpenseModalComponent{
   // ng2-select
   public selected(value:any):void {
       var category = this._expenseCategoriesService.categories.find(x=>x.expenseSubCategoryId == value.id);
+      this.selectedItem = category;
       if(category){
           console.log('Expense categories');
           console.log(category);

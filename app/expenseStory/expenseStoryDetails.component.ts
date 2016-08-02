@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Router, ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 import {ExpenseStoryService} from './expenseStory.service';
 import {ExpenseService} from '../expense/expense.service';
@@ -7,10 +7,11 @@ import {Expense} from '../expense/expense';
 import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import {DeleteExpenseDirective} from '../expense/deleteExpense.directive';
+import {ExpenseModalComponent} from '../expense/expense.modal.component';
 @Component({
     selector: 'selector',
     templateUrl: 'app/expenseStory/expenseStoryDetails.component.html',
-    directives: [ROUTER_DIRECTIVES, DeleteExpenseDirective]
+    directives: [ROUTER_DIRECTIVES, DeleteExpenseDirective, ExpenseModalComponent]
 })
 export class ExpenseStoryDetailsComponent implements OnInit {
     constructor( private _route: ActivatedRoute,
@@ -21,6 +22,8 @@ export class ExpenseStoryDetailsComponent implements OnInit {
     private expensesByCategory;
     private expenseStorySummary;
     private categoryKeys =[];
+     @ViewChild('expense')
+    expenseModal:ExpenseModalComponent;
     public ngOnInit() {
         this.sub = this._route.params.subscribe(params => {
             let id = params['id']; // (+) converts string 'id' to a number
@@ -54,5 +57,14 @@ export class ExpenseStoryDetailsComponent implements OnInit {
             var idx = exl.indexOf(expense);
             this.expensesByCategory[expense.expenseCategoryId.toLowerCase()].splice(idx,1);
         }
+    }
+
+    onEditNotify(expense:Expense):void{
+        alert("In edit notify");
+    }
+
+    edit(expense){
+       // alert("YOU CLICKED EDIT");
+        this.expenseModal.edit(expense);
     }
 }

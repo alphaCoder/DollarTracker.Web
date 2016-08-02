@@ -127,11 +127,12 @@
                          <div style="padding-top: 6px;cursor:pointer">
                             <span>
                                 <i class="fa fa-star-o"></i>
-                                <i class="fa fa-edit" style="cursor: pointer" ></i>
+                                <i class="fa fa-edit" (click)="edit(es)" style="cursor: pointer" ></i>
                                 <i class="fa fa-trash-o text-red" style="cursor:pointer" 
                                     [deleteExpense]="es" (notify) = "onNotify($event)">
                                 </i>
                             </span>
+                              <expense #expense (notify)='onEditNotify($event)'></expense>
                          </div>
                     </td>    
                 </tr>

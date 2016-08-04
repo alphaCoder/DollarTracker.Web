@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
 
 import {UserService} from '../user/user.service'
@@ -7,10 +6,10 @@ import {LoginService} from './login.service'
 import {ILoginResponse} from './loginResponse'
 import {DtAlertComponent} from '../shared/alert/dtalert.component'
 import {DtSpinButtonComponent} from '../shared/spinner/dtspinner.component'
-
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 @Component({
     templateUrl: 'app/login/login.component.html',
-    directives:[DtAlertComponent,DtSpinButtonComponent]
+    directives:[DtAlertComponent,DtSpinButtonComponent, ROUTER_DIRECTIVES]
 })
 export class LoginComponent {
     public pageTitle: string = "Login";
@@ -26,15 +25,14 @@ export class LoginComponent {
 
     public submit() {
         
-        // var isValid = this.validateEmailAndPassword();
-        // if(!isValid){
-        //     return;
-        // }
+        var isValid = this.validateEmailAndPassword();
+        if(!isValid){
+            return;
+        }
         var payload = {"email": this.email, "password": this.password};
         
        this._loginService
         .login(payload)
-        .filter(x=> this.validateEmailAndPassword())
         .subscribe(result => {
             if(!result.success){
                 this.dtAlert.failure(result.message);

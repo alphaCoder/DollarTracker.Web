@@ -15,8 +15,19 @@ export class ExpenseService {
         return this._uploadService
             .makeFileRequest(this._apiurl.addExpense, [JSON.stringify(payload)], files);
     }
+    updateOnlyExpense(payload:any):Observable<any>{
+        return this._apiService.post(this._apiurl.updateOnlyExpense, payload)
+    }
+
+    updateExpense(payload, files:Array<any>):Observable<any> {
+        return this._uploadService
+            .makeFileRequest(this._apiurl.updateExpense, [JSON.stringify(payload)], files);
+    }
+
     deleteExpense(expenseId){
         var url = this._apiurl.deleteExpense + "/" + expenseId;
         return this._apiService.delete(url);
     }
+
+
 }

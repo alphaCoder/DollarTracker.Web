@@ -11,17 +11,21 @@
                 <div class="panel-body">
                     <form class="form form-vertical">
                         <div class="form-group">
-                            <label class="control-label" for="username">Username</label>
-                            <input type="text" [(ngModel)] = "email" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
+                            <label class="control-label" for="name">Display Name</label>
+                            <input type="text" [(ngModel)] = "user.displayName" placeholder="e.g. Jon Doe" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="Email">Email</label>
+                            <input type="text" [(ngModel)] = "user.email" placeholder="example@gmail.com" class="form-control">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password">Password</label>
-                            <input type="password" [(ngModel)] = "password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
+                            <input type="password" [(ngModel)] = "user.password" title="Please enter your password" placeholder="******" class="form-control">
                         </div>
                         <div>
                             <button class="btn btn-default" (click)='submit()'>Sign Up</button>
                             <br />
-                            Already have an account?<a class="btn btn-default" href="register.html">Login</a>
+                            Already have an account?<a [routerLink]="['/login']" class=""> Login</a>
                         </div>
                     </form>
                 </div>

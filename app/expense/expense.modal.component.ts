@@ -26,6 +26,7 @@ export class ExpenseModalComponent{
     @ViewChild(SelectComponent) categorySelect:SelectComponent;
 
     private selectedItem;
+    private isEdit = false;
     constructor(private _expenseCategoriesService:ExpenseCategoriesService, private _iconMapper:IconMapperService,
     private _expenseService:ExpenseService)
      {
@@ -53,9 +54,12 @@ export class ExpenseModalComponent{
         console.log(this.files);
         this.readThumbnail(event);
     }
+    
+    private file= null;
     //src: http://raydaq.com/example-preview-and-auto-resize-images-for-uploading-angular2-typescript/
     private readThumbnail(event) {
          var img = document.createElement("img");
+         this.file = window.URL.createObjectURL(event.srcElement.files[0]);
             img.src = window.URL.createObjectURL(event.srcElement.files[0]);
           var reader: any, target: EventTarget;
              reader = new FileReader();
@@ -99,7 +103,7 @@ export class ExpenseModalComponent{
 
         ctx.drawImage(img, 0, 0, width, height);
 
-        var dataUrl = canvas.toDataURL('image/jpeg');  
+        var dataUrl = canvas.toDataURL('image/png');  
         // IMPORTANT: 'jpeg' NOT 'jpg'
         console.log("Size After:  " + dataUrl.length  + " bytes");
         return dataUrl
@@ -109,7 +113,9 @@ export class ExpenseModalComponent{
     }
 
     dismissed() {
+        this.isEdit = false;
         this.expense = new Expense();
+        this.previewImageUrl = null;
         console.log("IN DISMISS");
         console.log(this.categorySelect.data);
         console.log("INIT DATA", this.categorySelect.initData);
@@ -117,6 +123,7 @@ export class ExpenseModalComponent{
         this.categorySelect.remove(this.selectedItem);
         this.categoryIcon = 'fa fa-list';
         this.selectedCategory = null;
+        this.files = null;
         this.datepickerInput.reset(); //TODO: replace this temporary solution
         this.modal.dismiss();
     }
@@ -127,7 +134,13 @@ export class ExpenseModalComponent{
         this.modal.open('sm');
     }
     edit(expense){
+        this.isEdit = true;
         this.expense = expense;
+        console.log("EXPENSE");
+        console.log(JSON.stringify(this.expense));
+        if(this.expense.receiptThumbnail) {
+            this.previewImageUrl = "data:image/png;base64,"+ this.expense.receiptThumbnail;
+        }
         this.selectedCategory = this.items.find(x=>x.id == this.expense.expenseSubCategoryId);
         this.datepickerInput.updateDate (this.expense.expenseUtcDt);
         this.modal.open('sm')
@@ -136,21 +149,35 @@ export class ExpenseModalComponent{
     submit() {
         var fn;   
         if(this.files && this.files.length > 0) {
-            fn = this._expenseService.addExpense(this.expense, this.files);
+            if(this.isEdit){
+               fn = this._expenseService.updateExpense(this.expense, this.files);   
+            }
+            else{
+                fn = this._expenseService.addExpense(this.expense, this.files);
+            }
         }
         else {
-            fn = this._expenseService.addOnlyExpense(this.expense);
+            if(this.isEdit) {
+                fn = this._expenseService.updateOnlyExpense(this.expense);
+            }
+            else {
+                fn = this._expenseService.addOnlyExpense(this.expense);
+            }
         }
         
-        fn.subscribe((response)=>{
+        fn.subscribe((response) => {
             if(response.success) {
                 this.notify.emit(<Expense>response.data);
-            }
-        });
+             }
+            },
+            error=>{},
+            completed => {this.isEdit = false;}
+          );
     }
    
     cancel() {
         this.modal.dismiss();
+        this.isEdit = false;
     }
 
     onNotify(message:string):void {

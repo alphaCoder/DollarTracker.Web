@@ -37,14 +37,12 @@
                 </span>
             </div>
             <div class="form-group">
-                <span class="btn btn-success btn-file btn-sm" name="file" 
-                    xngf-resize="{width: 100, height: 100}">
-                        <input type="file" (change)="onChange($event)" value="Add Receipt"/>
-                    
+                <span class="btn btn-success btn-file btn-sm" name="file"> 
+                    <input type="file" (change)="onChange($event)" value="Add Receipt"/>
                 </span>
-                <div class="thumbnail" *ngIf="previewImageUrl">
-                    <img [src] ='previewImageUrl' alt="" />
-                </div>
+                <!--<div class="thumbnail" *ngIf="previewImageUrl">
+                    <img [src] ='previewImageUrl' alt="" height="200" width="150" />
+                </div>-->
             </div>
             
             <div class="form-group">
@@ -54,7 +52,10 @@
         <modal-footer [show-default-buttons]="false">
             <span class="pull-right">
                 <button class="btn btn-warning" (click)="cancel()">Cancel</button>
-                <button class="btn btn-primary" (click)="submit()">Add</button>
+                <button class="btn btn-primary" (click)="submit()">
+                   <span *ngIf="!isEdit"> Add </span>
+                   <span *ngIf="isEdit"> Update </span>
+                </button>
             </span>   
         </modal-footer>
     </modal>

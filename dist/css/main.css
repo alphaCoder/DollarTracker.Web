@@ -86,9 +86,21 @@
     font-weight: 700;
 }
 svg text {
-    fill: ghostwhite;
+    fill: #d3d3d3;
+    font-size: 14px;
 }
 
+/*Bootstrap overriding*/
+body {
+    font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+.navbar-brand {
+    float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
 /*STYLING BREADCRUMBS */
 /* Credits: http://bootsnipp.com/snippets/featured/triangle-breadcrumbs-arrows */
 /** The Magic **/

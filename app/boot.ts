@@ -19,6 +19,7 @@ import {ExpenseService} from './expense/expense.service'
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import {ExpenseStoryService} from './expenseStory/expenseStory.service';
 import {Authorize} from './user/authorize.service';
+
 bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
     HTTP_PROVIDERS,

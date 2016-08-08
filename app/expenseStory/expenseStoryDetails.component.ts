@@ -8,15 +8,19 @@ import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import {DeleteExpenseDirective} from '../expense/deleteExpense.directive';
 import {ExpenseModalComponent} from '../expense/expense.modal.component';
+import {PubnubService} from '../shared/notifications/pubnub.service'
 @Component({
     selector: 'selector',
     templateUrl: 'app/expenseStory/expenseStoryDetails.component.html',
-    directives: [ROUTER_DIRECTIVES, DeleteExpenseDirective, ExpenseModalComponent]
+    directives: [ROUTER_DIRECTIVES, DeleteExpenseDirective, ExpenseModalComponent],
+    providers:[PubnubService]
 })
 export class ExpenseStoryDetailsComponent implements OnInit {
     constructor( private _route: ActivatedRoute,
                  private _router: Router, private _expenseStoryService:ExpenseStoryService,
-                 private _iconMapper:IconMapperService, private _slimLoader:SlimLoadingBarService) { }
+                 private _iconMapper:IconMapperService, private _slimLoader:SlimLoadingBarService,
+                 private _pubnubService:PubnubService
+                 ) { }
 
     private sub: any;
     private expensesByCategory;

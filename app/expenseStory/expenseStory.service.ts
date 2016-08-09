@@ -5,15 +5,24 @@ import {ApiUrl} from '../shared/apiurl.service';
 import {ApiService} from '../shared/api/api.service';
 import {Http, Response} from '@angular/http';
 import {ExpenseStory, ExpenseStorySummary} from './expenseStory.model';
+import {UserService} from '../user/user.service';
 @Injectable()
 export class ExpenseStoryService {
 
     public expenseCategoryById = {};
     public expenseCategories = [];
     public expenseStorySummaries:BehaviorSubject<Array<ExpenseStorySummary>> = new BehaviorSubject<Array<ExpenseStorySummary>>(null) ;
-    constructor(private _apiUrl:ApiUrl, private _apiService:ApiService) {
+    constructor(private _apiUrl:ApiUrl, private _apiService:ApiService, private _userService:UserService) {
         this.loadExpenseCategories();
         this.loadExpenseStorySummaries();
+        _userService
+            .currentUser
+            .filter(x=>x==null)
+            .subscribe(x=>{
+                this.expenseCategoryById = null;
+                this.expenseCategories = [];
+                this.expenseStorySummaries.next([]);
+            })
     }
     public addExpenseStory(expenseStory:ExpenseStory): Observable<any>
     {

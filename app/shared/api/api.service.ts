@@ -10,28 +10,34 @@ export class ApiService {
 constructor(private _jwtService:JwtService,private http: Http, private _user:UserService, private _uploadService:UploadService) { 
   this.setup();
 }
-private headers:Headers;
+
 setup(){
+  let headers:Headers;
     if(!this._jwtService.isAuthenticated()) {
         this._user.logout();
       }
-    this.headers = new Headers();
-    this.headers.set('Content-Type', 'application/json');    
-    this.headers.set("Authorization", "Bearer " + this._jwtService.get());
+    headers = new Headers();
+    headers.set('Content-Type', 'application/json');    
+    headers.set("Authorization", "Bearer " + this._jwtService.get());
+    return headers;
 }
 post(url:string, payload:any) {
+   let headers = this.setup();
     return this.http
         .post(url, JSON.stringify(payload),
-         {headers: this.headers}).map(x=>x.json());
+         {headers: headers}).map(x=>x.json());
   } 
 
   get(url: string) : Observable<any> {
-      return this.http.get(url,{headers: this.headers}).map(x=>x.json());
+      let headers = this.setup();
+      return this.http.get(url,{headers: headers}).map(x=>x.json());
   }
   upload(url:string, payload:string, file:File):Observable<any> {
+    let headers = this.setup();
     return this._uploadService.makeFileRequest(url, [payload], [file]);
   }
   delete(url:string) {
-    return this.http.delete(url, {headers:this.headers});
+    let headers = this.setup();
+    return this.http.delete(url, {headers:headers});
   }
 }

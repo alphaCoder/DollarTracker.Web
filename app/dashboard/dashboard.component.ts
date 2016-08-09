@@ -17,16 +17,21 @@ export class DashboardComponent {
    
     public dashboardStats:any;
     constructor(private _dashboardService:DashboardService, private _slimLoader:SlimLoadingBarService){
+    }
+    ngOnInit(){
+        console.log("DASHBOARD NGONINIT");
         this._slimLoader.start();    
         this._dashboardService.getDashboardStats()
-        .subscribe(ds=>{
-            this._slimLoader.start();   
-            this.dashboardStats = ds.data;
-            this._slimLoader.complete();
+            .subscribe(ds=>{
+                this._slimLoader.start();   
+                this.dashboardStats = ds.data;
+                this._slimLoader.complete();
         }, 
         e => {
             this._slimLoader.complete();
-        });
+        },
+        ()=>{}
+        );
         this._slimLoader.complete();
     }
 }

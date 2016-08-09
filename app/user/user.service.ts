@@ -59,12 +59,10 @@ export class UserService{
         this.currentUser.next(null);
         this._jwtService.clear();
         this.isAuthenticated.next(false);
-        //this._router.navigateByUrl('/');
     }
 
     public logout(){
         this.clear();
-        window.location.reload(true); //todo: need to find a better way
         this._router.navigate(['login']);
     }
 }

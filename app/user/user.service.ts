@@ -10,8 +10,11 @@ export class UserService{
     private userKey:string = "dollarTrackerUser"
     isAuthenticated:Subject<boolean> = new BehaviorSubject<boolean>(false);
     currentUser: Subject<IUser> = new BehaviorSubject<IUser>(null);
-
+    public user:IUser = null;
     constructor(private _jwtService:JwtService, private _router:Router) {
+        this.currentUser.subscribe(user =>{
+            this.user = user;
+        })
     }
     public init(){
         

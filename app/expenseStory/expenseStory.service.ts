@@ -13,17 +13,21 @@ export class ExpenseStoryService {
     public expenseCategories = [];
     public expenseStorySummaries:BehaviorSubject<Array<ExpenseStorySummary>> = new BehaviorSubject<Array<ExpenseStorySummary>>(null) ;
     constructor(private _apiUrl:ApiUrl, private _apiService:ApiService, private _userService:UserService) {
-        this.loadExpenseCategories();
-        this.loadExpenseStorySummaries();
-        _userService
-            .currentUser
-            .filter(x=>x==null)
+        this._userService.currentUser
+            .filter(x=>x != null)   
             .subscribe(x=>{
+            if(x !=null) {
+                this.loadExpenseCategories();
+                this.loadExpenseStorySummaries();
+            }
+            else {
                 this.expenseCategoryById = null;
                 this.expenseCategories = [];
                 this.expenseStorySummaries.next([]);
-            })
+            }
+            });
     }
+    
     public addExpenseStory(expenseStory:ExpenseStory): Observable<any>
     {
         return this._apiService

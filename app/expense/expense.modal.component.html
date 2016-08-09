@@ -48,6 +48,7 @@
             <div class="form-group">
                 <textarea class="form-control" rows="2" [(ngModel)]="expense.comments" placeholder="additional comments"> </textarea>
             </div>
+            <dt-alert [malert]="dtAlert"></dt-alert>
         </modal-body>
         <modal-footer [show-default-buttons]="false">
             <span class="pull-right">

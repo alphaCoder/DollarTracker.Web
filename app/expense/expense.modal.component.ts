@@ -7,15 +7,16 @@ import {ExpenseCategoriesService} from './expenseCategories.service';
 import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {Observable} from 'rxjs/Rx';
 import {ExpenseService} from './expense.service';
+import {DtAlertComponent} from '../shared/alert/dtalert.component';
 
 @Component({
     selector: 'expense',
     templateUrl: 'app/expense/expense.modal.component.html',
-    directives:[MODAL_DIRECTIVES,DatePicker, SELECT_DIRECTIVES]
+    directives:[MODAL_DIRECTIVES,DatePicker, SELECT_DIRECTIVES, DtAlertComponent]
 })
 export class ExpenseModalComponent{
     private items:Array<any> = [];
-    
+    dtAlert:DtAlertComponent;
     @Output() notify: EventEmitter<Expense> = new EventEmitter<Expense>();
     
     @ViewChild('modal')
@@ -27,9 +28,11 @@ export class ExpenseModalComponent{
 
     private selectedItem;
     private isEdit = false;
-    constructor(private _expenseCategoriesService:ExpenseCategoriesService, private _iconMapper:IconMapperService,
+    constructor(private _expenseCategoriesService:ExpenseCategoriesService, 
+    private _iconMapper:IconMapperService,
     private _expenseService:ExpenseService)
-     {
+    {
+         this.dtAlert = new DtAlertComponent();
          this.expense = new Expense();
      }
     private selectedCategory = null;
@@ -113,21 +116,21 @@ export class ExpenseModalComponent{
     }
 
     dismissed() {
+        this.reset();
+        this.modal.dismiss();
+    }
+
+    reset() {
         this.isEdit = false;
         this.expense = new Expense();
         this.previewImageUrl = null;
-        console.log("IN DISMISS");
-        console.log(this.categorySelect.data);
-        console.log("INIT DATA", this.categorySelect.initData);
-        
         this.categorySelect.remove(this.selectedItem);
         this.categoryIcon = 'fa fa-list';
         this.selectedCategory = null;
         this.files = null;
         this.datepickerInput.reset(); //TODO: replace this temporary solution
-        this.modal.dismiss();
+        this.dtAlert = new DtAlertComponent();
     }
-
     open(storyId) {
         this.selectedCategory = {};
         this.expense.expenseStoryId = storyId;
@@ -147,6 +150,9 @@ export class ExpenseModalComponent{
     }
 
     submit() {
+        
+        if(!this.validate()) return;
+
         var fn;   
         if(this.files && this.files.length > 0) {
             if(this.isEdit){
@@ -175,6 +181,22 @@ export class ExpenseModalComponent{
           );
     }
    
+    validate():boolean {
+        let isValid = false;
+       if(this.expense.expenseSubCategoryId == null) {
+            this.dtAlert.failure("Please select a valid expense category");
+        }
+        else if(this.expense.amount == null || this.expense.amount <=0) {
+            this.dtAlert.failure("Please enter a valid amount");
+        }
+        else if(this.expense.expenseUtcDt == null) {
+            this.dtAlert.failure("Please select a valid expense date");
+        }
+        else {
+            isValid = true;
+        }
+       return isValid;
+   }
     cancel() {
         this.modal.dismiss();
         this.isEdit = false;

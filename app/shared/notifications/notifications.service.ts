@@ -10,11 +10,10 @@ public messages:Array<any> = [];
         this._pubnubService.isReady.subscribe(x=>{
             if(x) {
                  this._pubnubService.listen("dollarTracker")
-                      .subscribe(msg=>{
-                        if(msg.Author != _userService.user.userId) {
-                            this.messages.push(msg);
-                            this.isNewMessageAvailable = true;
-                     }
+                     .filter(x=>x.Author != _userService.user.userId)
+                     .subscribe(msg=>{
+                          this.messages.push(msg);
+                          this.isNewMessageAvailable = true;
                 });
             }
         });

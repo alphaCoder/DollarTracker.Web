@@ -64,6 +64,7 @@ export class UserService{
 
     public logout(){
         this.clear();
+        window.location.reload(true); //todo: need to find a better way
         this._router.navigate(['login']);
     }
 }

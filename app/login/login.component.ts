@@ -22,7 +22,6 @@ export class LoginComponent {
     constructor(private _loginService: LoginService, private _router:Router, private _userService:UserService) { 
         this.dtAlert = new DtAlertComponent();
     }
-
     public submit() {
         
         var isValid = this.validateEmailAndPassword();

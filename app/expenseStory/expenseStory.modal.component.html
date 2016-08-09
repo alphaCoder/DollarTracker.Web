@@ -24,6 +24,7 @@
                    <date-picker addontext="End Dt" #datepickerEndDtInput (notify)='onNotifyEndDt($event)'></date-picker>
                 </span>
             </div>
+            <dt-alert [malert]="dtAlert"></dt-alert>
         </modal-body>
         <modal-footer [show-default-buttons]="false">
             <span class="pull-right">

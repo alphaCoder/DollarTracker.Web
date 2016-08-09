@@ -25,13 +25,6 @@ export class PostLoginNavComponent implements OnInit {
      }
 
     ngOnInit() { }
-
-    public toggleDropDown(){
-        this.showDropdown = !this.showDropdown;
-    }
-    public toggleDropDown1(){
-        this.showDropdown1 = !this.showDropdown1;
-    }
     signout(){
         this._userService.logout();
     }

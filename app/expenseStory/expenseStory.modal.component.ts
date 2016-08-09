@@ -3,17 +3,19 @@ import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {DatePicker} from '../shared/datepicker/datepicker.component';
 import {ExpenseStory,ExpenseStorySummary} from './expenseStory.model';
 import {ExpenseStoryService} from './expenseStory.service';
+import {DtAlertComponent} from '../shared/alert/dtalert.component';
 @Component({
     selector: 'expense-story-modal',
     templateUrl: 'app/expenseStory/expenseStory.modal.component.html',
-    directives:[MODAL_DIRECTIVES,DatePicker]
+    directives:[MODAL_DIRECTIVES,DatePicker, DtAlertComponent]
 })
 export class ExpenseStoryModalComponent implements OnInit {
     @Output() notify: EventEmitter<ExpenseStorySummary> = new EventEmitter<ExpenseStorySummary>();
     private expenseStory:ExpenseStory;
-     
+    dtAlert:DtAlertComponent; 
     constructor(private _expenseStoryService:ExpenseStoryService) { 
         this.expenseStory = new ExpenseStory();
+        this.dtAlert = new DtAlertComponent();
     }
 
     ngOnInit() { }
@@ -47,6 +49,8 @@ export class ExpenseStoryModalComponent implements OnInit {
         this.expenseStory.endDt = endDt;
   }
   submit(){
+      if(!this.validate()) { return; }
+      
       if(this.expenseStory){
           this._expenseStoryService
           .addExpenseStory(this.expenseStory)
@@ -54,5 +58,19 @@ export class ExpenseStoryModalComponent implements OnInit {
               this.dismissed();
           });
       }
+  }
+  private validate() {
+      let isValid = false;
+      if(this.expenseStory.title == null || this.expenseStory.title.trim().length <=0 || this.expenseStory.title.trim().length >100){
+          this.dtAlert.failure("Please a valid title for your expense report");
+      }
+      else if(this.expenseStory.startDt == null || this.expenseStory.startDt.trim().length <=0){
+          this.dtAlert.failure("Please enter a valid start date");
+      }
+      else if(this.expenseStory.endDt == null || this.expenseStory.endDt.trim().length <=0) {
+          this.dtAlert.failure("Please enter a valid end date");
+      }
+      else { isValid = true;}
+      return isValid;
   }
 }

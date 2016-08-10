@@ -7,6 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var devAppFolder = './app';
 var distAppFolder = './dist/app';
 var distLibFolder = './dist/lib';
+var prodFolder ='./dist/bundle';
 
 var libFiles = [
         "node_modules/@angular/common/**/*",

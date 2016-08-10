@@ -4,9 +4,6 @@
                     <i class="fa fa-bell" aria-hidden="true"></i>
                     <span class="label up" [ngClass]="{'label-danger': _notificationsService.isNewMessageAvailable, 'label-default': !_notificationsService.isNewMessageAvailable }">{{_notificationsService.messages.length}}</span>
                 </a>
-                <!--<ul class="dropdown-menu" role="menu">
-                <li *ngFor="let m of _notificationsService.messages">{{m.Message}}</li>
-                </ul>-->
                 <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
                 
                     <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>

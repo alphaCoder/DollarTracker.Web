@@ -3,10 +3,8 @@ import {ExpenseStoryModalComponent} from '../expenseStory/expenseStory.modal.com
 @Component({
     selector: 'expense-story',
     template: `
-    <div class="input-group">
-       <button class="btn btn-default" (click)="addExpenseReport()"> New Expense Report</button>
+       <a href="javascript:void()" (click)="addExpenseReport()"> &nbsp;New Expense Report</a>
        <expense-story-modal #expensestorymodal></expense-story-modal>
-    </div>
     `,
     directives:[ExpenseStoryModalComponent]
 })

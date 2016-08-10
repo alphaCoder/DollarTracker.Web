@@ -24,4 +24,5 @@ export class ApiUrl {
     public deleteExpenseStory = this.baseUrl + "/api/deleteExpenseStory";
 
     public pubnubSubscribeKey = this.baseUrl + "/api/pubnub/subscribekey";
+    public getAllActiveExpenseStories = this.baseUrl + "/api/getAllActiveExpenseStories";
 }

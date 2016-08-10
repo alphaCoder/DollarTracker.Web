@@ -13,18 +13,15 @@ export class ExpenseStoryService {
     public expenseCategories = [];
     public expenseStorySummaries:BehaviorSubject<Array<ExpenseStorySummary>> = new BehaviorSubject<Array<ExpenseStorySummary>>(null) ;
     constructor(private _apiUrl:ApiUrl, private _apiService:ApiService, private _userService:UserService) {
+        this.loadExpenseCategories();
         this._userService.currentUser
             .filter(x=>x != null)   
             .subscribe(x=>{
-            if(x !=null) {
-                this.loadExpenseCategories();
-                this.loadExpenseStorySummaries();
-            }
-            else {
-                this.expenseCategoryById = null;
-                this.expenseCategories = [];
-                this.expenseStorySummaries.next([]);
-            }
+                if(x ==null) {
+                    this.expenseCategoryById = null;
+                    this.expenseCategories = [];
+                    this.expenseStorySummaries.next([]);
+                }
             });
     }
     
@@ -60,18 +57,19 @@ export class ExpenseStoryService {
         return this._apiService.get(url);
     }
 
-    public deleteExpenseStory(storyId) {
+    public deleteExpenseStory(storyId, active = false) {
         var url = this._apiUrl.deleteExpenseStory + '/' + storyId;
         this._apiService
         .delete(url)
         .subscribe(x=>{
-            this.loadExpenseStorySummaries()
+            this.loadExpenseStorySummaries(active)
         });
     }
 
-    public loadExpenseStorySummaries() {
+    public loadExpenseStorySummaries(active) {
+        var url = this._apiUrl.report+"?active="+active;
         this._apiService
-        .get(this._apiUrl.report)
+        .get(url)
         .subscribe((rs) => {
             this.expenseStorySummaries.next(rs.data.expenseStorySummaries);
         })

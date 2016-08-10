@@ -10,7 +10,7 @@ export const routes: RouterConfig = [
   {path:'signup', component:SignupComponent},
   {path:'', redirectTo:'/dashboard', pathMatch:'full', canActivate: [Authorize]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [Authorize]},
-  {path: 'report', component: ReportComponent, canActivate: [Authorize]},
+  {path: 'report/:active', component: ReportComponent, canActivate: [Authorize]},
   {path:'details/:id', component:ExpenseStoryDetailsComponent, canActivate: [Authorize]}
 ];
 

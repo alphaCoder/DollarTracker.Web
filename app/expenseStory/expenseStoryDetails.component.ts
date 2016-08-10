@@ -29,15 +29,14 @@ export class ExpenseStoryDetailsComponent implements OnInit {
      @ViewChild('expense')
     expenseModal:ExpenseModalComponent;
     public ngOnInit() {
-        this.sub = this._route.params.subscribe(params => {
+        this._route.params.subscribe(params => {
             let id = params['id']; // (+) converts string 'id' to a number
             this._slimLoader.start();
             this._expenseStoryService
             .getAllExpensesByCategory(id)
-            .subscribe(es=>{
+            .subscribe(es => {
                 this.expensesByCategory = es.data;
                 this.categoryKeys = Object.keys(es.data);
-               
             });
 
             //get expenseStorySummary TODO: need to optimize this call
@@ -49,10 +48,6 @@ export class ExpenseStoryDetailsComponent implements OnInit {
             });
 
   	    });
-    }
-
-    ngOnDestroy() {
-        this.sub.unsubscribe();
     }
 
     onNotify(expense:Expense):void {

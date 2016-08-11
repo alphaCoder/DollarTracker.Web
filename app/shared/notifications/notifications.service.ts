@@ -9,13 +9,13 @@ public messages:Array<any> = [];
     constructor(private _pubnubService: PubnubService, private _userService:UserService) {
         this._pubnubService.isReady.subscribe(x=>{
             if(x) {
-                 this._pubnubService.listen("dollarTracker")
+                 this._pubnubService.listen(this._userService.user.userId)
                      .filter(x=>x.Author != _userService.user.userId)
-                     .subscribe(msg=>{
+                     .subscribe(msg => {
                           this.messages.push(msg);
                           this.isNewMessageAvailable = true;
-                });
-            }
+                      });
+                }
         });
   }
 

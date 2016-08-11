@@ -1,33 +1,33 @@
 <ul class='nav navbar-nav navbar-right'>
-  
-   <li class="dropdown">
+  <li class="dropdown">
+        <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false" data-animation="scale-up" role="button" (click)="_notificationsService.readMessage()">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            <span class="label up" [ngClass]="{'label-danger': _notificationsService.newMessagesCount>0, 'label-default': !_notificationsService.newMessagesCount == 0 }">{{_notificationsService.newMessagesCount}}</span>
+        </a>
+        <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+    
+    <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+    </div>
+    <li class="divider"></li>
+   <div class="notifications-wrapper">
+     
+    <a class="content" href="#" *ngFor="let m of _notificationsService.messages">
+        <div class="notification-item">
+                <h4 class="item-title">{{m.messageType}}</h4>
+                <p class="item-info">{{m.message.Message}}</p>
+         </div>
+      </a>
+   </div>
+  </ul>
+     </li>
+      <li class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button">
                 <i class="fa fa-lg fa-plus"></i>
              </a>
             <ul class="dropdown-menu">
                 <li><expense-story></expense-story></li>
             </ul>
-    </li>    
-    <li class="dropdown">
-        <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false" data-animation="scale-up" role="button" (click)="_notificationsService.readMessage()">
-            <i class="fa fa-bell" aria-hidden="true"></i>
-            <span class="label up" [ngClass]="{'label-danger': _notificationsService.isNewMessageAvailable, 'label-default': !_notificationsService.isNewMessageAvailable }">{{_notificationsService.messages.length}}</span>
-        </a>
-        <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
-        
-            <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-            </div>
-            
-            <div class="notifications-wrapper">
-                <a class="content" href="#" *ngFor="let m of _notificationsService.messages">
-                <div class="notification-item">
-                        <h4 class="item-title">{{m.Header}}</h4>
-                        <p class="item-info">{{m.Message}}</p>
-                  </div>
-                </a>
-            </div>
-        </ul>
-     </li>
+    </li>  
     <li class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button">
                 <i class="fa fa-user"></i> {{user.displayName}} <span class="caret"></span></a>

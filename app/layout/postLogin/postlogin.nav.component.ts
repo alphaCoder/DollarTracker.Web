@@ -5,16 +5,12 @@ import {UserService} from '../../user/user.service'
 import {IUser} from '../../login/loginresponse'
 import {ExpenseStoryComponent} from '../../expenseStory/expenseStory.component';
 import {NotificationsService} from '../../shared/notifications/notifications.service';
-import {PubnubService} from '../../shared/notifications/pubnub.service';
 @Component({
     selector: 'post-login-nav',
     templateUrl: 'app/layout/postlogin/postlogin.nav.component.html',
     directives:[NgClass,ExpenseStoryComponent],
-    providers:[NotificationsService, PubnubService]
 })
 export class PostLoginNavComponent implements OnInit {
-    public showDropdown:boolean = false;
-    public showDropdown1:boolean = false;
     user:IUser;
     constructor(private _router:Router, private _userService:UserService, 
         private _notificationsService:NotificationsService) {

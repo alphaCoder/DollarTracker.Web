@@ -59,12 +59,15 @@
                     <table class="table table-condensed table-hover" style="margin-bottom:0">
                         <tbody>
                             <tr *ngFor="let ra of dashboardStats.recentlyAdded">
-                                <td colspan="3">You spent ${{ra.amount|number}} for {{ra.categoryDescription}} on {{ra.expenseDtUtc | date:"MMM"}}, {{ra.expenseDtUtc | date:"dd"}}</td>
+                                <td colspan="3" style="font-family:'Open Sans'; font-size:12px">
+                                    <i>You spent 
+                                        <strong>${{ra.amount|number}}</strong> for <strong>{{ra.categoryDescription}}</strong> on {{ra.expenseDtUtc | date:"MMM"}}, {{ra.expenseDtUtc | date:"dd"}}
+                                    </i>    
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>

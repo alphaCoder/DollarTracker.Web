@@ -19,7 +19,8 @@ import {ExpenseService} from './expense/expense.service'
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import {ExpenseStoryService} from './expenseStory/expenseStory.service';
 import {Authorize} from './user/authorize.service';
-
+import {NotificationsService} from './shared/notifications/notifications.service';
+import {PubnubService} from './shared/notifications/pubnub.service';
 bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
@@ -38,5 +39,7 @@ bootstrap(AppComponent, [
     ExpenseService,
     SlimLoadingBarService,
     ExpenseStoryService,
-    Authorize
+    Authorize,
+    NotificationsService,
+    PubnubService
 ]);

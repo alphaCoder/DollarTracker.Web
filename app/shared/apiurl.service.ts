@@ -25,4 +25,6 @@ export class ApiUrl {
 
     public pubnubSubscribeKey = this.baseUrl + "/api/pubnub/subscribekey";
     public getAllActiveExpenseStories = this.baseUrl + "/api/getAllActiveExpenseStories";
+
+    public getNotifications = this.baseUrl + "/api/notifications";
 }

@@ -9,6 +9,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import {Expense} from "../expense/expense"
+import {NotificationsService} from "../shared/notifications/notifications.service";
 @Component({
     templateUrl: 'app/dashboard/dashboard.component.html',
     directives:[ChartDemo,BarChartDemo,ROUTER_DIRECTIVES,MODAL_DIRECTIVES]
@@ -16,7 +17,9 @@ import {Expense} from "../expense/expense"
 export class DashboardComponent {
    
     public dashboardStats:any;
-    constructor(private _dashboardService:DashboardService, private _slimLoader:SlimLoadingBarService){
+    constructor(private _dashboardService:DashboardService, private _slimLoader:SlimLoadingBarService,
+    private _notificationService:NotificationsService
+    ){
     }
     ngOnInit(){
         console.log("DASHBOARD NGONINIT");
@@ -25,6 +28,7 @@ export class DashboardComponent {
             .subscribe(ds=>{
                 this._slimLoader.start();   
                 this.dashboardStats = ds.data;
+                this._notificationService.setMessageCount(ds.data.newNotificationsCount);
                 this._slimLoader.complete();
         }, 
         e => {

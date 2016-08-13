@@ -27,7 +27,7 @@ public messages:Array<any> = [];
 
   public readMessage(){
       //todo: apply pagination
-      var url= this._apiUrl.getNotifications + "?read="+this.isNewMessageAvailable;
+      var url= this._apiUrl.getNotifications + "?page=0&size=10&read="+true;
       this._apiService
           .get(url)
           .subscribe(x=>{

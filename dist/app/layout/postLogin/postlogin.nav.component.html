@@ -33,7 +33,7 @@
                 <i class="fa fa-user"></i> {{user.displayName}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a href="#">Help</a></li>
-                <li><a href="#">Account</a></li>
+                <li><a [routerLink] = "['/profile']">Account</a></li>
                 <li><a href="javascript:void(0)" role="button" (click)='signout()'>Sign Out</a></li>
             </ul>
     </li>

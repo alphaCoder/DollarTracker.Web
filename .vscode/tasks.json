@@ -4,7 +4,7 @@
     "isShellCommand": true,
     "tasks": [
         {
-            "taskName": "rebuild",
+            "taskName": "rebuild", //"bundle:vendor",
             "isBuildCommand": true,
             "isTestCommand": false,
             "showOutput": "always",

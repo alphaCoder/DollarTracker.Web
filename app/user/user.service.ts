@@ -14,6 +14,7 @@ export class UserService{
     constructor(private _jwtService:JwtService, private _router:Router) {
         this.currentUser.subscribe(user =>{
             this.user = user;
+
         })
     }
     public init(){
@@ -56,6 +57,7 @@ export class UserService{
     }
 
     public clear() {
+        this.user = null;
         this.currentUser.next(null);
         this._jwtService.clear();
         this.isAuthenticated.next(false);

@@ -3,6 +3,9 @@ var del = require('del');
 var ts = require('gulp-typescript');
 var watch = require('gulp-watch');
 var sourcemaps = require('gulp-sourcemaps');
+var systemjsBuilder = require('systemjs-builder');
+var concat = require('gulp-concat');
+
 
 var devAppFolder = './app';
 var distAppFolder = './dist/app';
@@ -36,6 +39,12 @@ var libFiles = [
     gulp.task('copyLibs', function () {
         gulp.src(libFiles, { base: "node_modules" }).pipe(gulp.dest(distLibFolder));
     });
+
+    gulp.task('bundle:vendor', function() {
+        gulp.src(libFiles, {base: "node_modules"})
+            .pipe(concat('vendors.js'))
+            .pipe(gulp.dest(prodFolder));
+    })
     
     gulp.task('cleanLibs', function () {
         return del(distLibFolder +'/**/*');

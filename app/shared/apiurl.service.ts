@@ -27,4 +27,5 @@ export class ApiUrl {
     public getAllActiveExpenseStories = this.baseUrl + "/api/getAllActiveExpenseStories";
 
     public getNotifications = this.baseUrl + "/api/notifications";
+    public profilePicUrl = this.baseUrl + "/api/profilePic";
 }

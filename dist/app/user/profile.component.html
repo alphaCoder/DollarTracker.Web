@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="well panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+              <img [src]="_avatarUrl" alt="" class="center-block img-thumbnail img-responsive">
+              <ul class="list-inline text-center" title="Ratings">
+                <li><a href="#" >Change</a></li>
+              </ul>
+            </div>
+            <!--/col--> 
+            <div class="col-xs-12 col-sm-8">
+              <h2>{{_userService.user.displayName}}</h2>
+              <p><strong>Email: </strong> {{_userService.user.email}}</p>
+              <p><strong>About me: </strong></p>
+              <p><strong>Member since: </strong> {{_userService.user.memberSince| date:'MMM dd, y'}} </p>
+            </div>
+            <!--/col-->          
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-sm-4">
+              <h2><strong> 10 </strong></h2>
+              <p><small>Friends</small></p>
+              <button class="btn btn-success btn-block"><span class="fa fa-pencil"></span> Edit Profile </button>
+            </div>
+            <!--/col-->
+            <div class="col-xs-12 col-sm-4">
+              <h2><strong>20</strong></h2>
+              <p><small>Reports Contributed</small></p>
+              <button class="btn btn-info btn-block"><span class="fa fa-key"></span> Change Password </button>
+            </div>
+            <!--/col-->
+            <div class="col-xs-12 col-sm-4">
+              <h2><strong>43</strong></h2>
+              <p><small>Expenses Created</small></p>
+              <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Privacy </button>  
+            </div>
+            <!--/col-->
+          </div>
+          <!--/row-->
+        </div>
+        <!--/panel-body-->
+      </div>
+      <!--/panel-->
+    </div>
+    <!--/col--> 
+  </div>
+  <!--/row--> 
+</div>
+<!--/container-->

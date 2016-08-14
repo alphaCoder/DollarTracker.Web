@@ -2,20 +2,16 @@ import { Injectable } from '@angular/core';
 import {Http, Headers, Request, RequestOptions, RequestOptionsArgs, RequestMethod, Response} from '@angular/http';
 import {JwtService} from '../../jwt/jwt.service'
 import {Observable} from 'rxjs/Observable';
-import {UserService} from '../../user/user.service'
 import {UploadService} from '../upload/upload.service'
 @Injectable()
 export class ApiService {
 
-constructor(private _jwtService:JwtService,private http: Http, private _user:UserService, private _uploadService:UploadService) { 
+constructor(private _jwtService:JwtService,private http: Http,  private _uploadService:UploadService) { 
   this.setup();
 }
 
 setup(){
   let headers:Headers;
-    if(!this._jwtService.isAuthenticated()) {
-        this._user.logout();
-      }
     headers = new Headers();
     headers.set('Content-Type', 'application/json');    
     headers.set("Authorization", "Bearer " + this._jwtService.get());

@@ -3,7 +3,9 @@ export interface IUser{
 	userName:string
 	email:string
 	displayName:string
-    memberSince:Date
+    memberSince:Date,
+    aboutMe:string,
+    phoneNo:string
 }
 export interface ILoginResponse{
     token:string;

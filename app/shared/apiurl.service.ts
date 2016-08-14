@@ -28,4 +28,8 @@ export class ApiUrl {
 
     public getNotifications = this.baseUrl + "/api/notifications";
     public profilePicUrl = this.baseUrl + "/api/profilePic";
+
+    public updatePassword = this.baseUrl + "/api/updatePassword";
+    public profile = this.baseUrl + "/api/profile";
+    public updateUser = this.baseUrl + "/api/updateUser";
 }

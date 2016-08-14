@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {JwtService} from '../jwt/jwt.service'
 import {IUser, ILoginResponse} from '../login/loginResponse'
-import {Subject, BehaviorSubject} from 'rxjs/Rx';
+import {Subject, BehaviorSubject, Observable} from 'rxjs/Rx';
 import {Router} from '@angular/router'
-
+import {ApiUrl} from '../shared/apiurl.service';
+import {ApiService} from '../shared/api/api.service';
 @Injectable()
 export class UserService{
 
@@ -11,10 +12,10 @@ export class UserService{
     isAuthenticated:Subject<boolean> = new BehaviorSubject<boolean>(false);
     currentUser: Subject<IUser> = new BehaviorSubject<IUser>(null);
     public user:IUser = null;
-    constructor(private _jwtService:JwtService, private _router:Router) {
+    constructor(private _jwtService:JwtService, private _router:Router, private _apiUrl:ApiUrl,
+     private _apiService:ApiService) {
         this.currentUser.subscribe(user =>{
             this.user = user;
-
         })
     }
     public init(){
@@ -53,7 +54,22 @@ export class UserService{
     }
     
     public setCurrent(newUser: IUser):void {
+        localStorage.setItem(this.userKey, JSON.stringify(newUser));
         this.currentUser.next(newUser);
+    }
+
+    public updatePassword(payload) {
+        return this._apiService.post(this._apiUrl.updatePassword, payload); 
+    }
+    public updateUser(payload):Observable<any> {
+       return this._apiService
+        .post(this._apiUrl.updateUser, payload)
+        .do(result => {
+            if(result.success) {
+                this.setCurrent(result.data);
+            }
+        });
+          
     }
 
     public clear() {

@@ -10,7 +10,6 @@ import {DeleteExpenseDirective} from '../expense/deleteExpense.directive';
 import {ExpenseModalComponent} from '../expense/expense.modal.component';
 import {PubnubService} from '../shared/notifications/pubnub.service'
 @Component({
-    selector: 'selector',
     templateUrl: 'app/expenseStory/expenseStoryDetails.component.html',
     directives: [ROUTER_DIRECTIVES, DeleteExpenseDirective, ExpenseModalComponent],
     providers:[PubnubService]

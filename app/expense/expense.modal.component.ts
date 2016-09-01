@@ -128,7 +128,7 @@ export class ExpenseModalComponent{
         this.categoryIcon = 'fa fa-list';
         this.selectedCategory = null;
         this.files = null;
-        this.datepickerInput.reset(); //TODO: replace this temporary solution
+     //   this.datepickerInput.reset(); //TODO: replace this temporary solution
         this.dtAlert = new DtAlertComponent();
     }
     open(storyId) {

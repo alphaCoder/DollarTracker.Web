@@ -19,7 +19,7 @@ declare var moment;
     template: `
     <div class="input-group"> 
          <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-         <input #datepickerInput type="text" class="form-control" placeholder="{{addontext}}">
+         <input #datepickerInput type="text" class="form-control" [value]="_value" placeholder="{{addontext}}">
     </div>
     `,
     providers:[CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR,FORM_PROVIDERS],
@@ -27,76 +27,65 @@ declare var moment;
 })
 export class DatePicker implements ControlValueAccessor {
 	//The internal data model
-    private _value: string = "";
-    public viewValue:string = "";
+    private _value = '';
+    
     @Input() addontext:string;
     @Output() notify: EventEmitter<string> = new EventEmitter<string>();
     @ViewChild('datepickerInput') datepickerInput;
-    constructor() { 
-    }
+    constructor() { }
 
-    ngOnInit() {
-      this.value = '';
-      this.viewValue = '';
-    }
-    
- 
-	ngAfterViewInit() {
-
-      	var self = this;
+  	ngAfterViewInit() {
+     	var self = this;
         $(this.datepickerInput.nativeElement).datepicker({
            autoclose: true,
            todayBtn: 'linked',
-           defaultViewDate: 'today',
            forceParse: 0
         }).on('changeDate', function (dt) {
-          console.log("I am truly in change date method:");
           self.writeValue(dt.format(0,"mm/dd/yyyy"));
         });
      }
   
     //Placeholders for the callbacks
-    private _onTouchedCallback: () => void = noop;
+    private _onTouchedCallback: (_:any) => void = noop;
    
     private _onChangeCallback: (_:any) => void = noop;
   
     //get accessor
     get value(): any {
-       return this.viewValue; 
+       return this._value; 
       };
   
     //set accessor including call the onchange callback
     set value(v: any) {
-      
+      this.setValue(v);
     }
     
     //Set touched on blur
     onTouched(ev){
-      this.writeValue(ev.target.value);
-      this._onTouchedCallback();
+      this._onTouchedCallback(null);
     }
   
+    private setValue(v: any) {
+      if(v && v!= this._value) {
+        this._value = v;
+        this.notify.emit(v);
+        this._onChangeCallback(v);
+      }
+    }
     //From ControlValueAccessor interface
     writeValue(value: any) {
-      console.log("I am in writeValue:"+value)
-      this.notify.emit(value);
+      this.setValue(value);
     }
     updateDate(value:string) {
       $(this.datepickerInput.nativeElement).datepicker('update', new Date(value));
     }
     //From ControlValueAccessor interface
     registerOnChange(fn: any) {
-      console.log("register on change");
-      console.log(fn);
-      
       this._onChangeCallback = fn;
     }
   
     //From ControlValueAccessor interface
     registerOnTouched(fn: any) {
-      console.log("register on touched");
-      console.log(fn);
-      
       this._onTouchedCallback = fn;
     }
     reset(){

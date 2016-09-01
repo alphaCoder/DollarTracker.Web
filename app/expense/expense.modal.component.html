@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <span>
-                    <date-picker #datepickerInput (notify)='onNotify($event)'></date-picker>
+                    <date-picker [(ngModel)]="expense.expenseUtcDt"></date-picker>
                 </span>
             </div>
             <div class="form-group">
